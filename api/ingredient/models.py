@@ -46,7 +46,7 @@ class Ingredient(models.Model):
 
 
 class IngredientServing(models.Model):
-    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, null=True)
+    ingredient = models.ManyToManyField(Ingredient, null=True)
     custom_name = models.CharField(max_length=25, null=True)
     grams = models.IntegerField(default=0)
     milliliters = models.IntegerField(default=0)
