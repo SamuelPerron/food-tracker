@@ -48,8 +48,8 @@ class Recipe(models.Model):
     name = models.CharField(max_length=150, null=True)
     description = models.TextField(blank=True)
     image = models.ImageField(blank=True)
-    ingredients = models.ManyToManyField(RecipeIngredient, null=True)
-    steps = models.ManyToManyField(RecipeStep, null=True)
+    ingredients = models.ManyToManyField(RecipeIngredient)
+    steps = models.ManyToManyField(RecipeStep)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     category = models.ForeignKey(RecipeSubCategory, on_delete=models.CASCADE, null=True)
 
