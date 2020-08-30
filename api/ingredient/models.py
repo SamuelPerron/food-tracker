@@ -49,7 +49,11 @@ class Ingredient(models.Model):
 
 
 class IngredientServing(models.Model):
-    ingredient = models.ManyToManyField(Ingredient)
-    custom_name = models.CharField(max_length=25, null=True)
-    grams = models.IntegerField(default=0)
-    milliliters = models.IntegerField(default=0)
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, null=True, related_name='servings')
+    custom_name = models.CharField(max_length=25, blank=True, default='Standard serving')
+    grams = models.FloatField(default=0, blank=True)
+    milliliters = models.FloatField(default=0, blank=True)
+
+    def __str__(self):
+        g_or_m = f'{self.grams} g' if self.grams != 0 else f'{self.milliliters} ml'
+        return f'{self.custom_name} ({g_or_m})'

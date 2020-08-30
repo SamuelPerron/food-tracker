@@ -1,8 +1,9 @@
 from rest_framework import serializers
 
 from .models import RecipeCategory, RecipeSubCategory, Recipe, RecipeStep, RecipeIngredient
-from ..ingredient.serializers import IngredientSerializer, IngredientServingSerializer
+from ..ingredient.serializers import IngredientServingSerializer, SlimIngredientSerializer
 from ..user.serializers import AuthorSerializer
+from ..nutritional_values.serializers import NutritionalValuesSerializer
 
 
 class RecipeCategorySerializer(serializers.ModelSerializer):
@@ -20,18 +21,18 @@ class RecipeSubCategorySerializer(serializers.ModelSerializer):
 
 
 class RecipeIngredientSerializer(serializers.ModelSerializer):
-    ingredient = IngredientSerializer()
+    ingredient = SlimIngredientSerializer()
     serving = IngredientServingSerializer()
 
     class Meta:
         model = RecipeIngredient
-        fields = ['pk', 'ingredient', 'quantity', 'serving']
+        fields = ['ingredient', 'quantity', 'serving']
 
 
 class RecipeStepSerializer(serializers.ModelSerializer):
     class Meta:
         model = RecipeStep
-        fields = ['pk', 'order', 'content']
+        fields = ['order', 'content']
         order = 'order'
 
 
@@ -40,6 +41,7 @@ class RecipeSerializer(serializers.ModelSerializer):
     author = AuthorSerializer()
     ingredients = RecipeIngredientSerializer(many=True)
     steps = RecipeStepSerializer(many=True)
+    nutritional_values = NutritionalValuesSerializer()
 
     class Meta:
         model = Recipe

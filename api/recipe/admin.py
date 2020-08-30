@@ -1,6 +1,8 @@
 from django.contrib import admin
+from django.forms import ModelForm
 
 from .models import RecipeCategory, RecipeSubCategory, Recipe, RecipeIngredient, RecipeStep
+from ..ingredient.models import IngredientServing
 
 @admin.register(RecipeCategory)
 class RecipeCategoryAdmin(admin.ModelAdmin):
@@ -12,20 +14,18 @@ class RecipeSubCategoryAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(RecipeIngredient)
-class RecipeIngredientAdmin(admin.ModelAdmin):
-    # Hide page from admin
-    def get_model_perms(self, request):
-        return {}
+class RecipeIngredientInline(admin.TabularInline):
+    model = RecipeIngredient
+    min_num = 1
+    extra = 0
 
 
-@admin.register(RecipeStep)
-class RecipeStepAdmin(admin.ModelAdmin):
-    # Hide page from admin
-    def get_model_perms(self, request):
-        return {}
+class RecipeStepInline(admin.TabularInline):
+    model = RecipeStep
+    min_num = 1
+    extra = 0
 
 
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
-    pass
+    inlines = (RecipeIngredientInline, RecipeStepInline)

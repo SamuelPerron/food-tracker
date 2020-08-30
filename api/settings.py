@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'api.user',
     'api.ingredient',
     'api.recipe',
+    'api.nutritional_values',
 ]
 
 MIDDLEWARE = [

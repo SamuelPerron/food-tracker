@@ -10,12 +10,12 @@ CATEGORIES = {
         'Turkey & Duck'
         'Other meat'
     ],
-    'Bread & bakery': [
+    'Bread & Bakery': [
         'Baguettes & Bagels',
         'Biscuits',
         'Crackers',
         'Croissants & Pastries',
-        'Dark bread'
+        'Dark bread',
         'White bread',
         'Other bread'
     ],
@@ -62,12 +62,14 @@ CATEGORIES = {
         'Breakfast Cereals',
         'Couscous & Noodles',
         'Flour & Sugar',
+        'Spices',
         'Grain',
         'Other',
         'Pasta',
         'Rice',
         'Spreads',
-        'Syrups, Jam, Honey & Toppings'
+        'Syrups, Jam, Honey & Toppings',
+        'Oil'
     ],
     'Sauces & Soup': [
         'Salad dressing',
