@@ -39,9 +39,12 @@ class IngredientBrand(models.Model):
 
 
 class IngredientServing(models.Model):
-    custom_name = models.CharField(max_length=25, blank=True, null=True)
+    custom_name = models.CharField(max_length=25, blank=True, default='Standard serving')
     grams = models.IntegerField(default=0, blank=True)
     milliliters = models.IntegerField(default=0, blank=True)
+
+    def __str__(self):
+        return self.custom_name
 
 
 class Ingredient(models.Model):

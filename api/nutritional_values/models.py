@@ -5,10 +5,13 @@ class NutritionalValues(models.Model):
     protein = models.FloatField(blank=False)
     carbs = models.FloatField(blank=False)
     fat = models.FloatField(blank=False)
-    saturated_fat = models.FloatField(default=0)
-    unsaturated_fat = models.FloatField(default=0)
-    fiber = models.FloatField(default=0)
-    sugars = models.FloatField(default=0)
-    sodium = models.FloatField(default=0)
-    cholesterol = models.FloatField(default=0)
-    potassium = models.FloatField(default=0)
+    saturated_fat = models.FloatField(default=0, blank=True)
+    unsaturated_fat = models.FloatField(default=0, blank=True)
+    fiber = models.FloatField(default=0, blank=True)
+    sugars = models.FloatField(default=0, blank=True)
+    sodium = models.FloatField(default=0, blank=True)
+    cholesterol = models.FloatField(default=0, blank=True)
+    potassium = models.FloatField(default=0, blank=True)
+
+    def __str__(self):
+        return f'{self.calories} Calories'

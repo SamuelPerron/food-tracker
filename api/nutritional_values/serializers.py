@@ -6,4 +6,4 @@ from .models import NutritionalValues
 class NutritionalValuesSerializer(serializers.ModelSerializer):
     class Meta:
         model = NutritionalValues
-        fields = '__all__'
+        exclude = ['id',]
