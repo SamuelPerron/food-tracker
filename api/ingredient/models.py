@@ -39,7 +39,7 @@ class Ingredient(models.Model):
     name = models.CharField(max_length=150, null=True)
     image = models.CharField(max_length=255, blank=True)
     category = models.ForeignKey(IngredientSubCategory, on_delete=models.CASCADE, null=True)
-    brand = models.ForeignKey(IngredientBrand, on_delete=models.SET_NULL, null=True)
+    brand = models.ForeignKey(IngredientBrand, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.name
