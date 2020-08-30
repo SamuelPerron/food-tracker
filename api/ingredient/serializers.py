@@ -23,18 +23,17 @@ class IngredientBrandSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class IngredientSerializer(serializers.ModelSerializer):
-    category = IngredientSubCategorySerializer()
-    brand = IngredientBrandSerializer()
-
+class IngredientServingSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Ingredient
+        model = IngredientServing
         fields = '__all__'
 
 
-class IngredientServingSerializer(serializers.ModelSerializer):
-    ingredient = IngredientSerializer()
+class IngredientSerializer(serializers.ModelSerializer):
+    category = IngredientSubCategorySerializer()
+    brand = IngredientBrandSerializer()
+    servings = IngredientServingSerializer(many=True)
 
     class Meta:
-        model = IngredientServing
+        model = Ingredient
         fields = '__all__'
