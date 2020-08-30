@@ -1,15 +1,17 @@
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from rest_framework.authtoken.views import obtain_auth_token  # <-- Here
+from rest_framework.authtoken.views import obtain_auth_token
 
 from api.user.views import UserViewSet
+from api.ingredient.views import IngredientViewSet
 
 
 # Routers
 router = routers.DefaultRouter()
 
 router.register(r'users', UserViewSet)
+router.register(r'ingredients', IngredientViewSet)
 
 # Routes
 urlpatterns = [
