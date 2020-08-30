@@ -5,7 +5,7 @@ class IngredientCategory(models.Model):
     name = models.CharField(max_length=25, null=True)
 
     def __str__(self):
-        return name
+        return self.name
 
     class Meta:
         verbose_name = 'category'
@@ -17,7 +17,7 @@ class IngredientSubCategory(models.Model):
     parent_category = models.ForeignKey(IngredientCategory, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return f'{parent_category.name} - {name}'
+        return f'{self.parent_category.name} - {self.name}'
 
     class Meta:
         verbose_name = 'sub-category'
@@ -29,7 +29,7 @@ class IngredientBrand(models.Model):
     image = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
-        return name
+        return self.name
 
     class Meta:
         verbose_name = 'brand'
@@ -42,7 +42,7 @@ class Ingredient(models.Model):
     brand = models.ForeignKey(IngredientBrand, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return name
+        return self.name
 
 
 class IngredientServing(models.Model):
