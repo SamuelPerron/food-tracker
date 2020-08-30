@@ -2,6 +2,8 @@ from django.db import models
 
 from django.contrib.auth.models import User
 from ..ingredient.models import Ingredient, IngredientServing
+from ..nutritional_values.models import NutritionalValues
+from ..nutritional_values.serializers import NutritionalValuesSerializer
 
 
 class RecipeCategory(models.Model):
@@ -33,9 +35,29 @@ class Recipe(models.Model):
     image = models.ImageField(blank=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     category = models.ForeignKey(RecipeSubCategory, on_delete=models.CASCADE, null=True)
+    servings = models.IntegerField(default=1, blank=False)
+    preparation_time = models.IntegerField(default=0, blank=False, help_text='In minutes')
+    cook_time = models.IntegerField(default=0, blank=False, help_text='In minutes')
+    # nutritional_values = models.ForeignKey(NutritionalValues, null=True, on_delete=models.SET_NULL)
+    @property
+    def nutritional_values(self):
+        nv_dict = {}
+        for ingredient in self.ingredients.all():
+            if ingredient.ingredient.nutritional_values.all():
+                for field in ingredient.ingredient.nutritional_values.first()._meta.fields:
+                    if field.name not in ['id', 'ingredient']:
+                        value = getattr(ingredient.ingredient.nutritional_values.first(), field.name)
+                        try:
+                            nv_dict[field.name] += value
+                        except KeyError:
+                            nv_dict[field.name] = value
+        nv = NutritionalValues(**nv_dict)
+        nv.save()
+        return nv
 
     def __str__(self):
         return self.name
+
 
 
 class RecipeStep(models.Model):

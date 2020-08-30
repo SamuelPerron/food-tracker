@@ -55,5 +55,5 @@ class IngredientServing(models.Model):
     milliliters = models.FloatField(default=0, blank=True)
 
     def __str__(self):
-        g_or_m = f'{self.grams}g' if self.grams is not 0 else f'{self.milliliters} ml'
+        g_or_m = f'{self.grams} g' if self.grams != 0 else f'{self.milliliters} ml'
         return f'{self.custom_name} ({g_or_m})'
