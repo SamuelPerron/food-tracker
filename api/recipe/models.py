@@ -47,7 +47,7 @@ class RecipeIngredient(models.Model):
 class Recipe(models.Model):
     name = models.CharField(max_length=150, null=True)
     description = models.TextField(blank=True)
-    image = models.CharField(max_length=255, blank=True)
+    image = models.ImageField(blank=True)
     ingredients = models.ManyToManyField(RecipeIngredient, null=True)
     steps = models.ManyToManyField(RecipeStep, null=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
