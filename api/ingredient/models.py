@@ -1,6 +1,7 @@
 from django.db import models
 
 from django.contrib.auth.models import User
+from ..nutritional_values.models import NutritionalValues
 
 
 class IngredientCategory(models.Model):
@@ -43,6 +44,7 @@ class Ingredient(models.Model):
     category = models.ForeignKey(IngredientSubCategory, on_delete=models.CASCADE, null=True)
     brand = models.ForeignKey(IngredientBrand, on_delete=models.SET_NULL, null=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    nutritional_values = models.ForeignKey(NutritionalValues, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.name
