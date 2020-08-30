@@ -1,10 +1,20 @@
 from django.contrib import admin
+from django import forms
+from django.db.models import Q
 
 from .models import Ingredient, IngredientCategory, IngredientSubCategory, IngredientBrand, IngredientServing
+from ..nutritional_values.models import NutritionalValues
+
+
+class IngredientServingInline(admin.TabularInline):
+    model = IngredientServing
+    min_num = 1
+    extra = 0
+
 
 @admin.register(Ingredient)
 class IngredientAdmin(admin.ModelAdmin):
-    pass
+    inlines = (IngredientServingInline,)
 
 
 @admin.register(IngredientCategory)
@@ -21,9 +31,3 @@ class IngredientSubCategoryAdmin(admin.ModelAdmin):
 class IngredientBrandAdmin(admin.ModelAdmin):
     pass
     
-
-@admin.register(IngredientServing)
-class IngredientServingAdmin(admin.ModelAdmin):
-    # Hide page from admin
-    def get_model_perms(self, request):
-        return {}

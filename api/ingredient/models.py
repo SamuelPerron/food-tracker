@@ -38,23 +38,24 @@ class IngredientBrand(models.Model):
         verbose_name = 'brand'
 
 
-class IngredientServing(models.Model):
-    custom_name = models.CharField(max_length=25, blank=True, default='Standard serving')
-    grams = models.IntegerField(default=0, blank=True)
-    milliliters = models.IntegerField(default=0, blank=True)
-
-    def __str__(self):
-        return self.custom_name
-
-
 class Ingredient(models.Model):
     name = models.CharField(max_length=150, null=True)
     image = models.ImageField(blank=True)
     category = models.ForeignKey(IngredientSubCategory, on_delete=models.CASCADE, null=True)
     brand = models.ForeignKey(IngredientBrand, on_delete=models.SET_NULL, null=True, blank=True)
-    servings = models.ManyToManyField(IngredientServing)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     nutritional_values = models.ForeignKey(NutritionalValues, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.name
+
+
+class IngredientServing(models.Model):
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, null=True, related_name='servings')
+    custom_name = models.CharField(max_length=25, blank=True, default='Standard serving')
+    grams = models.IntegerField(default=0, blank=True)
+    milliliters = models.IntegerField(default=0, blank=True)
+
+    def __str__(self):
+        g_or_m = f'{self.grams}g' if self.grams is not 0 else f'{self.milliliters} ml'
+        return f'{self.custom_name} ({g_or_m})'
