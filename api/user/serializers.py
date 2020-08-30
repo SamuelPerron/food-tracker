@@ -15,3 +15,9 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
+
+
+class AuthorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['pk', 'username']
