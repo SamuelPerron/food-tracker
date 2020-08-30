@@ -1,7 +1,6 @@
 from django.db import models
 
 from django.contrib.auth.models import User
-from ..nutritional_values.models import NutritionalValues
 
 
 class IngredientCategory(models.Model):
@@ -44,7 +43,6 @@ class Ingredient(models.Model):
     category = models.ForeignKey(IngredientSubCategory, on_delete=models.CASCADE, null=True)
     brand = models.ForeignKey(IngredientBrand, on_delete=models.SET_NULL, null=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    nutritional_values = models.ForeignKey(NutritionalValues, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.name
@@ -53,8 +51,8 @@ class Ingredient(models.Model):
 class IngredientServing(models.Model):
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, null=True, related_name='servings')
     custom_name = models.CharField(max_length=25, blank=True, default='Standard serving')
-    grams = models.IntegerField(default=0, blank=True)
-    milliliters = models.IntegerField(default=0, blank=True)
+    grams = models.FloatField(default=0, blank=True)
+    milliliters = models.FloatField(default=0, blank=True)
 
     def __str__(self):
         g_or_m = f'{self.grams}g' if self.grams is not 0 else f'{self.milliliters} ml'

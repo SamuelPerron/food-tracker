@@ -28,16 +28,22 @@ class IngredientBrandSerializer(serializers.ModelSerializer):
 class IngredientServingSerializer(serializers.ModelSerializer):
     class Meta:
         model = IngredientServing
-        exclude = ['id',]
+        exclude = ['id', 'ingredient']
 
 
 class IngredientSerializer(serializers.ModelSerializer):
     category = IngredientSubCategorySerializer()
     brand = IngredientBrandSerializer()
     servings = IngredientServingSerializer(many=True)
-    nutritional_values = NutritionalValuesSerializer()
+    nutritional_values = NutritionalValuesSerializer(many=True)
     author = AuthorSerializer()
 
     class Meta:
         model = Ingredient
         fields = '__all__'
+
+
+class SlimIngredientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ingredient
+        fields = ['pk', 'name']

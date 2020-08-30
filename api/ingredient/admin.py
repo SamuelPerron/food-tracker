@@ -3,7 +3,7 @@ from django import forms
 from django.db.models import Q
 
 from .models import Ingredient, IngredientCategory, IngredientSubCategory, IngredientBrand, IngredientServing
-from ..nutritional_values.models import NutritionalValues
+from ..nutritional_values.admin import NutritionalValuesInline
 
 
 class IngredientServingInline(admin.TabularInline):
@@ -14,7 +14,7 @@ class IngredientServingInline(admin.TabularInline):
 
 @admin.register(Ingredient)
 class IngredientAdmin(admin.ModelAdmin):
-    inlines = (IngredientServingInline,)
+    inlines = (IngredientServingInline, NutritionalValuesInline)
 
 
 @admin.register(IngredientCategory)

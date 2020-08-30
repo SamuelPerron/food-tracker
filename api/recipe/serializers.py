@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from .models import RecipeCategory, RecipeSubCategory, Recipe, RecipeStep, RecipeIngredient
-from ..ingredient.serializers import IngredientSerializer, IngredientServingSerializer
+from ..ingredient.serializers import IngredientServingSerializer, SlimIngredientSerializer
 from ..user.serializers import AuthorSerializer
 
 
@@ -20,7 +20,7 @@ class RecipeSubCategorySerializer(serializers.ModelSerializer):
 
 
 class RecipeIngredientSerializer(serializers.ModelSerializer):
-    ingredient = IngredientSerializer()
+    ingredient = SlimIngredientSerializer()
     serving = IngredientServingSerializer()
 
     class Meta:
