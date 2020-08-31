@@ -1,7 +1,5 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 
 const Profile = props => {
     return (
@@ -15,9 +13,7 @@ const Profile = props => {
 
 const mapStateToProps = state => {
     return {
-        api: state.apiBaseURL,
         user: state.user,
-        headers: state.headers,
     };
 };
 

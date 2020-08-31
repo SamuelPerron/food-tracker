@@ -29,6 +29,8 @@ const Login = props => {
             .then(r => {
                 const user = r.data[0];
                 props.onLoginSuccessful(token, user);
+                localStorage.setItem('user', JSON.stringify(user));
+                localStorage.setItem('token', token);
             });
         })
         .catch(e => {
