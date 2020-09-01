@@ -25,12 +25,12 @@ const RecipeDetails = props => {
                     <p>{recipe.description}</p>
                     <p>
                         <em>{recipe.category.name}</em><br/>
-                        <ul>
-                            <li>Servings: {recipe.servings}</li>
-                            <li>Preparation time: {recipe.preparation_time}</li>
-                            <li>Cook time: {recipe.cook_time}</li>
-                        </ul>
                     </p>
+                    <ul>
+                        <li>Servings: {recipe.servings}</li>
+                        <li>Preparation time: {recipe.preparation_time}</li>
+                        <li>Cook time: {recipe.cook_time}</li>
+                    </ul>
                     <p>Author: <NavLink to={'/user/' + recipe.author.pk} exact>{recipe.author.username}</NavLink></p>
 
                     <h2>Instructions</h2>
@@ -41,6 +41,26 @@ const RecipeDetails = props => {
                             </li>
                         )) }
                     </ol>
+
+                    <h2>Nutritional values per servings</h2>
+                    <ul>
+                        <li>
+                            <strong>Calories: </strong>
+                            {Math.round(recipe.nutritional_values.calories / recipe.servings)}
+                        </li>
+                        <li>
+                            <strong>Protein: </strong>
+                            {Math.round(recipe.nutritional_values.protein / recipe.servings)} g
+                        </li>
+                        <li>
+                            <strong>Carbs: </strong>
+                            {Math.round(recipe.nutritional_values.carbs / recipe.servings)} g
+                        </li>
+                        <li>
+                            <strong>Fat: </strong>
+                            {Math.round(recipe.nutritional_values.fat / recipe.servings)} g
+                        </li>
+                    </ul>
                 </>
             : null }
         </div>
