@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import './App.scss'
 import Login from './Login/Login';
 import Signup from './Signup/Signup';
+import RecipeList from './RecipeList/RecipeList';
 import Profile from '../components/User/Profile/Profile';
 import * as actionTypes from '../store/actionTypes';
 
@@ -36,6 +37,8 @@ const App = props => {
                     <Signup />
                 </>
             }
+
+            <RecipeList />
         </div>
     );
 }
