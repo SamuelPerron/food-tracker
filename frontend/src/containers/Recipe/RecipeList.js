@@ -20,6 +20,7 @@ const RecipeList = props => {
                 { recipes.map(recipe => (
                     <RecipeItem
                         key={recipe.id}
+                        showAuthor
                         {...recipe} />
                 )) }
             </ul>

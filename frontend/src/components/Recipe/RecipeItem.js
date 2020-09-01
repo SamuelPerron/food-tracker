@@ -8,7 +8,7 @@ const RecipeItem = props => {
             <strong>
                 <NavLink to={'/recipes/' + props.slug} exact>{props.name}</NavLink>
             </strong><br />
-            <NavLink to={'/user/' + props.author.pk} exact>{props.author.username}</NavLink>
+            { props.showAuthor ? <NavLink to={'/user/' + props.author.pk} exact>{props.author.username}</NavLink> : null }
         </li>
     );
 }

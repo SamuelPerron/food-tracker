@@ -28,8 +28,8 @@ const RecipeDetails = props => {
                     </p>
                     <ul>
                         <li>Servings: {recipe.servings}</li>
-                        <li>Preparation time: {recipe.preparation_time}</li>
-                        <li>Cook time: {recipe.cook_time}</li>
+                        <li>Preparation time: {recipe.preparation_time} min</li>
+                        <li>Cook time: {recipe.cook_time} min</li>
                     </ul>
                     <p>Author: <NavLink to={'/user/' + recipe.author.pk} exact>{recipe.author.username}</NavLink></p>
 
