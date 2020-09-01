@@ -1,6 +1,6 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
-from django.contrib.auth.models import User
 from ..ingredient.models import Ingredient, IngredientServing
 from ..nutritional_values.models import NutritionalValues
 from ..nutritional_values.serializers import NutritionalValuesSerializer
@@ -33,12 +33,11 @@ class Recipe(models.Model):
     name = models.CharField(max_length=150, null=True)
     description = models.TextField(blank=True)
     image = models.ImageField(blank=True)
-    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True)
     category = models.ForeignKey(RecipeSubCategory, on_delete=models.CASCADE, null=True)
     servings = models.IntegerField(default=1, blank=False)
     preparation_time = models.IntegerField(default=0, blank=False, help_text='In minutes')
     cook_time = models.IntegerField(default=0, blank=False, help_text='In minutes')
-    # nutritional_values = models.ForeignKey(NutritionalValues, null=True, on_delete=models.SET_NULL)
     @property
     def nutritional_values(self):
         nv_dict = {}
