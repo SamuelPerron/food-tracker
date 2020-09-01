@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import './App.scss'
 import Login from './Login/Login';
+import Signup from './Signup/Signup';
 import Profile from '../components/User/Profile/Profile';
 import * as actionTypes from '../store/actionTypes';
 
@@ -24,14 +25,17 @@ const App = props => {
 
     return (
         <div className="App">
-            <Login />
-
             { props.user !== null ?
                 <>
                     <span onClick={logout}>Logout</span>
                     <Profile />
                 </>
-            : null }
+            :
+                <>
+                    <Login />
+                    <Signup />
+                </>
+            }
         </div>
     );
 }
