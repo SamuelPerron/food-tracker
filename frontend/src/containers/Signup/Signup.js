@@ -15,6 +15,7 @@ const Signup = props => {
     const [usernameErrorMessage, setUsernameGeneralErrorMessage] = useState('');
     const [passwordErrorMessage, setPasswordGeneralErrorMessage] = useState('');
     const [emailErrorMessage, setEmailGeneralErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
     const resetMessages = () => {
         setGeneralErrorMessage('');
@@ -23,13 +24,21 @@ const Signup = props => {
         setEmailGeneralErrorMessage('');
     }
 
+    const resetFields = () => {
+        setUsername('');
+        setEmail('');
+        setPassword('');
+        setRepeatPassword('');
+    }
+
     const registerUser = () => {
         resetMessages();
 
         if (password === repeatPassword) {
             axios.post(props.api + 'users/', { username, password, email }, )
             .then(r => {
-                console.log(r);
+                resetFields();
+                setSuccessMessage('User created, you can now login.');
             })
             .catch(e => {
                 const error = e.response.data;
@@ -80,6 +89,7 @@ const Signup = props => {
                 <li>
                     <button onClick={registerUser}>Sign up</button>
                     <span>{generalErrorMessage}</span>
+                    <span>{successMessage}</span>
                 </li>
             </ul>
         </div>
