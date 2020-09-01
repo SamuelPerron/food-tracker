@@ -12,7 +12,7 @@ const Profile = props => {
                 setUser(r.data);
             })
             .catch(e => {
-                console.log(e);
+                props.history.push('/');
             });
         }
     }, []);

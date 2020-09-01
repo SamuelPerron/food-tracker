@@ -3,11 +3,14 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Redirect, Switch, Route } from 'react-router-dom';
 
 import './App.scss'
+
 import Login from './Login/Login';
 import Signup from './Signup/Signup';
-import RecipeList from './RecipeList/RecipeList';
+import RecipeList from './Recipe/RecipeList';
+import RecipeDetails from './Recipe/RecipeDetails';
 import Profile from './Profile/Profile';
 import Navbar from '../components/UI/Navigation/Navbar';
+
 import * as actionTypes from '../store/actionTypes';
 
 
@@ -26,7 +29,8 @@ const App = props => {
                 <Navbar />
 
                 <Switch>
-                    <Route path="/recipes" component={RecipeList} />
+                    <Route path="/recipes" exact component={RecipeList} />
+                    <Route path="/recipes/:slug" exact component={RecipeDetails} />
 
                     <Route path="/register" component={Signup} />
                     <Route path="/login" component={Login} />
@@ -42,7 +46,6 @@ const App = props => {
 const mapDispatchToProps = dispatch => {
     return {
         onLoginSuccessful: (token, user) => dispatch({type: actionTypes.SET_TOKEN, token, user}),
-        onLogout: (token, user) => dispatch({type: actionTypes.UNSET_TOKEN}),
     };
 };
 

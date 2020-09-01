@@ -38,6 +38,8 @@ class Recipe(models.Model):
     servings = models.IntegerField(default=1, blank=False)
     preparation_time = models.IntegerField(default=0, blank=False, help_text='In minutes')
     cook_time = models.IntegerField(default=0, blank=False, help_text='In minutes')
+    slug = models.SlugField(blank=False, default='')
+
     @property
     def nutritional_values(self):
         nv_dict = {}
