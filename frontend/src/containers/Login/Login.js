@@ -31,6 +31,7 @@ const Login = props => {
                 props.onLoginSuccessful(token, user);
                 localStorage.setItem('user', JSON.stringify(user));
                 localStorage.setItem('token', token);
+                props.history.push('/');
             });
         })
         .catch(e => {
@@ -52,7 +53,7 @@ const Login = props => {
 
     return (
         <div className="Login">
-            <h1>Login</h1>
+            <h1>Sign in</h1>
             <ul>
                 <li>
                     <span>Username</span>

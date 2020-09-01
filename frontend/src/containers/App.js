@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter, Redirect, Switch, Route } from 'react-router-dom';
 
 import './App.scss'
 import Login from './Login/Login';
 import Signup from './Signup/Signup';
 import RecipeList from './RecipeList/RecipeList';
-import Profile from '../components/User/Profile/Profile';
+import Profile from './Profile/Profile';
+import Navbar from '../components/UI/Navigation/Navbar';
 import * as actionTypes from '../store/actionTypes';
 
 
@@ -18,28 +20,22 @@ const App = props => {
         }
     }, []);
 
-    const logout = () => {
-        localStorage.removeItem('user');
-        localStorage.removeItem('token');
-        props.onLogout()
-    }
-
     return (
-        <div className="App">
-            { props.user !== null ?
-                <>
-                    <span onClick={logout}>Logout</span>
-                    <Profile />
-                </>
-            :
-                <>
-                    <Login />
-                    <Signup />
-                </>
-            }
+        <BrowserRouter basename="/">
+            <div className="App">
+                <Navbar />
 
-            <RecipeList />
-        </div>
+                <Switch>
+                    <Route path="/recipes" component={RecipeList} />
+
+                    <Route path="/register" component={Signup} />
+                    <Route path="/login" component={Login} />
+                    <Route path="/user/:id" component={Profile} />
+
+                    <Redirect from="/" exact to="/recipes" />
+                </Switch>
+            </div>
+        </BrowserRouter>
     );
 }
 
@@ -50,10 +46,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-const mapStateToProps = state => {
-    return {
-        user: state.user,
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);
