@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import RecipeItem from '../../components/Recipe/RecipeItem';
+import RecipeList from '../../components/Recipe/RecipeList';
 
 const BookmarkedRecipeList = props => {
     const [recipes, setRecipes] = useState([]);
@@ -24,16 +24,7 @@ const BookmarkedRecipeList = props => {
 
     return (
         <div className="RecipeList">
-            { recipes.length > 0 ?
-                <ul>
-                    { recipes.map(recipe => (
-                        <RecipeItem
-                            key={recipe.id}
-                            showAuthor
-                            {...recipe} />
-                    )) }
-                </ul>
-            : <p>No recipes bookmarked.</p> }
+            <RecipeList recipes={recipes} />
         </div>
     );
 }

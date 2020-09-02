@@ -7,7 +7,7 @@ import './App.scss'
 
 import Login from './Login/Login';
 import Signup from './Signup/Signup';
-import RecipeList from './Recipe/RecipeList';
+import RecipeListPage from './Recipe/RecipeListPage';
 import BookmarkedRecipeList from './Recipe/BookmarkedRecipeList';
 import RecipeDetails from './Recipe/RecipeDetails';
 import Profile from './Profile/Profile';
@@ -50,7 +50,7 @@ const App = props => {
                 <Navbar user={user}/>
 
                 <Switch>
-                    <Route path="/recipes" exact component={RecipeList} />
+                    <Route path="/recipes" exact component={RecipeListPage} />
                     <Route path="/recipes/:slug" exact component={RecipeDetails} />
                     <Route path="/bookmarks" exact component={BookmarkedRecipeList} />
 

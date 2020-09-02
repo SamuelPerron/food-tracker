@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import RecipeItem from '../../components/Recipe/RecipeItem';
+import RecipeList from '../../components/Recipe/RecipeList';
 
-const RecipeList = props => {
+
+const RecipeListPage = props => {
     const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
@@ -16,16 +17,7 @@ const RecipeList = props => {
 
     return (
         <div className="RecipeList">
-            { recipes.length > 0 ?
-                <ul>
-                    { recipes.map(recipe => (
-                        <RecipeItem
-                            key={recipe.id}
-                            showAuthor
-                            {...recipe} />
-                    )) }
-                </ul>
-            : <p>No recipes found.</p> }
+            <RecipeList recipes={recipes} />
         </div>
     );
 }
@@ -36,4 +28,4 @@ const mapStateToProps = state => {
         token: state.token
     };
 };
-export default connect(mapStateToProps)(RecipeList);
+export default connect(mapStateToProps)(RecipeListPage);

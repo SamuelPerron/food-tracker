@@ -8,6 +8,7 @@ from rest_framework.decorators import action
 from rest_framework.authtoken.models import Token
 
 from .serializers import UserSerializer
+from api.recipe.models import Recipe
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -25,3 +26,16 @@ class UserViewSet(viewsets.ModelViewSet):
         user = token.user
         serializer = UserSerializer(user)
         return Response(serializer.data)
+
+    @action(detail=True, methods=['patch'])
+    def toggle_bookmark(self, request, **kwargs):
+        profile = request.user.profile
+        recipe = None
+        if len(profile.bookmarked_recipes.all()) != 0:
+            recipe = profile.bookmarked_recipes.get(pk=request.data['recipe'])
+        if recipe:
+            profile.bookmarked_recipes.remove(recipe)
+        else:
+            profile.bookmarked_recipes.add(request.data['recipe'])
+        profile.save()
+        return Response(UserSerializer(request.user).data)
