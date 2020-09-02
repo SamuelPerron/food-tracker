@@ -3,7 +3,7 @@ import * as types from './actionTypes';
 const initialState = {
     apiBaseURL: 'http://localhost:8000/',
     headers: {},
-    user: null,
+    token: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -16,7 +16,7 @@ const reducer = (state = initialState, action) => {
                     ...state.headers,
                     Authorization: 'Token ' + action.token
                 },
-                user: action.user
+                token: action.token
             }
             return newState;
             break;
@@ -28,7 +28,7 @@ const reducer = (state = initialState, action) => {
                     ...state.headers,
                     Authorization: null
                 },
-                user: null
+                token: null,
             }
             return newState;
             break;

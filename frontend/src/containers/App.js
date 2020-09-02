@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Redirect, Switch, Route } from 'react-router-dom';
+import axios from 'axios';
 
 import './App.scss'
 
@@ -15,18 +16,37 @@ import * as actionTypes from '../store/actionTypes';
 
 
 const App = props => {
-    useState(() => {
-        const lsUser = localStorage.getItem('user');
+    const [user, setUser] = useState(null);
+
+    const findUser = () => {
+        axios.get(props.api + 'users/user_by_token/?token=' + props.token)
+        .then(r => {
+            setUser(r.data);
+        })
+        .catch(e => {
+            console.log(e);
+        });
+    }
+
+    useEffect(() => {
         const lsToken = localStorage.getItem('token');
-        if (lsUser && lsToken) {
-            props.onLoginSuccessful(lsToken, JSON.parse(lsUser));
+        if (lsToken) {
+            props.onSessionFound(lsToken);
         }
     }, []);
+
+    useEffect(() => {
+        if (props.token) {
+            findUser();
+        } else {
+            setUser(null);
+        }
+    }, [props.token]);
 
     return (
         <BrowserRouter basename="/">
             <div className="App">
-                <Navbar />
+                <Navbar user={user}/>
 
                 <Switch>
                     <Route path="/recipes" exact component={RecipeList} />
@@ -45,8 +65,16 @@ const App = props => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLoginSuccessful: (token, user) => dispatch({type: actionTypes.SET_TOKEN, token, user}),
+        onSessionFound: token => dispatch({type: actionTypes.SET_TOKEN, token}),
     };
 };
 
-export default connect(null, mapDispatchToProps)(App);
+const mapStateToProps = state => {
+    return {
+        api: state.apiBaseURL,
+        token: state.token
+    };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

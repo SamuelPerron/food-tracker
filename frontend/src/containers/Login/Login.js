@@ -25,14 +25,9 @@ const Login = props => {
         axios.post(props.api + 'login/', { username, password })
         .then(r => {
             const token = r.data.token;
-            axios.get(props.api + 'users/?username=' + username)
-            .then(r => {
-                const user = r.data[0];
-                props.onLoginSuccessful(token, user);
-                localStorage.setItem('user', JSON.stringify(user));
-                localStorage.setItem('token', token);
-                props.history.push('/');
-            });
+            props.onLoginSuccessful(token);
+            localStorage.setItem('token', token);
+            props.history.push('/');
         })
         .catch(e => {
             const error = e.response.data;

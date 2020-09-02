@@ -7,7 +7,6 @@ import * as actionTypes from '../../../store/actionTypes';
 
 const Navbar = props => {
     const logout = () => {
-        localStorage.removeItem('user');
         localStorage.removeItem('token');
         props.onLogout()
     }
@@ -35,13 +34,13 @@ const Navbar = props => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogout: (token, user) => dispatch({type: actionTypes.UNSET_TOKEN}),
+        onLogout: token => dispatch({type: actionTypes.UNSET_TOKEN}),
     };
 };
 
 const mapStateToProps = state => {
     return {
-        user: state.user,
+        api: state.apiBaseURL,
     };
 };
 
