@@ -55,6 +55,8 @@ class RecipeSerializer(serializers.ModelSerializer):
 
 
 class RecipeBookmarkSerializer(serializers.ModelSerializer):
+    author = AuthorSerializer()
+
     class Meta:
         model = Recipe
-        fields = ['pk', 'name']
+        fields = ['pk', 'name', 'author']

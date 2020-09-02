@@ -4,15 +4,23 @@ import axios from 'axios';
 
 import RecipeItem from '../../components/Recipe/RecipeItem';
 
-const RecipeList = props => {
+const BookmarkedRecipeList = props => {
     const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
-        axios.get(props.api + 'recipes/')
-        .then(r => {
-            setRecipes(r.data);
-        });
-    }, []);
+        if (props.token) {
+            axios.get(props.api + 'users/user_by_token/?token=' + props.token)
+            .then(r => {
+                const bmRecipes = r.data.profile.bookmarked_recipes;
+                if (bmRecipes.length > 0) {
+                    axios.get(props.api + 'recipes/?id=' + bmRecipes)
+                    .then(r => {
+                        setRecipes(r.data);
+                    });
+                }
+            });
+        }
+    }, [props.token]);
 
     return (
         <div className="RecipeList">
@@ -25,7 +33,7 @@ const RecipeList = props => {
                             {...recipe} />
                     )) }
                 </ul>
-            : <p>No recipes found.</p> }
+            : <p>No recipes bookmarked.</p> }
         </div>
     );
 }
@@ -36,4 +44,4 @@ const mapStateToProps = state => {
         token: state.token
     };
 };
-export default connect(mapStateToProps)(RecipeList);
+export default connect(mapStateToProps)(BookmarkedRecipeList);

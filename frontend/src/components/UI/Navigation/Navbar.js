@@ -19,6 +19,7 @@ const Navbar = props => {
                 { props.user ?
                     <>
                         <li><NavLink to={'/user/' + props.user.pk} exact>{props.user.username}</NavLink></li>
+                        <li><NavLink to={'/bookmarks'} exact>Bookmarked recipes</NavLink></li>
                         <li><span onClick={logout}>Sign out</span></li>
                     </>
                 :

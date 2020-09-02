@@ -3,12 +3,9 @@ from django.contrib.auth import get_user_model
 from drf_writable_nested import WritableNestedModelSerializer
 
 from .models import Profile
-from api.recipe.serializers import RecipeBookmarkSerializer
 
 
 class ProfileSerializer(WritableNestedModelSerializer):
-    bookmarked_recipes = RecipeBookmarkSerializer(many=True)
-
     class Meta:
         model = Profile
         fields = ['bookmarked_recipes',]

@@ -9,7 +9,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['slug', 'author']
+    filterset_fields = ['slug', 'author', 'id', 'name']
 
 
 class RecipeCategoryViewSet(viewsets.ModelViewSet):
