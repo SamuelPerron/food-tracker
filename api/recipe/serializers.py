@@ -1,8 +1,8 @@
 from rest_framework import serializers
+from django.contrib.auth import get_user_model
 
 from .models import RecipeCategory, RecipeSubCategory, Recipe, RecipeStep, RecipeIngredient
 from ..ingredient.serializers import IngredientServingSerializer, SlimIngredientSerializer
-from ..user.serializers import AuthorSerializer
 from ..nutritional_values.serializers import NutritionalValuesSerializer
 
 
@@ -36,6 +36,12 @@ class RecipeStepSerializer(serializers.ModelSerializer):
         order = 'order'
 
 
+class AuthorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = ['pk', 'username']
+
+
 class RecipeSerializer(serializers.ModelSerializer):
     category = RecipeSubCategorySerializer()
     author = AuthorSerializer()
@@ -46,3 +52,9 @@ class RecipeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recipe
         fields = '__all__'
+
+
+class RecipeBookmarkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Recipe
+        fields = ['pk', 'name']
