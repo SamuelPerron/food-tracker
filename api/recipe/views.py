@@ -15,8 +15,12 @@ class RecipeViewSet(viewsets.ModelViewSet):
 class RecipeCategoryViewSet(viewsets.ModelViewSet):
     queryset = RecipeCategory.objects.all()
     serializer_class = RecipeCategorySerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id', 'name']
 
 
 class RecipeSubCategoryViewSet(viewsets.ModelViewSet):
     queryset = RecipeSubCategory.objects.all()
     serializer_class = RecipeSubCategorySerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id', 'name', 'parent_category']

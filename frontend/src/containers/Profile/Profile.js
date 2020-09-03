@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { NavLink } from 'react-router-dom';
 
 import RecipeItem from '../../components/Recipe/RecipeItem';
 
@@ -37,6 +38,7 @@ const Profile = props => {
                         <>
                             <h2>Recipes</h2>
                             <ul>
+                                <li><NavLink to={'/recipes/new'} exact>New recipe</NavLink></li>
                                 { recipes.map(recipe => (
                                     <RecipeItem
                                         key={recipe.id}

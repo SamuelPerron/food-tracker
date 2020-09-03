@@ -12,6 +12,7 @@ import BookmarkedRecipeList from './Recipe/BookmarkedRecipeList';
 import RecipeDetails from './Recipe/RecipeDetails';
 import Profile from './Profile/Profile';
 import Navbar from '../components/UI/Navigation/Navbar';
+import RecipeForm from './Recipe/RecipeForm';
 
 import * as actionTypes from '../store/actionTypes';
 
@@ -51,6 +52,7 @@ const App = props => {
 
                 <Switch>
                     <Route path="/recipes" exact component={RecipeListPage} />
+                    <Route path="/recipes/new" exact component={RecipeForm} />
                     <Route path="/recipes/:slug" exact component={RecipeDetails} />
                     <Route path="/bookmarks" exact component={BookmarkedRecipeList} />
 
