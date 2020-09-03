@@ -26,6 +26,7 @@ const StepInstructions = props => {
                 { nextAvailable ?
                     <li>
                         <button onClick={() => props.changeStep('next')}>Next</button>
+                        <p>{props.errorMessage}</p>
                     </li>
                 : null }
             </ul>

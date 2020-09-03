@@ -14,6 +14,7 @@ const RecipeForm = props => {
         name: '', servings: 0, preparation_time: 0, cook_time: 0, category: null, sub_category: null,
         steps: {1: ''}
     });
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         if (props.token) {
@@ -44,7 +45,16 @@ const RecipeForm = props => {
     }
 
     const changeStep = nextOrPrev => {
+        setErrorMessage('');
         if (nextOrPrev === 'next') {
+            if (formStep === 2) {
+                for (let step in recipe.steps) {
+                    if (recipe.steps[step] === '') {
+                        setErrorMessage('Instruction steps must have instructions..');
+                        return
+                    }
+                }
+            }
             setFormStep(formStep + 1);
         } else {
             setFormStep(formStep - 1);
@@ -84,7 +94,8 @@ const RecipeForm = props => {
                     recipeValues={recipe}
                     addStep={() => addStep()}
                     changeStep={nextOrPrev => changeStep(nextOrPrev)}
-                    removeRecipeStep={step => removeRecipeStep(step)} />
+                    removeRecipeStep={step => removeRecipeStep(step)}
+                    errorMessage={errorMessage} />
             : null }
         </div>
     );
