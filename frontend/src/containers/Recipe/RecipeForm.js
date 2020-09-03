@@ -4,9 +4,10 @@ import axios from 'axios';
 
 import StepGeneralInformations from '../../components/Recipe/RecipeForm/StepGeneralInformations';
 import StepInstructions from '../../components/Recipe/RecipeForm/StepInstructions';
+import StepValidation from '../../components/Recipe/RecipeForm/StepValidation';
 
 const RecipeForm = props => {
-    const [formStep, setFormStep] = useState(2);
+    const [formStep, setFormStep] = useState(1);
     const [user, setUser] = useState(null);
     const [categories, setCategories] = useState([]);
     const [subCategories, setSubCategories] = useState([]);
@@ -33,15 +34,41 @@ const RecipeForm = props => {
     }, []);
 
     const findSubCategories = categoryId => {
-        axios.get(props.api + 'recipes/sub-categories/?parent_category=' + categoryId)
-        .then(r => {
-            setSubCategories(r.data);
-            setRecipeValue({category: categoryId})
-        });
+        if (categoryId) {
+            axios.get(props.api + 'recipes/sub-categories/?parent_category=' + categoryId)
+            .then(r => {
+                setSubCategories(r.data);
+                setRecipeValue({category: categoryId})
+            });
+        } else {
+            setSubCategories([]);
+        }
     }
 
     const setRecipeValue = updatedValues => {
         setRecipe({...recipe, ...updatedValues})
+    }
+
+    const transformRecipe = () => {
+        const newRecipe = {...recipe};
+        newRecipe.author = {
+            pk: user.pk,
+            username: user.username
+        }
+        newRecipe.nutritional_values = [];
+        for (let cat in subCategories) {
+            if (subCategories[cat].id === recipe.sub_category) {
+                newRecipe.category = subCategories[cat];
+                delete newRecipe.sub_category;
+            }
+        }
+        delete newRecipe.steps;
+        const newSteps = [];
+        for (let step in Object.keys(recipe.steps)) {
+            newSteps.push({order: parseInt(step) + 1, content: recipe.steps[parseInt(step) + 1]});
+        }
+        newRecipe.steps = newSteps;
+        return newRecipe;
     }
 
     const changeStep = nextOrPrev => {
@@ -96,6 +123,10 @@ const RecipeForm = props => {
                     changeStep={nextOrPrev => changeStep(nextOrPrev)}
                     removeRecipeStep={step => removeRecipeStep(step)}
                     errorMessage={errorMessage} />
+            : null }
+            { formStep === 3 ?
+                <StepValidation
+                    recipe={transformRecipe()} />
             : null }
         </div>
     );

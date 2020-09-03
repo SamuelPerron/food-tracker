@@ -9,7 +9,7 @@ import Login from './Login/Login';
 import Signup from './Signup/Signup';
 import RecipeListPage from './Recipe/RecipeListPage';
 import BookmarkedRecipeList from './Recipe/BookmarkedRecipeList';
-import RecipeDetails from './Recipe/RecipeDetails';
+import RecipeDetailsPage from './Recipe/RecipeDetailsPage';
 import Profile from './Profile/Profile';
 import Navbar from '../components/UI/Navigation/Navbar';
 import RecipeForm from './Recipe/RecipeForm';
@@ -53,7 +53,7 @@ const App = props => {
                 <Switch>
                     <Route path="/recipes" exact component={RecipeListPage} />
                     <Route path="/recipes/new" exact component={RecipeForm} />
-                    <Route path="/recipes/:slug" exact component={RecipeDetails} />
+                    <Route path="/recipes/:slug" exact component={RecipeDetailsPage} />
                     <Route path="/bookmarks" exact component={BookmarkedRecipeList} />
 
                     <Route path="/register" component={Signup} />
