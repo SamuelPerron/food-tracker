@@ -2,15 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import Step1 from '../../components/Recipe/RecipeForm/Step1';
+import StepGeneralInformations from '../../components/Recipe/RecipeForm/StepGeneralInformations';
+import StepInstructions from '../../components/Recipe/RecipeForm/StepInstructions';
 
 const RecipeForm = props => {
-    const [formStep, setFormStep] = useState(1);
+    const [formStep, setFormStep] = useState(2);
     const [user, setUser] = useState(null);
     const [categories, setCategories] = useState([]);
     const [subCategories, setSubCategories] = useState([]);
     const [recipe, setRecipe] = useState({
-        name: '', servings: 0, preparation_time: 0, cook_time: 0, category: null, sub_category: null
+        name: '', servings: 0, preparation_time: 0, cook_time: 0, category: null, sub_category: null,
+        steps: {1: ''}
     });
 
     useEffect(() => {
@@ -49,18 +51,41 @@ const RecipeForm = props => {
         }
     }
 
+    const addStep = () => {
+        const newStep = Object.keys(recipe.steps).length + 1;
+        setRecipe({...recipe, steps: {...recipe.steps, [newStep]: ''}});
+    }
+
+    const removeRecipeStep = step => {
+        const newRecipeSteps = {...recipe.steps};
+        for (let o in recipe.steps) {
+            if (o > step) {
+                delete Object.assign(newRecipeSteps, {[o - 1]: newRecipeSteps[o]})[o];
+            }
+        }
+        setRecipe({...recipe, steps: newRecipeSteps});
+    }
+
     return (
         <div>
             <h1>New recipe</h1>
             { formStep === 1 ?
-                <Step1
+                <StepGeneralInformations
                     categories={categories}
                     subCategories={subCategories}
                     onCategorySelect={cId => findSubCategories(parseInt(cId))}
                     onValuesChange={newValues => setRecipeValue(newValues)}
                     recipeValues={recipe}
                     changeStep={nextOrPrev => changeStep(nextOrPrev)} />
-            : null}
+            : null }
+            { formStep === 2 ?
+                <StepInstructions
+                    onValuesChange={newValues => setRecipeValue(newValues)}
+                    recipeValues={recipe}
+                    addStep={() => addStep()}
+                    changeStep={nextOrPrev => changeStep(nextOrPrev)}
+                    removeRecipeStep={step => removeRecipeStep(step)} />
+            : null }
         </div>
     );
 }

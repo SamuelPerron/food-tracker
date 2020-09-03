@@ -1,11 +1,12 @@
 import React from 'react';
 
-const Step1 = props => {
+const StepGeneralInformations = props => {
     const nextAvailable = props.recipeValues.name && props.recipeValues.servings > 0 &&
         props.recipeValues.category && props.recipeValues.sub_category;
 
     return (
         <>
+            <h2>Recipe description</h2>
             <ul>
                 <li>
                     <span>Name</span>
@@ -68,4 +69,4 @@ const Step1 = props => {
     );
 }
 
-export default Step1;
+export default StepGeneralInformations;
