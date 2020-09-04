@@ -9,7 +9,7 @@ const RecipeList = props => {
             <ul>
                 { props.recipes.map(recipe => (
                     <RecipeItem
-                        key={recipe.id}
+                        key={recipe.url}
                         showAuthor
                         {...recipe} />
                 )) }

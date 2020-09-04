@@ -7,6 +7,7 @@ import RecipeItem from '../../components/Recipe/RecipeItem';
 
 const Profile = props => {
     const [user, setUser] = useState(null);
+    const [loggedUser, setLoggedUser] = useState(null);
     const [recipes, setRecipes] = useState([]);
 
     const fetchRecipes = () => {
@@ -29,6 +30,18 @@ const Profile = props => {
         }
     }, []);
 
+    useEffect(() => {
+        if (props.token) {
+            axios.get(props.api + 'users/user_by_token/?token=' + props.token)
+            .then(r => {
+                setLoggedUser(r.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+        }
+    }, [props.token]);
+
     return (
         <div className="Profile">
             { user ?
@@ -38,7 +51,7 @@ const Profile = props => {
                         <>
                             <h2>Recipes</h2>
                             <ul>
-                                <li><NavLink to={'/recipes/new'} exact>New recipe</NavLink></li>
+                                { user.pk === loggedUser.pk ? <li><NavLink to={'/recipes/new'} exact>New recipe</NavLink></li> : null }
                                 { recipes.map(recipe => (
                                     <RecipeItem
                                         key={recipe.id}
@@ -56,6 +69,7 @@ const Profile = props => {
 const mapStateToProps = state => {
     return {
         api: state.apiBaseURL,
+        token: state.token,
     };
 };
 

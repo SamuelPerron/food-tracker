@@ -42,8 +42,17 @@ const RecipeDetailsPage = props => {
     useEffect(() => {
         axios.get(props.api + 'recipes/?slug=' + props.match.params.slug)
         .then(r => {
-            if (r.data[0]) {
-                setRecipe(r.data[0]);
+            const result = r.data[0];
+            if (result) {
+                axios.get(result.category)
+                .then(r => {
+                    result.category = r.data;
+                    axios.get(result.author)
+                    .then(r => {
+                        result.author = r.data;
+                        setRecipe(result);
+                    });
+                });
             } else {
                 props.history.push('/');
             }

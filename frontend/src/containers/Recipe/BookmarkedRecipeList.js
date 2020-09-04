@@ -15,7 +15,14 @@ const BookmarkedRecipeList = props => {
                 if (bmRecipes.length > 0) {
                     axios.get(props.api + 'recipes/?id=' + bmRecipes)
                     .then(r => {
-                        setRecipes(r.data);
+                        const results = r.data;
+                        for (let recipe in results) {
+                            axios.get(results[recipe].author)
+                            .then(r => {
+                                results[recipe].author = r.data;
+                                setRecipes(results);
+                            });
+                        }
                     });
                 }
             });
