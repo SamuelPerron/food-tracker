@@ -20,8 +20,7 @@ class RecipeSubCategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class RecipeIngredientSerializer(serializers.ModelSerializer):
-    ingredient = SlimIngredientSerializer()
+class RecipeIngredientSerializer(serializers.HyperlinkedModelSerializer):
     serving = IngredientServingSerializer()
 
     class Meta:
@@ -42,16 +41,27 @@ class AuthorSerializer(serializers.ModelSerializer):
         fields = ['pk', 'username']
 
 
-class RecipeSerializer(serializers.ModelSerializer):
-    category = RecipeSubCategorySerializer()
-    author = AuthorSerializer()
-    ingredients = RecipeIngredientSerializer(many=True)
+class RecipeSerializer(serializers.HyperlinkedModelSerializer):
+    ingredients = RecipeIngredientSerializer(many=True, required=False)
     steps = RecipeStepSerializer(many=True)
-    nutritional_values = NutritionalValuesSerializer()
+    nutritional_values = NutritionalValuesSerializer(required=False, read_only=True)
 
     class Meta:
         model = Recipe
         fields = '__all__'
+
+    # def create(self, validated_data):
+    #     author = get_user_model().objects.get(pk=validated_data['author']['pk'])
+    #     raise ValueError(author.username)
+    #     data_for_creation = {
+    #         'author': author,
+    #         'category_id': validated_data['category']['id'],
+    #         'name': validated_data['name'],
+    #         'preparation_time': validated_data['preparation_time'],
+    #         'servings': validated_data['servings'],
+    #     }
+    #     recipe = Recipe(**data_for_creation)
+    #     return recipe
 
 
 class RecipeBookmarkSerializer(serializers.ModelSerializer):

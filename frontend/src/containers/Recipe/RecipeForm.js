@@ -103,6 +103,17 @@ const RecipeForm = props => {
         setRecipe({...recipe, steps: newRecipeSteps});
     }
 
+    const sendToAPI = () => {
+        const toSend = transformRecipe();
+        delete toSend.nutritional_values;
+        axios({
+            url: props.api + 'recipes/',
+            method: 'POST',
+            headers: props.headers,
+            data: toSend
+        })
+    }
+
     return (
         <div>
             <h1>New recipe</h1>
@@ -126,7 +137,8 @@ const RecipeForm = props => {
             : null }
             { formStep === 3 ?
                 <StepValidation
-                    recipe={transformRecipe()} />
+                    recipe={transformRecipe()}
+                    sendToAPI={() => sendToAPI()} />
             : null }
         </div>
     );

@@ -10,9 +10,7 @@ class IngredientCategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class IngredientSubCategorySerializer(serializers.ModelSerializer):
-    parent_category = IngredientCategorySerializer()
-
+class IngredientSubCategorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = IngredientSubCategory
         fields = '__all__'
@@ -30,15 +28,11 @@ class IngredientServingSerializer(serializers.ModelSerializer):
         exclude = ['id', 'ingredient']
 
 
-class IngredientSerializer(serializers.ModelSerializer):
-    category = IngredientSubCategorySerializer()
-    brand = IngredientBrandSerializer()
-    servings = IngredientServingSerializer(many=True)
+class IngredientSerializer(serializers.HyperlinkedModelSerializer):
     nutritional_values = NutritionalValuesSerializer(many=True)
 
     class Meta:
         model = Ingredient
-        fields = '__all__'
         exclude = ['author',]
 
 
