@@ -32,9 +32,9 @@ class UserViewSet(viewsets.ModelViewSet):
         profile = request.user.profile
         recipe = None
         if len(profile.bookmarked_recipes.all()) != 0:
-            recipe = profile.bookmarked_recipes.get(pk=request.data['recipe'])
+            recipe = profile.bookmarked_recipes.filter(pk=request.data['recipe'])
         if recipe:
-            profile.bookmarked_recipes.remove(recipe)
+            profile.bookmarked_recipes.remove(recipe[0])
         else:
             profile.bookmarked_recipes.add(request.data['recipe'])
         profile.save()

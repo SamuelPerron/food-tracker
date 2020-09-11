@@ -52,9 +52,11 @@ class Recipe(models.Model):
                             nv_dict[field.name] += value
                         except KeyError:
                             nv_dict[field.name] = value
-        nv = NutritionalValues(**nv_dict)
-        nv.save()
-        return nv
+        if nv_dict != {}:
+            nv = NutritionalValues(**nv_dict)
+            nv.save()
+            return nv
+        return None
 
     def __str__(self):
         return self.name

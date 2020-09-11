@@ -6,7 +6,7 @@ const RecipeDetails = props => {
     return (
         <div className="RecipeDetails">
             <h1>{props.recipe.name}</h1>
-            { props.token ? <span onClick={props.toggleBookmarkRecipe}>{ props.bookmarked ? "Remove from bookmarks" : "Bookmark"}</span> : null }
+            { props.isUserLogged ? <span onClick={props.toggleBookmarkRecipe}>{ props.bookmarked ? "Remove from bookmarks" : "Bookmark"}</span> : null }
             <p>{props.recipe.description}</p>
             <p>
                 <em>{props.recipe.category.name}</em><br/>
@@ -53,5 +53,9 @@ const RecipeDetails = props => {
         </div>
     );
 }
+
+RecipeDetails.defaultProps = {
+    recipe: {},
+};
 
 export default RecipeDetails;

@@ -50,6 +50,7 @@ const RecipeDetailsPage = props => {
                     axios.get(result.author)
                     .then(r => {
                         result.author = r.data;
+                        result.id = parseInt(result.url.split('/recipes/')[1].split('/')[0]);
                         setRecipe(result);
                     });
                 });
@@ -57,13 +58,14 @@ const RecipeDetailsPage = props => {
                 props.history.push('/');
             }
         });
-    }, [props.token]);
+    }, []);
 
     return (
         <>
             { recipe ?
                 <RecipeDetails
                     recipe={recipe}
+                    isUserLogged={props.token}
                     bookmarked={bookmarked}
                     toggleBookmarkRecipe={toggleBookmarkRecipe} />
             : null }

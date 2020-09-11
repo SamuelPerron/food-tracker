@@ -41,7 +41,7 @@ const StepGeneralInformations = props => {
                         <option></option>
                         {
                             props.categories.map(c => (
-                                <option key={c.id} value={c.id}>{c.name}</option>
+                                <option key={c.url} value={c.url}>{c.name}</option>
                             ))
                         }
                     </select>
@@ -49,11 +49,11 @@ const StepGeneralInformations = props => {
                 { props.subCategories.length > 1 ?
                     <li>
                         <span>Sub Category</span>
-                        <select onChange={e => props.onValuesChange({sub_category: parseInt(e.target.value)})}>
+                        <select onChange={e => props.onValuesChange({sub_category: e.target.value})}>
                             <option></option>
                             {
                                 props.subCategories.map(c => (
-                                    <option key={c.id} value={c.id}>{c.name}</option>
+                                    <option key={c.url} value={c.url}>{c.name}</option>
                                 ))
                             }
                         </select>

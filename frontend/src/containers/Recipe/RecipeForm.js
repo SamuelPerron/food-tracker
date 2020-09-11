@@ -33,12 +33,12 @@ const RecipeForm = props => {
         });
     }, []);
 
-    const findSubCategories = categoryId => {
-        if (categoryId) {
-            axios.get(props.api + 'recipes/sub-categories/?parent_category=' + categoryId)
+    const findSubCategories = categoryUrl => {
+        if (categoryUrl) {
+            axios.get(props.api + 'recipes/sub-categories/?parent_category=' + categoryUrl.slice(-2)[0])
             .then(r => {
                 setSubCategories(r.data);
-                setRecipeValue({category: categoryId})
+                setRecipeValue({category: categoryUrl})
             });
         } else {
             setSubCategories([]);
@@ -57,7 +57,7 @@ const RecipeForm = props => {
         }
         newRecipe.nutritional_values = [];
         for (let cat in subCategories) {
-            if (subCategories[cat].id === recipe.sub_category) {
+            if (subCategories[cat].url === recipe.sub_category) {
                 newRecipe.category = subCategories[cat];
                 delete newRecipe.sub_category;
             }
@@ -106,12 +106,26 @@ const RecipeForm = props => {
     const sendToAPI = () => {
         const toSend = transformRecipe();
         delete toSend.nutritional_values;
+        toSend.category = toSend.category.url;
+        toSend.author = props.api + 'users/' + toSend.author.pk + '/';
+        toSend.ingredients = [{
+                "ingredient": "http://127.0.0.1:8000/ingredients/18/",
+                "quantity": 1.5,
+                "serving": {
+                    "custom_name": "Standard serving",
+                    "grams": 113.0,
+                    "milliliters": 0.0
+                }
+            }];
         axios({
             url: props.api + 'recipes/',
             method: 'POST',
             headers: props.headers,
             data: toSend
         })
+        .then(r => {
+            props.history.push('/recipes/' + r.data['slug']);
+        });
     }
 
     return (
@@ -121,7 +135,7 @@ const RecipeForm = props => {
                 <StepGeneralInformations
                     categories={categories}
                     subCategories={subCategories}
-                    onCategorySelect={cId => findSubCategories(parseInt(cId))}
+                    onCategorySelect={cId => findSubCategories(cId)}
                     onValuesChange={newValues => setRecipeValue(newValues)}
                     recipeValues={recipe}
                     changeStep={nextOrPrev => changeStep(nextOrPrev)} />

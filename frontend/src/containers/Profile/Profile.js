@@ -51,7 +51,7 @@ const Profile = props => {
                         <>
                             <h2>Recipes</h2>
                             <ul>
-                                { user.pk === loggedUser.pk ? <li><NavLink to={'/recipes/new'} exact>New recipe</NavLink></li> : null }
+                                { loggedUser && user.pk === loggedUser.pk ? <li><NavLink to={'/recipes/new'} exact>New recipe</NavLink></li> : null }
                                 { recipes.map(recipe => (
                                     <RecipeItem
                                         key={recipe.id}

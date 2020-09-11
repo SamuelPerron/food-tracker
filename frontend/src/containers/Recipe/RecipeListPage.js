@@ -12,13 +12,7 @@ const RecipeListPage = props => {
         axios.get(props.api + 'recipes/')
         .then(r => {
             const results = r.data;
-            for (let recipe in results) {
-                axios.get(results[recipe].author)
-                .then(r => {
-                    results[recipe].author = r.data;
-                    setRecipes(results);
-                });
-            }
+            setRecipes(results);
         });
     }, []);
 
