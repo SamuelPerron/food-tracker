@@ -80,3 +80,6 @@ class RecipeIngredient(models.Model):
 
     def __str__(self):
         return f'{self.recipe.name} - {self.ingredient.name}'
+
+    class Meta:
+        ordering = ['ingredient__category__name']

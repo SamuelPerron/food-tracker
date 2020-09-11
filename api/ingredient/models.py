@@ -50,6 +50,7 @@ class Ingredient(models.Model):
 class IngredientServing(models.Model):
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, null=True, related_name='servings')
     custom_name = models.CharField(max_length=25, blank=True, default='Standard serving')
+    for_list_name = models.CharField(max_length=25, blank=True, default='')
     grams = models.FloatField(default=0, blank=True)
     milliliters = models.FloatField(default=0, blank=True)
 

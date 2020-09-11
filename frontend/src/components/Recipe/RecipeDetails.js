@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import IngredientList from './Ingredient/IngredientList';
+
 
 const RecipeDetails = props => {
     return (
@@ -17,6 +19,9 @@ const RecipeDetails = props => {
                 <li>Cook time: {props.recipe.cook_time} min</li>
             </ul>
             <p>Author: <NavLink to={'/user/' + props.recipe.author.pk} exact>{props.recipe.author.username}</NavLink></p>
+
+            <h2>Ingredients</h2>
+            <IngredientList ingredients={props.recipe.ingredients} />
 
             <h2>Instructions</h2>
             <ol>
