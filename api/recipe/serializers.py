@@ -28,7 +28,7 @@ class RecipeIngredientNameSerializer(serializers.ModelSerializer):
 
 class RecipeIngredientSerializer(serializers.HyperlinkedModelSerializer):
     serving = IngredientServingSerializer()
-    ingredient_name = RecipeIngredientNameSerializer(source='ingredient')
+    ingredient_name = RecipeIngredientNameSerializer(source='ingredient', read_only=True)
 
     class Meta:
         model = RecipeIngredient

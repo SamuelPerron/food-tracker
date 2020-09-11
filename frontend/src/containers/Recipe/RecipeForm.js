@@ -9,7 +9,7 @@ import StepInstructions from '../../components/Recipe/RecipeForm/StepInstruction
 import StepValidation from '../../components/Recipe/RecipeForm/StepValidation';
 
 const RecipeForm = props => {
-    const [formStep, setFormStep] = useState(2);
+    const [formStep, setFormStep] = useState(1);
     const [user, setUser] = useState(null);
     const [categories, setCategories] = useState([]);
     const [subCategories, setSubCategories] = useState([]);
@@ -79,6 +79,22 @@ const RecipeForm = props => {
             newSteps.push({order: parseInt(step) + 1, content: recipe.steps[parseInt(step) + 1]});
         }
         newRecipe.steps = newSteps;
+        delete newRecipe.ingredients;
+        const newIngredients = [];
+        for (let i in recipe.ingredients) {
+            newIngredients.push({
+                "ingredient": recipe.ingredients[i].url,
+                "ingredient_name": {"name": recipe.ingredients[i].name},
+                "quantity": recipe.ingredients[i].quantity,
+                "serving": {
+                    "custom_name": recipe.ingredients[i].quantity + recipe.ingredients[i].serving.name,
+                    "for_list_name": recipe.ingredients[i].serving.name !== 'Standard serving' ? recipe.ingredients[i].serving.name : '',
+                    "grams": recipe.ingredients[i].serving.grams,
+                    "milliliters": recipe.ingredients[i].serving.milliliters
+                }
+            });
+        }
+        newRecipe.ingredients = newIngredients;
         return newRecipe;
     }
 
@@ -185,15 +201,6 @@ const RecipeForm = props => {
         delete toSend.nutritional_values;
         toSend.category = toSend.category.url;
         toSend.author = props.api + 'users/' + toSend.author.pk + '/';
-        toSend.ingredients = [{
-                "ingredient": "http://127.0.0.1:8000/ingredients/18/",
-                "quantity": 1.5,
-                "serving": {
-                    "custom_name": "Standard serving",
-                    "grams": 113.0,
-                    "milliliters": 0.0
-                }
-            }];
         axios({
             url: props.api + 'recipes/',
             method: 'POST',
