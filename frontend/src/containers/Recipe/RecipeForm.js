@@ -9,10 +9,11 @@ import StepInstructions from '../../components/Recipe/RecipeForm/StepInstruction
 import StepValidation from '../../components/Recipe/RecipeForm/StepValidation';
 
 const RecipeForm = props => {
-    const [formStep, setFormStep] = useState(1);
+    const [formStep, setFormStep] = useState(2);
     const [user, setUser] = useState(null);
     const [categories, setCategories] = useState([]);
     const [subCategories, setSubCategories] = useState([]);
+    const [ingredientCategories, setIngredientCategories] = useState([]);
     const [ingredients, setIngredients] = useState([]);
     const [ingredientSearch, setIngredientSearch] = useState('');
     const [recipe, setRecipe] = useState({
@@ -34,6 +35,11 @@ const RecipeForm = props => {
         axios.get(props.api + 'recipes/categories/')
         .then(r => {
             setCategories(r.data);
+        });
+
+        axios.get(props.api + 'ingredients/sub-categories/')
+        .then(r => {
+            setIngredientCategories(r.data);
         });
     }, []);
 
@@ -196,6 +202,10 @@ const RecipeForm = props => {
         setRecipeValue(newRecipeValues);
     }
 
+    const createIngredient = ingredient => {
+        console.log(ingredient);
+    }
+
     const sendToAPI = () => {
         const toSend = transformRecipe();
         delete toSend.nutritional_values;
@@ -237,6 +247,8 @@ const RecipeForm = props => {
                     changeIngredientQuantity={(i, qty) => changeIngredientQuantity(i, parseFloat(qty))}
                     changeStep={nextOrPrev => changeStep(nextOrPrev)}
                     removeRecipeIngredient={ingredient => removeRecipeIngredient(ingredient)}
+                    createIngredient={i => createIngredient(i)}
+                    categories={ingredientCategories}
                     errorMessage={errorMessage} />
             : null }
             { formStep === 3 ?

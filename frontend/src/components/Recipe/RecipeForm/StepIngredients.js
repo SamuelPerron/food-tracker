@@ -1,6 +1,7 @@
 import React from 'react';
 
 import IngredientForm from '../Ingredient/IngredientForm';
+import CreateIngredientForm from '../Ingredient/CreateIngredientForm';
 
 const StepIngredients = props => {
     const nextAvailable = props.recipeValues.ingredients.length > 0;
@@ -21,6 +22,13 @@ const StepIngredients = props => {
                                 ingredientSearchHandler={i => props.ingredientSearchHandler(i)}
                                 changeIngredientServing={s => props.changeIngredientServing(s)}
                                 changeIngredientQuantity={qty => props.changeIngredientQuantity(i.id, qty)} />
+                            { props.ingredients.length === 0 ?
+                                <>
+                                    <CreateIngredientForm
+                                        createIngredient={i => props.createIngredient(i)}
+                                        categories={props.categories} />
+                                </>
+                            :null }
                             <button onClick={() => props.removeRecipeIngredient(i.id)}>Remove</button>
                         </li>
                     ))
