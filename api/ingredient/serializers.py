@@ -25,11 +25,12 @@ class IngredientBrandSerializer(serializers.ModelSerializer):
 class IngredientServingSerializer(serializers.ModelSerializer):
     class Meta:
         model = IngredientServing
-        exclude = ['id', 'ingredient']
+        exclude = ['ingredient']
 
 
 class IngredientSerializer(serializers.HyperlinkedModelSerializer):
     nutritional_values = NutritionalValuesSerializer(many=True)
+    servings = IngredientServingSerializer(many=True)
 
     class Meta:
         model = Ingredient

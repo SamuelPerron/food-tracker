@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import crypto from 'crypto';
 
 import StepGeneralInformations from '../../components/Recipe/RecipeForm/StepGeneralInformations';
+import StepIngredients from '../../components/Recipe/RecipeForm/StepIngredients';
 import StepInstructions from '../../components/Recipe/RecipeForm/StepInstructions';
 import StepValidation from '../../components/Recipe/RecipeForm/StepValidation';
 
 const RecipeForm = props => {
-    const [formStep, setFormStep] = useState(1);
+    const [formStep, setFormStep] = useState(2);
     const [user, setUser] = useState(null);
     const [categories, setCategories] = useState([]);
     const [subCategories, setSubCategories] = useState([]);
+    const [ingredients, setIngredients] = useState([]);
+    const [ingredientSearch, setIngredientSearch] = useState('');
     const [recipe, setRecipe] = useState({
         name: '', servings: 0, preparation_time: 0, cook_time: 0, category: null, sub_category: null,
-        steps: {1: ''}
+        steps: {1: ''}, ingredients: [],
     });
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -32,6 +36,13 @@ const RecipeForm = props => {
             setCategories(r.data);
         });
     }, []);
+
+    useEffect(() => {
+        axios.get(props.api + 'ingredients?search=' + ingredientSearch)
+        .then(r => {
+            setIngredients(r.data);
+        });
+    }, [ingredientSearch]);
 
     const findSubCategories = categoryUrl => {
         if (categoryUrl) {
@@ -74,7 +85,7 @@ const RecipeForm = props => {
     const changeStep = nextOrPrev => {
         setErrorMessage('');
         if (nextOrPrev === 'next') {
-            if (formStep === 2) {
+            if (formStep === 3) {
                 for (let step in recipe.steps) {
                     if (recipe.steps[step] === '') {
                         setErrorMessage('Instruction steps must have instructions..');
@@ -101,6 +112,72 @@ const RecipeForm = props => {
             }
         }
         setRecipe({...recipe, steps: newRecipeSteps});
+    }
+
+    const addIngredient = () => {
+        const newId = crypto.randomBytes(20).toString('hex');
+        setRecipe({...recipe, ingredients: [...recipe.ingredients, {id: newId}]});
+    }
+
+    const chooseIngredientHandler = ingredient => {
+        const newRecipeValues = {...recipe};
+        for (let i = 0; i < newRecipeValues.ingredients.length; i++) {
+            if (newRecipeValues.ingredients[i].id === ingredient[0]) {
+                newRecipeValues.ingredients[i] = {
+                    id: ingredient[0],
+                    ...ingredient[1],
+                    serving: {
+                        name: '',
+                        grams: 0,
+                        milliliters: 0
+                    },
+                    quantity: 1,
+                };
+                setIngredientSearch('');
+            }
+        }
+        setRecipeValue(newRecipeValues);
+    }
+
+    const changeIngredientServing = serving => {
+        const newRecipeValues = {...recipe};
+        for (let i = 0; i < newRecipeValues.ingredients.length; i++) {
+            if (newRecipeValues.ingredients[i].id === serving[1]) {
+
+                for (let j = 0; j < newRecipeValues.ingredients[i].servings.length; j++) {
+                    if (newRecipeValues.ingredients[i].servings[j].id == serving[0]) {
+                        serving = newRecipeValues.ingredients[i].servings[j];
+                        newRecipeValues.ingredients[i].serving = {
+                            name: serving.for_list_name ? serving.for_list_name : serving.custom_name,
+                            grams: serving.grams,
+                            milliliters: serving.milliliters
+                        };
+                    }
+                }
+
+            }
+        }
+        setRecipeValue(newRecipeValues);
+    }
+
+    const removeRecipeIngredient = ingredientId => {
+        const newRecipeIngredients = [...recipe.ingredients];
+        for (let i = newRecipeIngredients.length -1; i >= 0; i--) {
+            if (newRecipeIngredients[i].id === ingredientId) {
+                newRecipeIngredients.splice(i, 1);
+            }
+        }
+        setRecipe({...recipe, ingredients: newRecipeIngredients});
+    }
+
+    const changeIngredientQuantity = (ingredientId, qty) => {
+        const newRecipeValues = {...recipe};
+        for (let i = 0; i < newRecipeValues.ingredients.length; i++) {
+            if (newRecipeValues.ingredients[i].id === ingredientId) {
+                newRecipeValues.ingredients[i].quantity = qty;
+            }
+        }
+        setRecipeValue(newRecipeValues);
     }
 
     const sendToAPI = () => {
@@ -141,6 +218,21 @@ const RecipeForm = props => {
                     changeStep={nextOrPrev => changeStep(nextOrPrev)} />
             : null }
             { formStep === 2 ?
+                <StepIngredients
+                    onValuesChange={newValues => setRecipeValue(newValues)}
+                    recipeValues={recipe}
+                    ingredients={ingredients}
+                    ingredientSearch={ingredientSearch}
+                    ingredientSearchHandler={i => setIngredientSearch(i)}
+                    addIngredient={() => addIngredient()}
+                    chooseIngredientHandler={i => chooseIngredientHandler(i)}
+                    changeIngredientServing={s => changeIngredientServing(s)}
+                    changeIngredientQuantity={(i, qty) => changeIngredientQuantity(i, parseFloat(qty))}
+                    changeStep={nextOrPrev => changeStep(nextOrPrev)}
+                    removeRecipeIngredient={ingredient => removeRecipeIngredient(ingredient)}
+                    errorMessage={errorMessage} />
+            : null }
+            { formStep === 3 ?
                 <StepInstructions
                     onValuesChange={newValues => setRecipeValue(newValues)}
                     recipeValues={recipe}
@@ -149,7 +241,7 @@ const RecipeForm = props => {
                     removeRecipeStep={step => removeRecipeStep(step)}
                     errorMessage={errorMessage} />
             : null }
-            { formStep === 3 ?
+            { formStep === 4 ?
                 <StepValidation
                     recipe={transformRecipe()}
                     sendToAPI={() => sendToAPI()} />

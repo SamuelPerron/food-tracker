@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 
 from .models import Ingredient, IngredientCategory, IngredientSubCategory, IngredientServing, IngredientBrand
 from .serializers import IngredientSerializer, IngredientCategorySerializer, IngredientSubCategorySerializer, IngredientBrandSerializer
@@ -7,6 +7,8 @@ from .serializers import IngredientSerializer, IngredientCategorySerializer, Ing
 class IngredientViewSet(viewsets.ModelViewSet):
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name',]
 
 class IngredientBrandViewSet(viewsets.ModelViewSet):
     queryset = IngredientBrand.objects.all()
