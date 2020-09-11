@@ -2,7 +2,6 @@ from rest_framework import serializers
 
 from .models import Ingredient, IngredientCategory, IngredientSubCategory, IngredientServing, IngredientBrand
 from ..nutritional_values.serializers import NutritionalValuesSerializer
-from ..user.serializers import AuthorSerializer
 
 
 class IngredientCategorySerializer(serializers.ModelSerializer):
@@ -11,9 +10,7 @@ class IngredientCategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class IngredientSubCategorySerializer(serializers.ModelSerializer):
-    parent_category = IngredientCategorySerializer()
-
+class IngredientSubCategorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = IngredientSubCategory
         fields = '__all__'
@@ -31,16 +28,12 @@ class IngredientServingSerializer(serializers.ModelSerializer):
         exclude = ['id', 'ingredient']
 
 
-class IngredientSerializer(serializers.ModelSerializer):
-    category = IngredientSubCategorySerializer()
-    brand = IngredientBrandSerializer()
-    servings = IngredientServingSerializer(many=True)
+class IngredientSerializer(serializers.HyperlinkedModelSerializer):
     nutritional_values = NutritionalValuesSerializer(many=True)
-    author = AuthorSerializer()
 
     class Meta:
         model = Ingredient
-        fields = '__all__'
+        exclude = ['author',]
 
 
 class SlimIngredientSerializer(serializers.ModelSerializer):

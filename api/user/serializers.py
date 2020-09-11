@@ -1,16 +1,17 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from drf_writable_nested import WritableNestedModelSerializer
 
 from .models import Profile
 
 
-class ProfileSerializer(serializers.ModelSerializer):
+class ProfileSerializer(WritableNestedModelSerializer):
     class Meta:
         model = Profile
-        fields = ['bookmarked_recipes']
+        fields = ['bookmarked_recipes',]
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer(WritableNestedModelSerializer):
     profile = ProfileSerializer(required=False)
 
     class Meta:
@@ -24,9 +25,3 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
-
-
-class AuthorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = get_user_model()
-        fields = ['pk', 'username']

@@ -3,8 +3,6 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import * as actionTypes from '../../store/actionTypes';
-
 
 const Signup = props => {
     const [username, setUsername] = useState('');

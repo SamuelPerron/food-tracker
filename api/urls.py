@@ -4,7 +4,7 @@ from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
 
 from api.user.views import UserViewSet
-from api.ingredient.views import IngredientViewSet, IngredientCategoryViewSet, IngredientSubCategoryViewSet
+from api.ingredient.views import IngredientViewSet, IngredientCategoryViewSet, IngredientSubCategoryViewSet, IngredientBrandViewSet
 from api.recipe.views import RecipeViewSet, RecipeCategoryViewSet, RecipeSubCategoryViewSet
 
 
@@ -12,6 +12,7 @@ from api.recipe.views import RecipeViewSet, RecipeCategoryViewSet, RecipeSubCate
 router = routers.DefaultRouter()
 
 router.register(r'users', UserViewSet)
+router.register(r'ingredients/brands', IngredientBrandViewSet)
 router.register(r'ingredients/categories', IngredientCategoryViewSet)
 router.register(r'ingredients/sub-categories', IngredientSubCategoryViewSet)
 router.register(r'ingredients', IngredientViewSet)

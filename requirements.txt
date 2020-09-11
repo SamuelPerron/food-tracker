@@ -10,3 +10,4 @@ requests>=2.24
 Pillow>=7.2.0
 django-cors-headers>=3.5.0
 django-user-unique-email>=0.1.1
+drf-writable-nested>=0.6.1

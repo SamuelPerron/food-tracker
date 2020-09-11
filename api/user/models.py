@@ -9,7 +9,7 @@ from ..recipe.models import Recipe
 
 class Profile(models.Model):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
-    bookmarked_recipes = models.ManyToManyField(Recipe)
+    bookmarked_recipes = models.ManyToManyField(Recipe, blank=True)
 
 
 @receiver(post_save, sender=get_user_model())
