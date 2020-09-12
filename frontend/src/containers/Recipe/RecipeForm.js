@@ -193,6 +193,10 @@ const RecipeForm = props => {
     }
 
     const changeIngredientQuantity = (ingredientId, qty) => {
+        let quantity = 0;
+        if (qty !== "") {
+            quantity = parseFloat(qty)
+        }
         const newRecipeValues = {...recipe};
         for (let i = 0; i < newRecipeValues.ingredients.length; i++) {
             if (newRecipeValues.ingredients[i].id === ingredientId) {
@@ -244,6 +248,7 @@ const RecipeForm = props => {
             : null }
             { formStep === 2 ?
                 <StepIngredients
+                    user={user}
                     onValuesChange={newValues => setRecipeValue(newValues)}
                     recipeValues={recipe}
                     ingredients={ingredients}
@@ -252,7 +257,7 @@ const RecipeForm = props => {
                     addIngredient={() => addIngredient()}
                     chooseIngredientHandler={i => chooseIngredientHandler(i)}
                     changeIngredientServing={s => changeIngredientServing(s)}
-                    changeIngredientQuantity={(i, qty) => changeIngredientQuantity(i, parseFloat(qty))}
+                    changeIngredientQuantity={(i, qty) => changeIngredientQuantity(i, qty)}
                     changeStep={nextOrPrev => changeStep(nextOrPrev)}
                     removeRecipeIngredient={ingredient => removeRecipeIngredient(ingredient)}
                     createIngredient={i => createIngredient(i)}

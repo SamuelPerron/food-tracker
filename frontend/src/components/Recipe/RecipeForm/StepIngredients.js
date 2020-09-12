@@ -22,12 +22,13 @@ const StepIngredients = props => {
                                 ingredientSearchHandler={i => props.ingredientSearchHandler(i)}
                                 changeIngredientServing={s => props.changeIngredientServing(s)}
                                 changeIngredientQuantity={qty => props.changeIngredientQuantity(i.id, qty)} />
-                            { props.ingredients.length === 0 ?
+                            { props.ingredients.length === 0 && !i.name ?
                                 <>
                                     <CreateIngredientForm
                                         alreadyEnteredName={props.ingredientSearch}
                                         ingredientId={i.id}
                                         createIngredient={i => props.createIngredient(i)}
+                                        authorId={props.user.pk}
                                         categories={props.categories} />
                                 </>
                             :null }

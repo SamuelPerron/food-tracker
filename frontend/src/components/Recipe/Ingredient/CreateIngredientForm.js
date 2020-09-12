@@ -10,6 +10,7 @@ const CreateIngredientForm = props => {
             fats: 0,
         }],
         category: '',
+        author: props.authorId,
     });
 
     useEffect(() => {
@@ -37,21 +38,24 @@ const CreateIngredientForm = props => {
                     <h4>Nutritional values</h4>
                     <ul>
                         <li>
-                            <span>Serving size</span>
                             <input
-                                value={newIngredient.nutritional_values.serving_size}
+                                placeholder='Serving name'
+                                value={newIngredient.nutritional_values.serving_name}
                                 onChange={e => setNewIngredient({
-                                    ...newIngredient, nutritional_values: [{
-                                        ...newIngredient.nutritional_values[0],
-                                        serving_size: parseFloat(e.target.value)
-                                    }]
+                                    ...newIngredient,
+                                    serving_name: e.target.value
                                 })} />
-                            <select value={newIngredient.nutritional_values.serving_type}nChange={e => setNewIngredient({
-                                ...newIngredient, nutritional_values: [{
-                                    ...newIngredient.nutritional_values[0],
-                                    serving_type: parseFloat(e.target.value)
-                                }]
+                            <input
+                                value={newIngredient.serving_size}
+                                onChange={e => setNewIngredient({
+                                    ...newIngredient,
+                                    serving_size: parseFloat(e.target.value)
+                                })} />
+                            <select value={newIngredient.nutritional_values.serving_type} onChange={e => setNewIngredient({
+                                ...newIngredient,
+                                serving_type: e.target.value
                             })}>
+                                <option></option>
                                 <option value="grams">grams</option>
                                 <option value="milliliters">milliliters</option>
                             </select>
