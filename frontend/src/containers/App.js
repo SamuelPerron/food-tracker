@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Redirect, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 
-import './App.scss'
+import '../styles/App.scss'
 
 import Login from './Login/Login';
 import Signup from './Signup/Signup';
@@ -11,7 +11,7 @@ import RecipeListPage from './Recipe/RecipeListPage';
 import BookmarkedRecipeList from './Recipe/BookmarkedRecipeList';
 import RecipeDetailsPage from './Recipe/RecipeDetailsPage';
 import Profile from './Profile/Profile';
-import Navbar from '../components/UI/Navigation/Navbar';
+import Header from '../components/UI/Header/Header';
 import RecipeForm from './Recipe/RecipeForm';
 
 import * as actionTypes from '../store/actionTypes';
@@ -48,7 +48,7 @@ const App = props => {
     return (
         <BrowserRouter basename="/">
             <div className="App">
-                <Navbar user={user}/>
+                <Header user={user}/>
 
                 <Switch>
                     <Route path="/recipes" exact component={RecipeListPage} />

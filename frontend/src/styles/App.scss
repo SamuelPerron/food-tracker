@@ -1,0 +1,9 @@
+@import './colors.scss';
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+
+.App {
+    background-color: $white;
+    color: $text;
+    font-size: 1.15rem;
+    font-family: Comfortaa, 'sans-serif';
+}
