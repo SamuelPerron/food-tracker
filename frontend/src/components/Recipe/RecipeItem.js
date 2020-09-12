@@ -16,6 +16,7 @@ const RecipeItem = props => {
 
     return (
         <li>
+            <div className="card-background"/>
             <strong>
                 <NavLink to={'/recipes/' + props.slug} exact>{props.name}</NavLink>
             </strong><br />

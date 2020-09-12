@@ -5,7 +5,7 @@ import axios from 'axios';
 const IngredientItem = props => {
     return (
         <li>
-            <strong>{props.ingredient_name.name}</strong> 
+            <strong>{props.ingredient_name.name}</strong>
             { props.serving.for_list_name !== '' ?
                 <span>{props.quantity} {props.serving.for_list_name}{ props.quantity > 1 ? 's' : null}</span>
             :

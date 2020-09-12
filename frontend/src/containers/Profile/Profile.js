@@ -5,6 +5,9 @@ import { NavLink } from 'react-router-dom';
 
 import RecipeItem from '../../components/Recipe/RecipeItem';
 
+import '../../styles/User/Profile.scss';
+import avatar from '../../static/avatar.jpeg';
+
 const Profile = props => {
     const [user, setUser] = useState(null);
     const [loggedUser, setLoggedUser] = useState(null);
@@ -46,18 +49,25 @@ const Profile = props => {
         <div className="Profile">
             { user ?
                 <>
-                    <h1>{user.username}</h1>
+                    <div className="profile-header"/>
+                    <div className="profile-card">
+                        <div className="card-background"/>
+                        <div className="avatar-container"><div className="avatar"><img src={avatar}/></div></div>
+                        <h1>{user.username}</h1>
+                    </div>
                     { recipes.length > 0 ?
                         <>
                             <h2>Recipes</h2>
-                            <ul>
-                                { loggedUser && user.pk === loggedUser.pk ? <li><NavLink to={'/recipes/new'} exact>New recipe</NavLink></li> : null }
-                                { recipes.map(recipe => (
-                                    <RecipeItem
-                                        key={recipe.id}
-                                        {...recipe} />
-                                )) }
-                            </ul>
+                            <div className="recipes">
+                                <ul>
+                                    { loggedUser && user.pk === loggedUser.pk ? <li><NavLink to={'/recipes/new'} exact>New recipe</NavLink></li> : null }
+                                    { recipes.map(recipe => (
+                                        <RecipeItem
+                                            key={recipe.id}
+                                            {...recipe} />
+                                    )) }
+                                </ul>
+                            </div>
                         </>
                     : null }
                 </>
