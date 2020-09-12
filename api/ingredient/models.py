@@ -37,7 +37,7 @@ class IngredientBrand(models.Model):
 
 
 class Ingredient(models.Model):
-    name = models.CharField(max_length=150, null=True)
+    name = models.CharField(max_length=150, null=True, unique=True)
     image = models.ImageField(blank=True)
     category = models.ForeignKey(IngredientSubCategory, on_delete=models.CASCADE, null=True)
     brand = models.ForeignKey(IngredientBrand, on_delete=models.SET_NULL, null=True, blank=True)
@@ -50,6 +50,7 @@ class Ingredient(models.Model):
 class IngredientServing(models.Model):
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, null=True, related_name='servings')
     custom_name = models.CharField(max_length=25, blank=True, default='Standard serving')
+    for_list_name = models.CharField(max_length=25, blank=True, default='')
     grams = models.FloatField(default=0, blank=True)
     milliliters = models.FloatField(default=0, blank=True)
 

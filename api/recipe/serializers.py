@@ -5,7 +5,7 @@ from django.utils.text import slugify
 from .models import RecipeCategory, RecipeSubCategory, Recipe, RecipeStep, RecipeIngredient
 from ..ingredient.serializers import IngredientServingSerializer, SlimIngredientSerializer
 from ..nutritional_values.serializers import NutritionalValuesSerializer
-from ..ingredient.models import IngredientServing
+from ..ingredient.models import IngredientServing, Ingredient
 
 
 class RecipeCategorySerializer(serializers.HyperlinkedModelSerializer):
@@ -20,12 +20,19 @@ class RecipeSubCategorySerializer(serializers.HyperlinkedModelSerializer):
         fields = '__all__'
 
 
+class RecipeIngredientNameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ingredient
+        fields = ['name',]
+
+
 class RecipeIngredientSerializer(serializers.HyperlinkedModelSerializer):
     serving = IngredientServingSerializer()
+    ingredient_name = RecipeIngredientNameSerializer(source='ingredient', read_only=True)
 
     class Meta:
         model = RecipeIngredient
-        fields = ['ingredient', 'quantity', 'serving']
+        fields = ['ingredient', 'quantity', 'serving', 'ingredient_name']
 
 
 class RecipeStepSerializer(serializers.ModelSerializer):
