@@ -9,7 +9,7 @@ import StepInstructions from '../../components/Recipe/RecipeForm/StepInstruction
 import StepValidation from '../../components/Recipe/RecipeForm/StepValidation';
 
 const RecipeForm = props => {
-    const [formStep, setFormStep] = useState(2);
+    const [formStep, setFormStep] = useState(1);
     const [user, setUser] = useState(null);
     const [categories, setCategories] = useState([]);
     const [subCategories, setSubCategories] = useState([]);
@@ -203,7 +203,15 @@ const RecipeForm = props => {
     }
 
     const createIngredient = ingredient => {
-        console.log(ingredient);
+        axios({
+            url: props.api + 'ingredients/',
+            method: 'POST',
+            headers: props.headers,
+            data: ingredient[1]
+        })
+        .then(r => {
+            chooseIngredientHandler([ingredient[0], r.data]);
+        });
     }
 
     const sendToAPI = () => {

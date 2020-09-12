@@ -37,7 +37,7 @@ class IngredientBrand(models.Model):
 
 
 class Ingredient(models.Model):
-    name = models.CharField(max_length=150, null=True)
+    name = models.CharField(max_length=150, null=True, unique=True)
     image = models.ImageField(blank=True)
     category = models.ForeignKey(IngredientSubCategory, on_delete=models.CASCADE, null=True)
     brand = models.ForeignKey(IngredientBrand, on_delete=models.SET_NULL, null=True, blank=True)

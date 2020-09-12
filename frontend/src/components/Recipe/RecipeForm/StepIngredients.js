@@ -9,7 +9,7 @@ const StepIngredients = props => {
     return (
         <>
             <h2>Ingredients</h2>
-            <button onClick={props.addIngredient}>Add ingredient</button>
+            { props.ingredientSearch === '' ? <button onClick={props.addIngredient}>Add ingredient</button> : null }
             <ul>
                 {
                     props.recipeValues.ingredients.map(i => (
@@ -25,6 +25,8 @@ const StepIngredients = props => {
                             { props.ingredients.length === 0 ?
                                 <>
                                     <CreateIngredientForm
+                                        alreadyEnteredName={props.ingredientSearch}
+                                        ingredientId={i.id}
                                         createIngredient={i => props.createIngredient(i)}
                                         categories={props.categories} />
                                 </>
