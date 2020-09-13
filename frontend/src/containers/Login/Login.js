@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import * as actionTypes from '../../store/actionTypes';
 
-import '../../styles/User/Login.scss';
+import '../../styles/User/LoginRegister.scss';
 import logo from '../../static/icons/logo.png';
 
 const Login = props => {

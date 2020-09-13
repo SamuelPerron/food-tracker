@@ -1,7 +1,14 @@
 @import '../colors.scss';
 @import '../variables.scss';
 
-.Login {
+.Signup {
+    h1 {
+        margin-bottom: 0!important;
+    }
+}
+
+.Login,
+.Signup {
     width: 100vw;
     height: 90vh;
     position: absolute;
@@ -25,7 +32,8 @@
         }
     }
 
-    .login-form {
+    .login-form,
+    .register-form {
         width: 80vw;
         height: 40vh;
         color: #fff;
@@ -59,13 +67,14 @@
                 }
 
                 button {
-                    border: 2px solid #fff;
                     border-radius: $radius;
                     color: #fff;
                     width: 50vw;
                     height: 5vh;
                     font-size: 1.2rem;
-                    background: none;
+                    background-image: linear-gradient(25deg, $accent, $accent-dark);
+                    box-shadow: 0 0 5px 1px $accent-dark;
+                    border: none;
                 }
             }
         }
