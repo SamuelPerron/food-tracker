@@ -52,15 +52,26 @@ const Profile = props => {
                     <div className="profile-header"/>
                     <div className="profile-card">
                         <div className="card-background"/>
-                        <div className="avatar-container"><div className="avatar"><img src={avatar}/></div></div>
+                        <div className="avatar-container" data-aos="zoom-out">
+                            <div className="avatar"><img src={avatar}/></div>
+                        </div>
                         <h1>{user.username}</h1>
+                        <ul>
+                            <li>
+                                <strong>Recipe created</strong>
+                                <span>{recipes.length}</span>
+                            </li>
+                        </ul>
                     </div>
                     { recipes.length > 0 ?
                         <>
                             <h2>Recipes</h2>
-                            <div className="recipes">
+                            <div className="recipes" data-aos="fade-up">
                                 <ul>
-                                    { loggedUser && user.pk === loggedUser.pk ? <li><NavLink to={'/recipes/new'} exact>New recipe</NavLink></li> : null }
+                                    { loggedUser && user.pk === loggedUser.pk ? <li className="new-recipe">
+                                        <div className="card-background"/>
+                                        <NavLink to={'/recipes/new'} exact>+</NavLink>
+                                    </li> : null }
                                     { recipes.map(recipe => (
                                         <RecipeItem
                                             key={recipe.id}

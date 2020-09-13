@@ -1,12 +1,12 @@
 @import './colors.scss';
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap');
 @import './variables.scss';
 
 .App {
     background-color: $white;
     color: $text;
     font-size: 1.15rem;
-    font-family: Comfortaa, 'sans-serif';
+    font-family: 'Comfortaa', 'sans-serif';
     padding: 5vh 5vw;
     min-height: 90vh;
 

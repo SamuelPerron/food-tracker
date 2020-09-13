@@ -15,11 +15,11 @@ const RecipeItem = props => {
     }, []);
 
     return (
-        <li>
+        <li style={{backgroundImage: 'url(' + props.image + ')'}}>
             <div className="card-background"/>
-            <strong>
-                <NavLink to={'/recipes/' + props.slug} exact>{props.name}</NavLink>
-            </strong><br />
+            <NavLink to={'/recipes/' + props.slug} exact>
+                <strong>{props.name}</strong>
+            </NavLink>
             { props.showAuthor ? <NavLink to={'/user/' + author.pk} exact>{author.username}</NavLink> : null }
         </li>
     );

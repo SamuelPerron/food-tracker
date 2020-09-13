@@ -32,7 +32,7 @@ class RecipeSubCategory(models.Model):
 class Recipe(models.Model):
     name = models.CharField(max_length=150, null=True)
     description = models.TextField(blank=True)
-    image = models.ImageField(blank=True)
+    image = models.ImageField(blank=True, upload_to='recipes')
     author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True)
     category = models.ForeignKey(RecipeSubCategory, on_delete=models.CASCADE, null=True)
     servings = models.IntegerField(default=1, blank=False)

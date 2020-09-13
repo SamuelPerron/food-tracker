@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Redirect, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 import '../styles/App.scss'
 
@@ -18,6 +20,7 @@ import * as actionTypes from '../store/actionTypes';
 
 
 const App = props => {
+    AOS.init()
     const [user, setUser] = useState(null);
 
     const findUser = () => {
