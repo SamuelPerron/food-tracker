@@ -46,7 +46,7 @@ const Navbar = props => {
                                     <Link to='/bookmarks'><img src={bookmarksIcon}/> Bookmarks</Link>
                                 </li>
                             )} />
-                        <li onClick={props.close}><span onClick={logout}><img src={logoutIcon}/> Sign out</span></li>
+                        <li onClick={props.close}><a onClick={logout}><img src={logoutIcon}/> Sign out</a></li>
                     </>
                 :
                     <>
@@ -73,7 +73,7 @@ const Navbar = props => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogout: token => dispatch({type: actionTypes.UNSET_TOKEN}),
+        onLogout: () => dispatch({type: actionTypes.UNSET_TOKEN}),
     };
 };
 

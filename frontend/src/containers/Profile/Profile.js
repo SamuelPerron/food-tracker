@@ -42,6 +42,8 @@ const Profile = props => {
             .catch(e => {
                 console.log(e);
             });
+        } else {
+            setLoggedUser({});
         }
     }, [props.token]);
 

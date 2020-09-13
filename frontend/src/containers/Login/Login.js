@@ -5,6 +5,8 @@ import axios from 'axios';
 
 import * as actionTypes from '../../store/actionTypes';
 
+import '../../styles/User/Login.scss';
+import logo from '../../static/icons/logo.png';
 
 const Login = props => {
     const [username, setUsername] = useState('');
@@ -48,23 +50,28 @@ const Login = props => {
 
     return (
         <div className="Login">
-            <h1>Sign in</h1>
-            <ul>
-                <li>
-                    <span>Username</span>
-                    <input value={username} onChange={e => setUsername(e.target.value)} />
-                    <span>{usernameErrorMessage}</span>
-                </li>
-                <li>
-                    <span>Password</span>
-                    <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-                    <span>{passwordErrorMessage}</span>
-                </li>
-                <li>
-                    <button onClick={authUser}>Login</button>
-                    <span>{generalErrorMessage}</span>
-                </li>
-            </ul>
+            <div className="logo">
+                <img src={logo} data-aos="zoom-out" data-aos-delay="700"/>
+                <h1>Mealtoasty</h1>
+            </div>
+            <div className="login-form">
+                <ul>
+                    <li data-aos="fade-up" data-aos-delay="100">
+                        <span>Username</span>
+                        <input value={username} onChange={e => setUsername(e.target.value)} />
+                        <span className="error">{usernameErrorMessage}</span>
+                    </li>
+                    <li data-aos="fade-up" data-aos-delay="200">
+                        <span>Password</span>
+                        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+                        <span className="error">{passwordErrorMessage}</span>
+                    </li>
+                    <li data-aos="fade-up" data-aos-delay="300">
+                        <button onClick={authUser}>Sign in</button>
+                        <span className="error">{generalErrorMessage}</span>
+                    </li>
+                </ul>
+            </div>
         </div>
     );
 }
