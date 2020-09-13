@@ -1,13 +1,16 @@
 import React from 'react';
 
+import loopIcon from '../../static/icons/loop.png';
+
 const RecipeSearch = props => {
     return (
-        <div>
-            <h2>Search</h2>
+        <div className="RecipeSearch">
             <ul>
                 <li>
-                    <span>Name</span>
-                    <input value={props.search.name} onChange={e => props.searchHandler({'name': e.target.value})}/>
+                    <input
+                        value={props.search.name}
+                        onChange={e => props.searchHandler({'name': e.target.value})}
+                        placeholder="Search recipes..." />
                 </li>
                 <li>
                     <span>Category</span>

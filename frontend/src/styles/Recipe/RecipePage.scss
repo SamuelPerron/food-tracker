@@ -1,0 +1,79 @@
+@import '../colors.scss';
+@import '../variables.scss';
+
+.RecipePage {
+    .recipes-header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-image: linear-gradient($main, $main-dark);
+        height: 25vh;
+        width: 100vw;
+        z-index: 2;
+
+        &:after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100vw;
+            height: 2vh;
+            background-color: $accent;
+            top: 25vh;
+            z-index: 1;
+        }
+    }
+
+    .logo {
+        z-index: 2;
+        position: relative;
+        display: flex;
+        height: 2.3rem;
+        justify-content: space-around;
+        text-align: center;
+
+        h1 {
+            color: #fff;
+            margin: 0;
+            font-size: 2.3rem;
+        }
+
+        img {
+            height: 2.3rem;
+            margin-bottom: 1vh;
+        }
+    }
+
+    .RecipeSearch {
+        z-index: 9;
+        position: relative;
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+
+            li {
+                input {
+                    border: 2px solid #fff;
+                    background-color: #fff;
+                    border-radius: $radius;
+                    height: 3vh;
+                    padding-left: 5vw;
+                    color: $text;
+                    width: 50vw;
+                    transition: width 200ms;
+                    margin-top: 3vh;
+
+                    &:focus {
+                        width: 80vw;
+                    }
+                }
+
+                span {
+                    color: #fff;
+                    margin-bottom: 1vh;
+                    display: block;
+                }
+            }
+        }
+    }
+}

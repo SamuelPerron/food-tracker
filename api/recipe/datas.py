@@ -13,21 +13,6 @@ CATEGORIES = {
         'Fruit appetizers',
         'Other appetizers'
     ],
-    'Breads': [
-        'Bagels',
-        'Banana bread',
-        'Challah',
-        'Egg bread',
-        'Flat bread',
-        'Pizza dough',
-        'Pretzels',
-        'Rolls & Buns',
-        'White bread',
-        'Whole grain bread',
-        'Pastries',
-        'Cornbread',
-        'Other breads'
-    ],
     'Desserts': [
         'Cakes & Cupcakes',
         'Candy',

@@ -10,6 +10,17 @@
         height: 25vh;
         width: 100vw;
         z-index: 1;
+
+        &:after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100vw;
+            height: 2vh;
+            background-color: $accent;
+            top: 25vh;
+            z-index: 1;
+        }
     }
 
     .profile-card {

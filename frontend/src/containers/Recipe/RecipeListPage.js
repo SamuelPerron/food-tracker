@@ -5,6 +5,9 @@ import axios from 'axios';
 import RecipeList from '../../components/Recipe/RecipeList';
 import RecipeSearch from '../../components/Recipe/RecipeSearch';
 
+import '../../styles/Recipe/RecipePage.scss';
+import logo from '../../static/icons/logo.png';
+
 
 const RecipeListPage = props => {
     const [recipes, setRecipes] = useState([]);
@@ -69,14 +72,24 @@ const RecipeListPage = props => {
     }, [search]);
 
     return (
-        <div className="RecipeList">
-            <RecipeSearch
+        <div className="RecipePage">
+            <div className="recipes-header"/>
+            <div className="sfx"/>
+
+            <div className="logo">
+                <div>
+                    <img src={logo} />
+                    <h1>Mealtoasty</h1>
+                </div>
+            </div>
+
+            {/*}<RecipeSearch
                 search={search}
                 searchHandler={s => setSearch({...search, ...s})}
                 categories={categories}
-                subCategories={subCategories} />
+                subCategories={subCategories} />*/}
 
-            <RecipeList recipes={recipes} />
+            {/*<RecipeList recipes={recipes} />*/}
         </div>
     );
 }
