@@ -6,15 +6,18 @@ import '../../styles/Recipe/RecipeList.scss';
 
 const RecipeList = props => {
     return (
-        props.recipes.length > 0 ?
-            <ul className="RecipeList">
-                { props.recipes.map(recipe => (
-                    <RecipeItem
-                        key={recipe.url}
-                        {...recipe} />
-                )) }
-            </ul>
-        : <div data-aos="zoom-in" className="spinner"><div/></div>
+        props.loading ?
+            <div data-aos="zoom-in" className="spinner"><div/></div>
+        :
+            props.recipes.length > 0 ?
+                <ul className="RecipeList">
+                    { props.recipes.map(recipe => (
+                        <RecipeItem
+                            key={recipe.url}
+                            {...recipe} />
+                    )) }
+                </ul>
+            : <p className="no-results">No recipes found...</p>
     );
 }
 

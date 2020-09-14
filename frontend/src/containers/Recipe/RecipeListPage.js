@@ -15,12 +15,15 @@ const RecipeListPage = props => {
     const [categories, setCategories] = useState([]);
     const [subCategories, setSubCategories] = useState([]);
     const [searchFocused, setSearchFocused] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        setLoading(true);
         axios.get(props.api + 'recipes/')
         .then(r => {
             const results = r.data;
             setRecipes(results);
+            setLoading(false);
         });
 
         axios.get(props.api + 'recipes/categories/')
@@ -90,7 +93,7 @@ const RecipeListPage = props => {
                 categories={categories}
                 subCategories={subCategories} />
 
-            <RecipeList recipes={recipes} />
+            <RecipeList recipes={recipes} loading={loading} />
         </div>
     );
 }
