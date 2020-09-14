@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import RecipeList from '../../components/Recipe/RecipeList';
 
+import '../../styles/Recipe/RecipePage.scss';
+
 const BookmarkedRecipeList = props => {
     const [recipes, setRecipes] = useState([]);
     const [recipeProxy, setRecipeProxy] = useState({});
@@ -34,7 +36,15 @@ const BookmarkedRecipeList = props => {
     }, [recipeProxy]);
 
     return (
-        <div className="RecipeList">
+        <div className="Bookmarks">
+            <div className="recipes-header"/>
+
+            <div className="header-title">
+                <div>
+                    <h1>Bookmarked recipes</h1>
+                </div>
+            </div>
+
             <RecipeList recipes={recipes} />
         </div>
     );

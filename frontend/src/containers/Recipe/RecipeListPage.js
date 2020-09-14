@@ -74,9 +74,7 @@ const RecipeListPage = props => {
     return (
         <div className="RecipePage">
             <div className="recipes-header"/>
-            <div className="sfx"/>
-
-            <div className="logo">
+            <div className="header-title">
                 <div>
                     <img src={logo} />
                     <h1>Mealtoasty</h1>

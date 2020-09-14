@@ -1,7 +1,16 @@
 @import '../colors.scss';
 @import '../variables.scss';
 
-.RecipePage {
+.Bookmarks {
+    .header-title {
+        h1 {
+            padding-top: 1vh;
+        }
+    }
+}
+
+.RecipePage,
+.Bookmarks {
     .recipes-header {
         position: absolute;
         top: 0;
@@ -23,7 +32,7 @@
         }
     }
 
-    .logo {
+    .header-title {
         z-index: 2;
         position: relative;
         display: flex;
