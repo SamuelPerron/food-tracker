@@ -12,19 +12,20 @@ const Profile = props => {
     const [loggedUser, setLoggedUser] = useState(null);
     const [recipes, setRecipes] = useState([]);
 
-    const fetchRecipes = () => {
-        axios.get(props.api + 'recipes/?author=' + props.match.params.id)
-        .then(r => {
-            setRecipes(r.data);
-        })
-    }
+    useEffect(() => {
+        if (user) {
+            axios.get(props.api + 'recipes/?author__username=' + user.username)
+            .then(r => {
+                setRecipes(r.data);
+            });
+        }
+    }, [user]);
 
     useEffect(() => {
         if (props.match.params.id > 0) {
             axios.get(props.api + 'users/' + props.match.params.id)
             .then(r => {
                 setUser(r.data);
-                fetchRecipes();
             })
             .catch(e => {
                 props.history.push('/');
