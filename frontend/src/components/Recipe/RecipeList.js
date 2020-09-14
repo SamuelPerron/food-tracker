@@ -1,16 +1,16 @@
 import React from 'react';
 
 import RecipeItem from '../../components/Recipe/RecipeItem';
+import '../../styles/Recipe/RecipeList.scss';
 
 
 const RecipeList = props => {
     return (
         props.recipes.length > 0 ?
-            <ul>
+            <ul className="RecipeList">
                 { props.recipes.map(recipe => (
                     <RecipeItem
                         key={recipe.url}
-                        showAuthor
                         {...recipe} />
                 )) }
             </ul>

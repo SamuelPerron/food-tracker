@@ -89,7 +89,7 @@ const RecipeListPage = props => {
                 categories={categories}
                 subCategories={subCategories} />*/}
 
-            {/*<RecipeList recipes={recipes} />*/}
+            <RecipeList recipes={recipes} />
         </div>
     );
 }
