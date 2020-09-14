@@ -5,18 +5,25 @@ import axios from 'axios';
 import RecipeList from '../../components/Recipe/RecipeList';
 import RecipeSearch from '../../components/Recipe/RecipeSearch';
 
+import '../../styles/Recipe/RecipePage.scss';
+import logo from '../../static/icons/logo.png';
+
 
 const RecipeListPage = props => {
     const [recipes, setRecipes] = useState([]);
     const [search, setSearch] = useState({});
     const [categories, setCategories] = useState([]);
     const [subCategories, setSubCategories] = useState([]);
+    const [searchFocused, setSearchFocused] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        setLoading(true);
         axios.get(props.api + 'recipes/')
         .then(r => {
             const results = r.data;
             setRecipes(results);
+            setLoading(false);
         });
 
         axios.get(props.api + 'recipes/categories/')
@@ -69,14 +76,24 @@ const RecipeListPage = props => {
     }, [search]);
 
     return (
-        <div className="RecipeList">
+        <div className="RecipePage">
+            <div className="recipes-header"/>
+            <div className="header-title">
+                <div>
+                    <img src={logo} />
+                    <h1>Mealtoasty</h1>
+                </div>
+            </div>
+
             <RecipeSearch
                 search={search}
+                focusSearch={() => setSearchFocused(!searchFocused)}
+                searchFocused={searchFocused}
                 searchHandler={s => setSearch({...search, ...s})}
                 categories={categories}
                 subCategories={subCategories} />
 
-            <RecipeList recipes={recipes} />
+            <RecipeList recipes={recipes} loading={loading} />
         </div>
     );
 }

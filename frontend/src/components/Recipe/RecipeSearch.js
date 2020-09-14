@@ -1,15 +1,23 @@
 import React from 'react';
 
+import loopIcon from '../../static/icons/loop.png';
+
 const RecipeSearch = props => {
     return (
-        <div>
-            <h2>Search</h2>
+        <div className="RecipeSearch">
             <ul>
                 <li>
-                    <span>Name</span>
-                    <input value={props.search.name} onChange={e => props.searchHandler({'name': e.target.value})}/>
+                    <div className="search-label">
+                        <img
+                            src={loopIcon}
+                            onClick={props.focusSearch} />
+                        <input
+                            placeholder="Search recipe"
+                            value={props.search.name}
+                            onChange={e => props.searchHandler({'name': e.target.value})} />
+                    </div>
                 </li>
-                <li>
+                {/*<li>
                     <span>Category</span>
                     <select value={props.search.category__parent_category__name} onChange={e => props.searchHandler({'category__parent_category__name': e.target.value})}>
                         <option/>
@@ -32,7 +40,7 @@ const RecipeSearch = props => {
                             }
                         </select>
                     </li>
-                : null }
+                : null */}
             </ul>
         </div>
     );

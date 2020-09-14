@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
+import '../../styles/User/LoginRegister.scss';
+import logo from '../../static/icons/logo.png';
 
 const Signup = props => {
     const [username, setUsername] = useState('');
@@ -63,33 +65,38 @@ const Signup = props => {
 
     return (
         <div className="Signup">
-            <h1>Signup</h1>
-            <ul>
-                <li>
-                    <span>Username</span>
-                    <input value={username} onChange={e => setUsername(e.target.value)} />
-                    <span>{usernameErrorMessage}</span>
-                </li>
-                <li>
-                    <span>Password</span>
-                    <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-                    <span>{passwordErrorMessage}</span>
-                </li>
-                <li>
-                    <span>Repeat password</span>
-                    <input type="password" value={repeatPassword} onChange={e => setRepeatPassword(e.target.value)} />
-                </li>
-                <li>
-                    <span>Email</span>
-                    <input value={email} onChange={e => setEmail(e.target.value)} />
-                    <span>{emailErrorMessage}</span>
-                </li>
-                <li>
-                    <button onClick={registerUser}>Sign up</button>
-                    <span>{generalErrorMessage}</span>
-                    <span>{successMessage}</span>
-                </li>
-            </ul>
+            <div className="logo">
+                <img src={logo} data-aos="zoom-out" data-aos-delay="700"/>
+                <h1>Mealtoasty</h1>
+            </div>
+            <div className="register-form">
+                <ul>
+                    <li data-aos="fade-up" data-aos-delay="100">
+                        <span>Username</span>
+                        <input value={username} onChange={e => setUsername(e.target.value)} />
+                        <span className="error">{usernameErrorMessage}</span>
+                    </li>
+                    <li data-aos="fade-up" data-aos-delay="200">
+                        <span>Password</span>
+                        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+                        <span className="error">{passwordErrorMessage}</span>
+                    </li>
+                    <li data-aos="fade-up" data-aos-delay="300">
+                        <span>Repeat password</span>
+                        <input type="password" value={repeatPassword} onChange={e => setRepeatPassword(e.target.value)} />
+                    </li>
+                    <li data-aos="fade-up" data-aos-delay="400">
+                        <span>Email</span>
+                        <input value={email} onChange={e => setEmail(e.target.value)} />
+                        <span className="error">{emailErrorMessage}</span>
+                    </li>
+                    <li data-aos="fade-up" data-aos-delay="500">
+                        <button onClick={registerUser}>Sign up</button>
+                        <span className="error">{generalErrorMessage}</span>
+                        <span className="error">{successMessage}</span>
+                    </li>
+                </ul>
+            </div>
         </div>
     );
 }

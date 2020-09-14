@@ -1,6 +1,9 @@
+from urllib.parse import urlparse
+
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from django.utils.text import slugify
+from django.urls import resolve
 
 from .models import RecipeCategory, RecipeSubCategory, Recipe, RecipeStep, RecipeIngredient
 from ..ingredient.serializers import IngredientServingSerializer, SlimIngredientSerializer
@@ -50,7 +53,9 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 class RecipeSerializer(serializers.HyperlinkedModelSerializer):
     ingredients = RecipeIngredientSerializer(many=True, required=False)
-    steps = RecipeStepSerializer(many=True)
+    ingredients_post = serializers.JSONField(write_only=True)
+    steps = RecipeStepSerializer(many=True, required=False)
+    steps_post = serializers.JSONField(write_only=True)
     nutritional_values = NutritionalValuesSerializer(required=False, read_only=True)
 
     class Meta:
@@ -65,18 +70,22 @@ class RecipeSerializer(serializers.HyperlinkedModelSerializer):
             'preparation_time': validated_data['preparation_time'],
             'cook_time': validated_data['cook_time'],
             'servings': validated_data['servings'],
+            'image': validated_data['image'],
             'slug': slugify(validated_data['name'])
         }
         recipe = Recipe(**data_for_creation)
         recipe.save()
-        for step in validated_data['steps']:
+        for step in validated_data['steps_post']:
             new_step = RecipeStep(**step)
             new_step.save()
             recipe.steps.add(new_step)
-        for ingredient in validated_data['ingredients']:
+        for ingredient in validated_data['ingredients_post']:
             new_serving = IngredientServing(**ingredient['serving'])
             new_serving.save()
             ingredient['serving'] = new_serving
+            ingredient_pk = resolve(urlparse(ingredient['ingredient']).path).kwargs['pk']
+            ingredient['ingredient'] = Ingredient.objects.get(pk=ingredient_pk)
+            ingredient.pop('ingredient_name')
             new_ingredient = RecipeIngredient(**ingredient)
             new_ingredient.save()
             recipe.ingredients.add(new_ingredient)

@@ -1,0 +1,82 @@
+@import '../colors.scss';
+@import '../variables.scss';
+
+.Signup {
+    h1 {
+        margin-bottom: 0!important;
+    }
+}
+
+.Login,
+.Signup {
+    width: 100vw;
+    height: 90%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient($main, $main-dark);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 5rem;
+    overflow: hidden;
+
+    .logo {
+        text-align: center;
+
+        h1 {
+            font-size: 3rem;
+            color: #fff;
+            margin-bottom: 5rem;
+            margin-top: 1rem;
+        }
+    }
+
+    .login-form,
+    .register-form {
+        width: 80vw;
+        height: 20rem;
+        color: #fff;
+        text-align: center;
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+
+            li {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 1.5rem;
+                align-items: center;
+
+                span.error {
+                    margin-top: 1rem;
+                }
+
+                input {
+                    display: block;
+                    background: none;
+                    margin-top: 1rem;
+                    width: 65vw;
+                    height: 2rem;
+                    min-height: 25px;
+                    border: 2px solid #fff;
+                    border-radius: $radius;
+                    color: #fff;
+                    padding-left: 5vw;
+                }
+
+                button {
+                    border-radius: $radius;
+                    color: #fff;
+                    width: 50vw;
+                    height: 2.5rem;
+                    font-size: 1.2rem;
+                    background-image: linear-gradient(25deg, $accent, $accent-dark);
+                    box-shadow: 0 0 5px 1px $accent-dark;
+                    border: none;
+                }
+            }
+        }
+    }
+}

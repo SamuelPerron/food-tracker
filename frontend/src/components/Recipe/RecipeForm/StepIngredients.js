@@ -10,10 +10,10 @@ const StepIngredients = props => {
         <>
             <h2>Ingredients</h2>
             { props.ingredientSearch === '' ? <button onClick={props.addIngredient}>Add ingredient</button> : null }
-            <ul>
+            <ul className="ul-form">
                 {
                     props.recipeValues.ingredients.map(i => (
-                        <li key={i.id}>
+                        <li className="new-ingredient" data-aos="fade-up" key={i.id}>
                             <IngredientForm
                                 ingredients={props.ingredients}
                                 ingredient={i}

@@ -14,24 +14,24 @@ const IngredientForm = props => {
         <div>
             { props.ingredient.name ?
                 <>
-                    <strong>{props.ingredient.name}</strong><br />
+                    <strong>{props.ingredient.name}</strong>
                     <select value={props.ingredient.serving.id} onChange={e => props.changeIngredientServing([e.target.value, props.ingredient.id])}>
                         <option></option>
                         { props.ingredient.servings.map(s => (
                             <option value={s.id} key={s.id}>{ s.for_list_name !== '' ? s.for_list_name : s.custom_name }</option>
                         ))}
                     </select> x
-                    <input onChange={e => props.changeIngredientQuantity(e.target.value)} value={props.ingredient.quantity} /> =
-                    <span> { grams != 0 ? grams + ' g' : milliliters + ' ml' }</span>
+                    <input className="ingredient-quantity" onChange={e => props.changeIngredientQuantity(e.target.value)} value={props.ingredient.quantity} /> =
+                    <span className="ingredient-total"> { grams != 0 ? grams + ' g' : milliliters + ' ml' }</span>
                 </>
             :
                 <>
                     <span>Ingredient</span>
                     <input value={props.ingredientSearch} onChange={e => props.ingredientSearchHandler(e.target.value)} />
                     { props.ingredientSearch !== '' ?
-                        <ul>
+                        <ul className="ingredient-search">
                             { props.ingredients.map(i => (
-                                <li onClick={() => props.chooseIngredientHandler([props.ingredient.id, i])}>{i.name}</li>
+                                <li data-aos="zoom-out" onClick={() => props.chooseIngredientHandler([props.ingredient.id, i])}>{i.name}</li>
                             ))}
                         </ul>
                     :null }

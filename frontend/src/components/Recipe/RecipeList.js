@@ -1,20 +1,23 @@
 import React from 'react';
 
 import RecipeItem from '../../components/Recipe/RecipeItem';
+import '../../styles/Recipe/RecipeList.scss';
 
 
 const RecipeList = props => {
     return (
-        props.recipes.length > 0 ?
-            <ul>
-                { props.recipes.map(recipe => (
-                    <RecipeItem
-                        key={recipe.url}
-                        showAuthor
-                        {...recipe} />
-                )) }
-            </ul>
-        : <p>No recipes found.</p>
+        props.loading ?
+            <div data-aos="zoom-in" className="spinner"><div/></div>
+        :
+            props.recipes.length > 0 ?
+                <ul className="RecipeList">
+                    { props.recipes.map(recipe => (
+                        <RecipeItem
+                            key={recipe.url}
+                            {...recipe} />
+                    )) }
+                </ul>
+            : <p className="no-results">No recipes found...</p>
     );
 }
 

@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.contrib.auth import get_user_model
 
@@ -32,13 +34,15 @@ class RecipeSubCategory(models.Model):
 class Recipe(models.Model):
     name = models.CharField(max_length=150, null=True)
     description = models.TextField(blank=True)
-    image = models.ImageField(blank=True)
+    image = models.ImageField(blank=True, upload_to='recipes')
     author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True)
     category = models.ForeignKey(RecipeSubCategory, on_delete=models.CASCADE, null=True)
     servings = models.IntegerField(default=1, blank=False)
     preparation_time = models.IntegerField(default=0, blank=False, help_text='In minutes')
     cook_time = models.IntegerField(default=0, blank=False, help_text='In minutes')
     slug = models.SlugField(blank=False, default='')
+    created_at = models.DateTimeField(blank=False, null=True, editable=False)
+    is_active = models.BooleanField(blank=True, default=True)
 
     @property
     def nutritional_values(self):
@@ -60,6 +64,14 @@ class Recipe(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.created_at = datetime.now()
+        super(Recipe, self).save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['created_at',]
 
 
 

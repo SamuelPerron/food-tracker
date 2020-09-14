@@ -8,8 +8,12 @@ from ..recipe.models import Recipe
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
+    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, editable=False)
+    avatar = models.ImageField(blank=True, upload_to='avatars')
     bookmarked_recipes = models.ManyToManyField(Recipe, blank=True)
+
+    def __str__(self):
+        return self.user.username
 
 
 @receiver(post_save, sender=get_user_model())

@@ -1,0 +1,100 @@
+@import '../colors.scss';
+@import '../variables.scss';
+
+.Bookmarks {
+    .header-title {
+        h1 {
+            padding-top: .5rem;
+        }
+    }
+}
+
+.RecipePage,
+.Bookmarks,
+.RecipeDetails,
+.RecipeForm {
+    .recipes-header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-image: linear-gradient($main, $main-dark);
+        height: 14rem;
+        width: 100vw;
+        z-index: 2;
+
+        &:after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100vw;
+            height: 1rem;
+            background-color: $accent;
+            top: 14rem;
+            z-index: 1;
+        }
+    }
+
+    .header-title {
+        z-index: 2;
+        position: relative;
+        display: flex;
+        height: 2.3rem;
+        justify-content: space-around;
+        text-align: center;
+        margin-bottom: 10rem;
+
+        h1 {
+            color: #fff;
+            margin: 0;
+            font-size: 2.3rem;
+        }
+
+        img {
+            height: 2.3rem;
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    .RecipeSearch {
+        position: relative;
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 2rem;
+
+            li {
+                .search-label {
+                    display: flex;
+
+                    img {
+                        height: 1.5rem;
+                        bottom: 0.5rem;
+                        cursor: pointer;
+                    }
+
+                    input {
+                        border: none;
+                        background: none;
+                        border-radius: $radius;
+                        height: 1.5rem;
+                        padding-left: 5vw;
+                        color: $text;
+                        transition: all 200ms;
+                        box-sizing: border-box;
+                        display: inline-box;
+                        margin-top: 0;
+                        color: $main;
+                        font-size: 1.2rem;
+                    }
+                }
+
+                span {
+                    color: #fff;
+                    margin-bottom: 0.5rem;
+                    display: block;
+                }
+            }
+        }
+    }
+}

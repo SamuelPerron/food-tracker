@@ -8,6 +8,8 @@ import StepIngredients from '../../components/Recipe/RecipeForm/StepIngredients'
 import StepInstructions from '../../components/Recipe/RecipeForm/StepInstructions';
 import StepValidation from '../../components/Recipe/RecipeForm/StepValidation';
 
+import '../../styles/Recipe/RecipeForm.scss';
+
 const RecipeForm = props => {
     const [formStep, setFormStep] = useState(1);
     const [user, setUser] = useState(null);
@@ -72,6 +74,8 @@ const RecipeForm = props => {
             pk: user.pk,
             username: user.username
         }
+        newRecipe.image = URL.createObjectURL(newRecipe.image_post);
+        console.log(newRecipe.image);
         newRecipe.nutritional_values = [];
         for (let cat in subCategories) {
             if (subCategories[cat].url === recipe.sub_category) {
@@ -221,13 +225,25 @@ const RecipeForm = props => {
     const sendToAPI = () => {
         const toSend = transformRecipe();
         delete toSend.nutritional_values;
+        delete toSend.image;
         toSend.category = toSend.category.url;
         toSend.author = props.api + 'users/' + toSend.author.pk + '/';
+
+        const data = new FormData();
+        for (let att in toSend) {
+            if (att === 'steps' || att === 'ingredients') {
+                data.append(att + '_post', JSON.stringify(toSend[att]));
+            } else if (att === 'image_post') {
+                data.append('image', toSend[att]);
+            } else {
+                data.append(att, toSend[att]);
+            }
+        }
         axios({
             url: props.api + 'recipes/',
             method: 'POST',
-            headers: props.headers,
-            data: toSend
+            headers: {...props.headers, 'Content-Type': 'multipart/form-data'},
+            data
         })
         .then(r => {
             props.history.push('/recipes/' + r.data['slug']);
@@ -235,8 +251,14 @@ const RecipeForm = props => {
     }
 
     return (
-        <div>
-            <h1>New recipe</h1>
+        <div className="RecipeForm">
+            <div className="recipes-header"/>
+            <div className="header-title">
+                <div>
+                    <h1>New recipe</h1>
+                </div>
+            </div>
+
             { formStep === 1 ?
                 <StepGeneralInformations
                     categories={categories}

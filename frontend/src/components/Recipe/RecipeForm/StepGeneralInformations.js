@@ -1,18 +1,25 @@
 import React from 'react';
+import ImageUploader from 'react-images-upload';
 
 const StepGeneralInformations = props => {
     const nextAvailable = props.recipeValues.name && props.recipeValues.servings > 0 &&
-        props.recipeValues.category && props.recipeValues.sub_category;
+        props.recipeValues.category && props.recipeValues.sub_category && props.recipeValues.image_post;
 
     return (
         <>
-            <h2>Recipe description</h2>
-            <ul>
+            <h2>General informations</h2>
+            <ul className="ul-form" data-aos="fade-up">
                 <li>
                     <span>Name</span>
                     <input
                         onChange={e => props.onValuesChange({name: e.target.value})}
                         value={props.recipeValues.name} />
+                </li>
+                <li>
+                    <span>Image</span>
+                    <input
+                        type="file"
+                        onChange={e => props.onValuesChange({image_post: e.target.files[0]})}/>
                 </li>
                 <li>
                     <span>Servings</span>

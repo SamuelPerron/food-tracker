@@ -20,7 +20,7 @@ const CreateIngredientForm = props => {
     return (
         <div>
             <h4>Create new ingredient ?</h4>
-            <ul>
+            <ul className="ul-form">
                 <li>
                     <span>Name</span>
                     <input value={newIngredient.name} onChange={e => setNewIngredient({...newIngredient, name: e.target.value})} />
@@ -36,25 +36,29 @@ const CreateIngredientForm = props => {
                 </li>
                 <li>
                     <h4>Nutritional values</h4>
-                    <ul>
+                    <ul className="ul-form">
                         <li>
+                            <span>Serving name</span>
                             <input
-                                placeholder='Serving name'
                                 value={newIngredient.nutritional_values.serving_name}
                                 onChange={e => setNewIngredient({
                                     ...newIngredient,
                                     serving_name: e.target.value
                                 })} />
+                            <span>Serving size</span>
                             <input
+                                className="serving-size"
                                 value={newIngredient.serving_size}
                                 onChange={e => setNewIngredient({
                                     ...newIngredient,
                                     serving_size: parseFloat(e.target.value)
                                 })} />
-                            <select value={newIngredient.nutritional_values.serving_type} onChange={e => setNewIngredient({
-                                ...newIngredient,
-                                serving_type: e.target.value
-                            })}>
+                            <select
+                                className="serving-size"
+                                value={newIngredient.nutritional_values.serving_type} onChange={e => setNewIngredient({
+                                    ...newIngredient,
+                                    serving_type: e.target.value }
+                                )}>
                                 <option></option>
                                 <option value="grams">grams</option>
                                 <option value="milliliters">milliliters</option>

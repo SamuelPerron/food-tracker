@@ -7,11 +7,11 @@ const StepInstructions = props => {
         <>
             <h2>Instructions</h2>
             <button onClick={props.addStep}>Add step</button>
-            <ul>
+            <ul className="ul-form">
                 {
                     Object.keys(props.recipeValues.steps).map((o) => (
-                        <li key={o}>
-                            <span>{o}</span>
+                        <li className="new-step" data-aos="fade-up" key={o}>
+                            <span className="step-number">{o}</span>
                             <textarea onChange={e => props.onValuesChange({
                                     ...props.recipeValues,
                                     steps: {

@@ -24,7 +24,7 @@ class UserViewSet(viewsets.ModelViewSet):
         queryset = Token.objects.all()
         token = get_object_or_404(queryset, key=request.query_params['token'])
         user = token.user
-        serializer = UserSerializer(user)
+        serializer = UserSerializer(user, context={'request': request})
         return Response(serializer.data)
 
     @action(detail=True, methods=['patch'])
