@@ -35,6 +35,16 @@ const RecipeDetailsPage = props => {
         }
     }
 
+    const deleteRecipe = () => {
+        axios({
+            url: props.api + 'recipes/' + recipe.id,
+            method: 'DELETE',
+            headers: props.headers,
+        }).then(r => {
+            props.history.push('/');
+        });
+    }
+
     useEffect(() => {
         findIfRecipeBookmarked();
     }, [recipe]);
@@ -67,6 +77,8 @@ const RecipeDetailsPage = props => {
                     recipe={recipe}
                     isUserLogged={props.token}
                     bookmarked={bookmarked}
+                    userId={userId}
+                    deleteRecipe={deleteRecipe}
                     toggleBookmarkRecipe={toggleBookmarkRecipe} />
             : null }
         </>

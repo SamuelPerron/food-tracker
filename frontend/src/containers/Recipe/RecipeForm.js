@@ -239,7 +239,6 @@ const RecipeForm = props => {
                 data.append(att, toSend[att]);
             }
         }
-        console.log(data);
         axios({
             url: props.api + 'recipes/',
             method: 'POST',

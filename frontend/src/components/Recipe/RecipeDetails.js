@@ -15,7 +15,14 @@ const RecipeDetails = props => {
             <div className="header-title">
                 <div>
                     <h1>{props.recipe.name}</h1>
-                    { props.isUserLogged ? <span className="bookmark" onClick={props.toggleBookmarkRecipe}>{ props.bookmarked ? "Remove from bookmarks" : "Bookmark"}</span> : null }
+                    { props.isUserLogged ?
+                        <span onClick={props.toggleBookmarkRecipe}>{
+                                props.bookmarked ? "Remove from bookmarks" : "Bookmark"}
+                            </span>
+                    : null }
+                    { props.isUserLogged && props.userId === props.recipe.author.pk ?
+                        <span onClick={props.deleteRecipe}>Delete</span>
+                    : null }
                 </div>
             </div>
             <div className="recipe-image" style={{backgroundImage: 'url(' + props.recipe.image + ')'}}/>
