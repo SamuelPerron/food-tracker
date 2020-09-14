@@ -3,7 +3,7 @@ import ImageUploader from 'react-images-upload';
 
 const StepGeneralInformations = props => {
     const nextAvailable = props.recipeValues.name && props.recipeValues.servings > 0 &&
-        props.recipeValues.category && props.recipeValues.sub_category;
+        props.recipeValues.category && props.recipeValues.sub_category && props.recipeValues.image_post;
 
     return (
         <>
