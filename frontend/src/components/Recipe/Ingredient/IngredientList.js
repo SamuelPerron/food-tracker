@@ -6,7 +6,7 @@ import IngredientItem from './IngredientItem';
 const IngredientList = props => {
     return (
         props.ingredients.length > 0 ?
-            <ul>
+            <ul className="IngredientList">
                 { props.ingredients.map(ingredient => (
                     <IngredientItem
                         key={ingredient.url}

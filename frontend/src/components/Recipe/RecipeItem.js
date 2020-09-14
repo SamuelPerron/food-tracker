@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const RecipeItem = props => {
     return (
-        <li style={{backgroundImage: 'url(' + props.image + ')'}}>
+        <li style={{backgroundImage: 'url(' + props.image + ')'}}  data-aos="fade-up">
             <div className="card-background"/>
             <div className="card-text">
                 <NavLink to={'/recipes/' + props.slug} exact>

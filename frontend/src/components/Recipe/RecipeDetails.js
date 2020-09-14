@@ -3,58 +3,81 @@ import { NavLink } from 'react-router-dom';
 
 import IngredientList from './Ingredient/IngredientList';
 
+import '../../styles/Recipe/RecipeDetails.scss';
+import categoryIcon from '../../static/icons/category.png';
+import authorIcon from '../../static/icons/author.png';
+
 
 const RecipeDetails = props => {
     return (
         <div className="RecipeDetails">
-            <h1>{props.recipe.name}</h1>
-            { props.isUserLogged ? <span onClick={props.toggleBookmarkRecipe}>{ props.bookmarked ? "Remove from bookmarks" : "Bookmark"}</span> : null }
-            <p>{props.recipe.description}</p>
-            <p>
-                <em>{props.recipe.category.name}</em><br/>
-            </p>
-            <ul>
-                <li>Servings: {props.recipe.servings}</li>
-                <li>Preparation time: {props.recipe.preparation_time} min</li>
-                <li>Cook time: {props.recipe.cook_time} min</li>
-            </ul>
-            <p>Author: <NavLink to={'/user/' + props.recipe.author.pk} exact>{props.recipe.author.username}</NavLink></p>
+            <div className="recipes-header"/>
+            <div className="header-title">
+                <div>
+                    <h1>{props.recipe.name}</h1>
+                    { props.isUserLogged ? <span className="bookmark" onClick={props.toggleBookmarkRecipe}>{ props.bookmarked ? "Remove from bookmarks" : "Bookmark"}</span> : null }
+                </div>
+            </div>
+            <div className="recipe-image" style={{backgroundImage: 'url(' + props.recipe.image + ')'}}/>
 
-            <h2>Ingredients</h2>
-            <IngredientList ingredients={props.recipe.ingredients} />
+            <div data-aos="fade-up">
+                <div className="recipe-category-author">
+                    <p>
+                        <img src={categoryIcon} /> <em>{props.recipe.category.name}</em>
+                    </p>
+                    <p>
+                        <img src={authorIcon} /> <NavLink to={'/user/' + props.recipe.author.pk} exact>{props.recipe.author.username}</NavLink>
+                    </p>
+                </div>
 
-            <h2>Instructions</h2>
-            <ol>
-                { props.recipe.steps.map(s => (
-                    <li key={s.order}>
-                        <p>{s.content}</p>
-                    </li>
-                )) }
-            </ol>
+                <ul className="recipe-key-points">
+                    <li>Servings: <strong>{props.recipe.servings}</strong></li>
+                    <li>Preparation time: <strong>{props.recipe.preparation_time} min</strong></li>
+                    <li>Cook time: <strong>{props.recipe.cook_time} min</strong></li>
+                </ul>
+            </div>
 
-            { Object.keys(props.recipe.nutritional_values).length ?
-                <>
-                    <h2>Nutritional values per servings</h2>
-                    <ul>
-                        <li>
-                            <strong>Calories: </strong>
-                            {Math.round(props.recipe.nutritional_values.calories / props.recipe.servings)}
+            <div data-aos="fade-up">
+                <h2>Ingredients</h2>
+                <IngredientList ingredients={props.recipe.ingredients} />
+            </div>
+
+            <div data-aos="fade-up">
+                <h2>Instructions</h2>
+                <ol>
+                    { props.recipe.steps.map(s => (
+                        <li key={s.order}>
+                            <p>{s.content}</p>
                         </li>
-                        <li>
-                            <strong>Protein: </strong>
-                            {Math.round(props.recipe.nutritional_values.protein / props.recipe.servings)} g
-                        </li>
-                        <li>
-                            <strong>Carbs: </strong>
-                            {Math.round(props.recipe.nutritional_values.carbs / props.recipe.servings)} g
-                        </li>
-                        <li>
-                            <strong>Fat: </strong>
-                            {Math.round(props.recipe.nutritional_values.fat / props.recipe.servings)} g
-                        </li>
-                    </ul>
-                </>
-            : null }
+                    )) }
+                </ol>
+            </div>
+
+            <div data-aos="fade-up">
+                { Object.keys(props.recipe.nutritional_values).length ?
+                    <>
+                        <h2>Nutritional values per servings</h2>
+                        <ul className="nutritional-values">
+                            <li>
+                                <strong>Calories</strong>
+                                {Math.round(props.recipe.nutritional_values.calories / props.recipe.servings)}
+                            </li>
+                            <li>
+                                <strong>Protein</strong>
+                                {Math.round(props.recipe.nutritional_values.protein / props.recipe.servings)} g
+                            </li>
+                            <li>
+                                <strong>Carbs</strong>
+                                {Math.round(props.recipe.nutritional_values.carbs / props.recipe.servings)} g
+                            </li>
+                            <li>
+                                <strong>Fat</strong>
+                                {Math.round(props.recipe.nutritional_values.fat / props.recipe.servings)} g
+                            </li>
+                        </ul>
+                    </>
+                : null }
+            </div>
         </div>
     );
 }

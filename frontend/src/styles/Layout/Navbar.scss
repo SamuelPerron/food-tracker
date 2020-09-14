@@ -5,13 +5,15 @@ header {
 
     .hamburger-icon {
         width: 9vw;
-        position: fixed;
+        position: absolute;
         right: 5vw;
         top: 3vh;
         cursor: pointer;
         z-index: 999;
 
         &.open {
+            position: fixed;
+
             div {
                 display: block;
                 background-color: $main;
