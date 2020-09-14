@@ -7,12 +7,17 @@ const RecipeSearch = props => {
         <div className="RecipeSearch">
             <ul>
                 <li>
-                    <input
-                        value={props.search.name}
-                        onChange={e => props.searchHandler({'name': e.target.value})}
-                        placeholder="Search recipes..." />
+                    <div className="search-label">
+                        <img
+                            src={loopIcon}
+                            onClick={props.focusSearch} />
+                        <input
+                            placeholder="Search recipe"
+                            value={props.search.name}
+                            onChange={e => props.searchHandler({'name': e.target.value})} />
+                    </div>
                 </li>
-                <li>
+                {/*<li>
                     <span>Category</span>
                     <select value={props.search.category__parent_category__name} onChange={e => props.searchHandler({'category__parent_category__name': e.target.value})}>
                         <option/>
@@ -35,7 +40,7 @@ const RecipeSearch = props => {
                             }
                         </select>
                     </li>
-                : null }
+                : null */}
             </ul>
         </div>
     );

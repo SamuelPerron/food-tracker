@@ -64,19 +64,28 @@
             padding-left: 0;
 
             li {
-                input {
-                    border: 2px solid #fff;
-                    background-color: #fff;
-                    border-radius: $radius;
-                    height: 3vh;
-                    padding-left: 5vw;
-                    color: $text;
-                    width: 50vw;
-                    transition: width 200ms;
-                    margin-top: 3vh;
+                .search-label {
+                    display: flex;
 
-                    &:focus {
-                        width: 80vw;
+                    img {
+                        height: 1.5rem;
+                        bottom: 1vh;
+                        cursor: pointer;
+                    }
+
+                    input {
+                        border: none;
+                        background: none;
+                        border-radius: $radius;
+                        height: 1.5rem;
+                        padding-left: 5vw;
+                        color: $text;
+                        transition: all 200ms;
+                        box-sizing: border-box;
+                        display: inline-box;
+                        margin-top: 0;
+                        color: $main;
+                        font-size: 1.2rem;
                     }
                 }
 

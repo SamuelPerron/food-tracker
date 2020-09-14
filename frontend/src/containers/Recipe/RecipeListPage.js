@@ -14,6 +14,7 @@ const RecipeListPage = props => {
     const [search, setSearch] = useState({});
     const [categories, setCategories] = useState([]);
     const [subCategories, setSubCategories] = useState([]);
+    const [searchFocused, setSearchFocused] = useState(false);
 
     useEffect(() => {
         axios.get(props.api + 'recipes/')
@@ -81,11 +82,13 @@ const RecipeListPage = props => {
                 </div>
             </div>
 
-            {/*}<RecipeSearch
+            <RecipeSearch
                 search={search}
+                focusSearch={() => setSearchFocused(!searchFocused)}
+                searchFocused={searchFocused}
                 searchHandler={s => setSearch({...search, ...s})}
                 categories={categories}
-                subCategories={subCategories} />*/}
+                subCategories={subCategories} />
 
             <RecipeList recipes={recipes} />
         </div>
