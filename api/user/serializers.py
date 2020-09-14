@@ -8,7 +8,7 @@ from .models import Profile
 class ProfileSerializer(WritableNestedModelSerializer):
     class Meta:
         model = Profile
-        fields = ['bookmarked_recipes',]
+        fields = ['avatar', 'bookmarked_recipes',]
 
 
 class UserSerializer(WritableNestedModelSerializer):

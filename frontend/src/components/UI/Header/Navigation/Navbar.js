@@ -23,7 +23,7 @@ const Navbar = props => {
                 { props.user ?
                     <li className="user" onClick={props.close}>
                         <NavLink to={'/user/' + props.user.pk} exact>
-                            <div className="avatar"/>
+                            <div className="avatar"><img src={props.user.profile.avatar}/></div>
                             <strong>{props.user.username}</strong>
                         </NavLink>
                     </li>

@@ -6,7 +6,6 @@ import { NavLink } from 'react-router-dom';
 import RecipeItem from '../../components/Recipe/RecipeItem';
 
 import '../../styles/User/Profile.scss';
-import avatar from '../../static/avatar.jpeg';
 
 const Profile = props => {
     const [user, setUser] = useState(null);
@@ -55,7 +54,7 @@ const Profile = props => {
                     <div className="profile-card">
                         <div className="card-background"/>
                         <div className="avatar-container" data-aos="zoom-out">
-                            <div className="avatar"><img src={avatar}/></div>
+                            <div className="avatar"><img src={user.profile.avatar}/></div>
                         </div>
                         <h1>{user.username}</h1>
                         <ul>
