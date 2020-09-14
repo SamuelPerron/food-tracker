@@ -14,7 +14,7 @@ const RecipeList = props => {
                         {...recipe} />
                 )) }
             </ul>
-        : <p>No recipes found.</p>
+        : <div data-aos="zoom-in" className="spinner"><div/></div>
     );
 }
 
