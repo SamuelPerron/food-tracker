@@ -51,10 +51,10 @@ header {
     nav {
         background-color: #fff;
         width: 100vw;
-        height: 100vh;
+        height: 100%;
         position: fixed;
         top: 0;
-        padding: 2vh 0;
+        padding: 1rem 0;
         z-index: 99;
         right: 200vw;
         transition: right 450ms;
@@ -68,15 +68,15 @@ header {
         ul {
             list-style: none;
             padding-left: 0;
-            padding-top: 8vh;
+            padding-top: 4rem;
             display: flex;
             flex-direction: column;
 
             .user {
-                margin-bottom: 4vh;
+                margin-bottom: 3rem;
                 border-bottom: 2px solid $pale-grey;
                 width: 80vw;
-                height: 10vh;
+                height: 6rem;
                 vertical-align: top;
                 padding: 0;
                 margin-left: 10vw;
@@ -99,8 +99,8 @@ header {
             }
 
             li {
-                height: 4vh;
-                padding: 2vh 10vw;
+                height: 2rem;
+                padding: 1rem 10vw;
 
                 &.active {
                     background-color: $accent-pale;
@@ -109,7 +109,7 @@ header {
                 }
 
                 img {
-                    height: 4vh;
+                    height: 2rem;
                     vertical-align: middle;
                     margin-right: 3vw;
                 }

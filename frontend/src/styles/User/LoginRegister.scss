@@ -10,7 +10,7 @@
 .Login,
 .Signup {
     width: 100vw;
-    height: 90vh;
+    height: 90%;
     position: absolute;
     top: 0;
     left: 0;
@@ -18,7 +18,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding-top: 10vh;
+    padding-top: 5rem;
     overflow: hidden;
 
     .logo {
@@ -27,15 +27,15 @@
         h1 {
             font-size: 3rem;
             color: #fff;
-            margin-bottom: 10vh;
-            margin-top: 2vh;
+            margin-bottom: 5rem;
+            margin-top: 1rem;
         }
     }
 
     .login-form,
     .register-form {
         width: 80vw;
-        height: 40vh;
+        height: 20rem;
         color: #fff;
         text-align: center;
 
@@ -46,19 +46,19 @@
             li {
                 display: flex;
                 flex-direction: column;
-                margin-bottom: 3vh;
+                margin-bottom: 1.5rem;
                 align-items: center;
 
                 span.error {
-                    margin-top: 2vh;
+                    margin-top: 1rem;
                 }
 
                 input {
                     display: block;
                     background: none;
-                    margin-top: 2vh;
+                    margin-top: 1rem;
                     width: 65vw;
-                    height: 4vh;
+                    height: 2rem;
                     min-height: 25px;
                     border: 2px solid #fff;
                     border-radius: $radius;
@@ -70,7 +70,7 @@
                     border-radius: $radius;
                     color: #fff;
                     width: 50vw;
-                    height: 5vh;
+                    height: 2.5rem;
                     font-size: 1.2rem;
                     background-image: linear-gradient(25deg, $accent, $accent-dark);
                     box-shadow: 0 0 5px 1px $accent-dark;
