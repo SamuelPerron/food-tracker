@@ -1,7 +1,8 @@
 import * as types from './actionTypes';
+import { API_BASE_URL } from '../env';
 
 const initialState = {
-    apiBaseURL: 'http://localhost:8000/',
+    apiBaseURL: API_BASE_URL,
     headers: {},
     token: null,
 };
