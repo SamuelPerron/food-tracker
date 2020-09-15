@@ -17,7 +17,7 @@ environ.Env.read_env()
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = env('ALLOWED_HOSTS')
+ALLOWED_HOSTS = ['localhost',]
 
 
 # Application definition
@@ -58,6 +58,8 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
     'http://localhost:8000',
+    'http://samperron.alwaysdata.net',
+    'http://mealtoasty.samuelperron.ca'
 )
 
 REST_FRAMEWORK = {
