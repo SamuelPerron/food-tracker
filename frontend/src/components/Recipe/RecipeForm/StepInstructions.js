@@ -7,10 +7,17 @@ const StepInstructions = props => {
         <>
             <h2>Instructions</h2>
             <button onClick={props.addStep}>Add step</button>
-            <ul className="ul-form">
+            { nextAvailable ?
+                <div className="form-item">
+                    <button onClick={() => props.changeStep('next')}>Next</button>
+                    <p>{props.errorMessage}</p>
+                </div>
+            : null }
+
+            <div className="form form-steps">
                 {
                     Object.keys(props.recipeValues.steps).map((o) => (
-                        <li className="new-step" data-aos="fade-up" key={o}>
+                        <div className="form-item new-step" data-aos="fade-up" key={o}>
                             <span className="step-number">{o}</span>
                             <textarea onChange={e => props.onValuesChange({
                                     ...props.recipeValues,
@@ -19,17 +26,13 @@ const StepInstructions = props => {
                                         [o]: e.target.value
                                     }
                                 })} value={props.recipeValues.steps[o]}/>
-                            <button onClick={() => props.removeRecipeStep(o)}>Remove</button>
-                        </li>
+                            { o != Object.keys(props.recipeValues.steps).length ?
+                                <button onClick={() => props.removeRecipeStep(o)}>Remove</button>
+                            : null }
+                        </div>
                     ))
                 }
-                { nextAvailable ?
-                    <li>
-                        <button onClick={() => props.changeStep('next')}>Next</button>
-                        <p>{props.errorMessage}</p>
-                    </li>
-                : null }
-            </ul>
+            </div>
         </>
     );
 }

@@ -120,7 +120,7 @@
             }
 
             .new-ingredient,
-            .new-step,
+            &.new-step,
             .create-ingredient {
                 margin: 2.5rem 0;
                 margin-bottom: 0;
@@ -185,7 +185,7 @@
             }
 
             .new-ingredient,
-            .new-step {
+            &.new-step {
                 strong {
                     display: block;
                     margin-bottom: 1.5rem;
@@ -238,6 +238,21 @@
                     width: 90%;
                     height: 5rem;
                     padding-right: 1rem;
+                }
+            }
+        }
+
+        &.form-steps {
+            @media (min-width: $desktop) {
+                & {
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    padding-bottom: 5rem;
+                    align-items: flex-start;
+
+                    .new-step {
+                        height: auto;
+                    }
                 }
             }
         }
