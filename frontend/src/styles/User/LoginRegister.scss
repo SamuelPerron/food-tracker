@@ -9,6 +9,8 @@
 
 .Login,
 .Signup {
+    $desktop: 545px;
+
     width: 100vw;
     height: 90%;
     position: absolute;
@@ -20,6 +22,16 @@
     flex-direction: column;
     padding-top: 5rem;
     overflow: hidden;
+
+    @media (min-width: $desktop) {
+        & {
+            padding-top: 3rem;
+            position: relative;
+            margin-left: -5vw;
+            margin-top: -2rem;
+            height: 94vh;
+        }
+    }
 
     .logo {
         text-align: center;
@@ -35,15 +47,15 @@
     .login-form,
     .register-form {
         width: 80vw;
-        height: 20rem;
         color: #fff;
         text-align: center;
 
-        ul {
-            list-style: none;
-            padding-left: 0;
+        div {
+            &:first-of-type {
+                padding-top: 1rem;
+            }
 
-            li {
+            div {
                 display: flex;
                 flex-direction: column;
                 margin-bottom: 1.5rem;
@@ -58,23 +70,36 @@
                     background: none;
                     margin-top: 1rem;
                     width: 65vw;
+                    max-width: 480px;
                     height: 2rem;
                     min-height: 25px;
                     border: 2px solid #fff;
                     border-radius: $radius;
                     color: #fff;
                     padding-left: 5vw;
+                    font-family: 'Comfortaa', 'sans-serif';
+                    font-size: 1.1rem;
+
+                    @media (min-width: $desktop) {
+                        & {
+                            padding-left: 25px;
+                        }
+                    }
                 }
 
-                button {
-                    border-radius: $radius;
-                    color: #fff;
-                    width: 50vw;
-                    height: 2.5rem;
-                    font-size: 1.2rem;
-                    background-image: linear-gradient(25deg, $accent, $accent-dark);
-                    box-shadow: 0 0 5px 1px $accent-dark;
-                    border: none;
+                &.submit {
+                    button {
+                        border-radius: $radius;
+                        color: #fff;
+                        width: 50vw;
+                        max-width: 350px;
+                        height: 2.5rem;
+                        font-size: 1.2rem;
+                        background-image: linear-gradient(25deg, $accent, $accent-dark);
+                        box-shadow: 0 0 5px 1px $accent-dark;
+                        border: none;
+                        cursor: pointer;
+                    }
                 }
             }
         }

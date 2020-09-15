@@ -8,7 +8,15 @@
     font-size: 1.15rem;
     font-family: 'Comfortaa', 'sans-serif';
     padding: 2.5rem 5vw;
+    padding-bottom: 0;
     min-height: 45rem;
+    
+    @media (min-width: 545px) {
+        & {
+            padding: 2rem 5vw;
+            padding-bottom: 0;
+        }
+    }
 
     .card-background {
         width: 100%;

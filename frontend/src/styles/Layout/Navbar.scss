@@ -4,6 +4,12 @@ header {
     padding-top: 3vh;
     $desktop: 495px;
 
+    @media (min-width: $desktop) {
+        & {
+            padding-top: 0;
+        }
+    }
+
     .hamburger-icon {
         width: 2rem;
         position: absolute;

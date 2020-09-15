@@ -10,13 +10,45 @@ const RecipeList = props => {
             <div data-aos="zoom-in" className="spinner"><div/></div>
         :
             props.recipes.length > 0 ?
-                <ul className="RecipeList">
-                    { props.recipes.map(recipe => (
-                        <RecipeItem
-                            key={recipe.url}
-                            {...recipe} />
-                    )) }
-                </ul>
+                <div className="list-container">
+                    <ul className="RecipeList">
+                        { props.recipes.map(recipe => (
+                            <RecipeItem
+                                key={recipe.url}
+                                {...recipe} />
+                        )) }
+                        { props.recipes.map(recipe => (
+                            <RecipeItem
+                                key={recipe.url}
+                                {...recipe} />
+                        )) }
+                        { props.recipes.map(recipe => (
+                            <RecipeItem
+                                key={recipe.url}
+                                {...recipe} />
+                        )) }
+                        { props.recipes.map(recipe => (
+                            <RecipeItem
+                                key={recipe.url}
+                                {...recipe} />
+                        )) }
+                        { props.recipes.map(recipe => (
+                            <RecipeItem
+                                key={recipe.url}
+                                {...recipe} />
+                        )) }
+                        { props.recipes.map(recipe => (
+                            <RecipeItem
+                                key={recipe.url}
+                                {...recipe} />
+                        )) }
+                        { props.recipes.map(recipe => (
+                            <RecipeItem
+                                key={recipe.url}
+                                {...recipe} />
+                        )) }
+                    </ul>
+                </div>
             : <p className="no-results">No recipes found...</p>
     );
 }
