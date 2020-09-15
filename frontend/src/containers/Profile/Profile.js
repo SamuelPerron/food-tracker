@@ -52,18 +52,20 @@ const Profile = props => {
             { user ?
                 <>
                     <div className="profile-header"/>
-                    <div className="profile-card">
-                        <div className="card-background"/>
-                        <div className="avatar-container" data-aos="zoom-out">
-                            <div className="avatar"><img src={user.profile.avatar}/></div>
+                    <div className="card-container">
+                        <div className="profile-card">
+                            <div className="card-background"/>
+                            <div className="avatar-container" data-aos="zoom-out">
+                                <div className="avatar"><img src={user.profile.avatar}/></div>
+                            </div>
+                            <h1>{user.username}</h1>
+                            <ul>
+                                <li>
+                                    <strong>Recipe created</strong>
+                                    <span>{recipes.length}</span>
+                                </li>
+                            </ul>
                         </div>
-                        <h1>{user.username}</h1>
-                        <ul>
-                            <li>
-                                <strong>Recipe created</strong>
-                                <span>{recipes.length}</span>
-                            </li>
-                        </ul>
                     </div>
                     { recipes.length > 0 ?
                         <>

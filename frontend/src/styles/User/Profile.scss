@@ -23,66 +23,74 @@
         }
     }
 
-    .profile-card {
-        z-index: 2;
-        position: relative;
-        width: 85vw;
-        height: 15rem;
-        margin-top: 2.5rem;
+    .card-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
 
-        .card-background {
-            box-shadow: 0px 8px 20px 1px $main-pale;
-        }
+        .profile-card {
+            z-index: 2;
+            position: relative;
+            width: 85vw;
+            max-width: 533px;
+            height: 15rem;
+            margin-top: 2.5rem;
 
-        .avatar-container {
-            position: absolute;
-            left: 50%;
+            .card-background {
+                box-shadow: 0px 8px 20px 1px $main-pale;
+            }
 
-            .avatar {
-                width: 30vw;
-                height: 30vw;
-                border-radius: 30vw;
-                background-color: $accent;
-                position: relative;
-                margin-top: -2.5rem;
-                left: -50%;
-                box-shadow: 0px 5px 20px 1px $main-pale;
-                overflow: hidden;
+            .avatar-container {
+                position: absolute;
+                left: 50%;
 
-                img {
-                    height: 30vw;
+                .avatar {
+                    $size: 8rem;
+                    width: $size;
+                    height: $size;
+                    border-radius: $size;
+                    background-color: $accent;
+                    position: relative;
+                    margin-top: -2.5rem;
+                    left: -50%;
+                    box-shadow: 0px 5px 20px 1px $main-pale;
+                    overflow: hidden;
+
+                    img {
+                        height: $size;
+                    }
                 }
             }
-        }
 
-        h1 {
-            margin-top: 0;
-            text-align: center;
-            width: 100%;
-            display: block;
-            padding-top: 6rem;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
-
-            li {
+            h1 {
+                margin-top: 0;
                 text-align: center;
+                width: 100%;
+                display: block;
+                padding-top: 6rem;
+            }
 
-                strong {
-                    font-size: .9rem;
-                }
+            ul {
+                list-style: none;
+                padding: 0;
+                width: 100%;
+                display: flex;
+                justify-content: space-around;
 
-                span {
-                    margin-top: 0.5rem;
-                    display: block;
-                    font-size: 1.5rem;
-                    color: $accent;
-                    font-weight: bold;
+                li {
+                    text-align: center;
+
+                    strong {
+                        font-size: .9rem;
+                    }
+
+                    span {
+                        margin-top: 0.5rem;
+                        display: block;
+                        font-size: 1.5rem;
+                        color: $accent;
+                        font-weight: bold;
+                    }
                 }
             }
         }
@@ -109,8 +117,9 @@
                 display: inline-block;
                 position: relative;
                 width: 50vw;
+                max-width: 295px;
                 height: 10rem;
-                margin-right: 5vw;
+                margin-right: 2rem;
                 vertical-align: top;
                 background-size: cover;
                 background-position: center;
@@ -123,7 +132,7 @@
                     display: block;
                     position: relative;
                     z-index: 99;
-                    padding-left: 5vw;
+                    padding-left: 1rem;
                     position: absolute;
                     bottom: 1rem;
                     color: #fff;
