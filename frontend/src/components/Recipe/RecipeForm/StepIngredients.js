@@ -10,13 +10,20 @@ const StepIngredients = props => {
         <>
             <h2>Ingredients</h2>
             { props.ingredientSearch === '' ? <button onClick={props.addIngredient}>Add ingredient</button> : null }
-            <ul className="ul-form">
+            { nextAvailable ?
+                <div className="form-item">
+                    <button onClick={() => props.changeStep('next')}>Next</button>
+                    <p>{props.errorMessage}</p>
+                </div>
+            : null }
+            <div className="form" data-aos="fade-up">
                 {
                     props.recipeValues.ingredients.map(i => (
-                        <li className="new-ingredient" data-aos="fade-up" key={i.id}>
+                        <div className="form-item ingredients-fi" data-aos="fade-up" key={i.id}>
                             <IngredientForm
                                 ingredients={props.ingredients}
                                 ingredient={i}
+                                removeRecipeIngredient={() => props.removeRecipeIngredient(i.id)}
                                 chooseIngredientHandler={i => props.chooseIngredientHandler(i)}
                                 ingredientSearch={props.ingredientSearch}
                                 ingredientSearchHandler={i => props.ingredientSearchHandler(i)}
@@ -31,18 +38,11 @@ const StepIngredients = props => {
                                         authorId={props.user.pk}
                                         categories={props.categories} />
                                 </>
-                            :null }
-                            <button onClick={() => props.removeRecipeIngredient(i.id)}>Remove</button>
-                        </li>
+                            : null }
+                        </div>
                     ))
                 }
-                { nextAvailable ?
-                    <li>
-                        <button onClick={() => props.changeStep('next')}>Next</button>
-                        <p>{props.errorMessage}</p>
-                    </li>
-                : null }
-            </ul>
+            </div>
         </>
     );
 }

@@ -17,36 +17,6 @@ const RecipeList = props => {
                                 key={recipe.url}
                                 {...recipe} />
                         )) }
-                        { props.recipes.map(recipe => (
-                            <RecipeItem
-                                key={recipe.url}
-                                {...recipe} />
-                        )) }
-                        { props.recipes.map(recipe => (
-                            <RecipeItem
-                                key={recipe.url}
-                                {...recipe} />
-                        )) }
-                        { props.recipes.map(recipe => (
-                            <RecipeItem
-                                key={recipe.url}
-                                {...recipe} />
-                        )) }
-                        { props.recipes.map(recipe => (
-                            <RecipeItem
-                                key={recipe.url}
-                                {...recipe} />
-                        )) }
-                        { props.recipes.map(recipe => (
-                            <RecipeItem
-                                key={recipe.url}
-                                {...recipe} />
-                        )) }
-                        { props.recipes.map(recipe => (
-                            <RecipeItem
-                                key={recipe.url}
-                                {...recipe} />
-                        )) }
                     </ul>
                 </div>
             : <p className="no-results">No recipes found...</p>

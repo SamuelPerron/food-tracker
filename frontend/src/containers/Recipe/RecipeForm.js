@@ -11,7 +11,7 @@ import StepValidation from '../../components/Recipe/RecipeForm/StepValidation';
 import '../../styles/Recipe/RecipeForm.scss';
 
 const RecipeForm = props => {
-    const [formStep, setFormStep] = useState(1);
+    const [formStep, setFormStep] = useState(2);
     const [user, setUser] = useState(null);
     const [categories, setCategories] = useState([]);
     const [subCategories, setSubCategories] = useState([]);
@@ -194,6 +194,7 @@ const RecipeForm = props => {
             }
         }
         setRecipe({...recipe, ingredients: newRecipeIngredients});
+        setIngredientSearch('');
     }
 
     const changeIngredientQuantity = (ingredientId, qty) => {

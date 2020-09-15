@@ -18,14 +18,14 @@ const CreateIngredientForm = props => {
     }, [props.alreadyEnteredName]);
 
     return (
-        <div>
+        <div className="create-ingredient">
             <h4>Create new ingredient ?</h4>
-            <ul className="ul-form">
-                <li>
+            <div className="form">
+                <div className="form-item">
                     <span>Name</span>
                     <input value={newIngredient.name} onChange={e => setNewIngredient({...newIngredient, name: e.target.value})} />
-                </li>
-                <li>
+                </div>
+                <div className="form-item">
                     <span>Category</span>
                     <select value={newIngredient.category} onChange={e => setNewIngredient({...newIngredient, category: e.target.value})}>
                         <option></option>
@@ -33,11 +33,11 @@ const CreateIngredientForm = props => {
                             <option key={c.url} value={c.url}>{c.name}</option>
                         )) }
                     </select>
-                </li>
-                <li>
+                </div>
+                <div className="form-item">
                     <h4>Nutritional values</h4>
-                    <ul className="ul-form">
-                        <li>
+                    <div className="form">
+                        <div className="form-item">
                             <span>Serving name</span>
                             <input
                                 value={newIngredient.nutritional_values.serving_name}
@@ -63,8 +63,8 @@ const CreateIngredientForm = props => {
                                 <option value="grams">grams</option>
                                 <option value="milliliters">milliliters</option>
                             </select>
-                        </li>
-                        <li>
+                        </div>
+                        <div className="form-item">
                             <span>Calories</span>
                             <input
                                 value={newIngredient.nutritional_values.calories}
@@ -74,8 +74,8 @@ const CreateIngredientForm = props => {
                                         calories: parseFloat(e.target.value)
                                     }]
                                 })} />
-                        </li>
-                        <li>
+                        </div>
+                        <div className="form-item">
                             <span>Proteins</span>
                             <input
                                 value={newIngredient.nutritional_values.proteins}onChange={e => setNewIngredient({
@@ -84,8 +84,8 @@ const CreateIngredientForm = props => {
                                         protein: parseFloat(e.target.value)
                                     }]
                                 })} />
-                        </li>
-                        <li>
+                        </div>
+                        <div className="form-item">
                             <span>Carbs</span>
                             <input
                                 value={newIngredient.nutritional_values.carbs}
@@ -95,8 +95,8 @@ const CreateIngredientForm = props => {
                                         carbs: parseFloat(e.target.value)
                                     }]
                                 })} />
-                        </li>
-                        <li>
+                        </div>
+                        <div className="form-item">
                             <span>Fats</span>
                             <input
                                 value={newIngredient.nutritional_values.fats}
@@ -106,10 +106,10 @@ const CreateIngredientForm = props => {
                                         fat: parseFloat(e.target.value)
                                     }]
                                 })} />
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <button onClick={() => props.createIngredient([props.ingredientId, newIngredient])}>Create</button>
         </div>
     );

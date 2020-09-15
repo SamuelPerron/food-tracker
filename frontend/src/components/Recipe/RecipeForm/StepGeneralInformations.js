@@ -8,70 +8,76 @@ const StepGeneralInformations = props => {
     return (
         <>
             <h2>General informations</h2>
-            <ul className="ul-form" data-aos="fade-up">
-                <li>
-                    <span>Name</span>
-                    <input
-                        onChange={e => props.onValuesChange({name: e.target.value})}
-                        value={props.recipeValues.name} />
-                </li>
-                <li>
-                    <span>Image</span>
-                    <input
-                        type="file"
-                        onChange={e => props.onValuesChange({image_post: e.target.files[0]})}/>
-                </li>
-                <li>
-                    <span>Servings</span>
-                    <input
-                        type="number"
-                        onChange={e => props.onValuesChange({servings: parseInt(e.target.value)})}
-                        value={props.recipeValues.servings} />
-                </li>
-                <li>
-                    <span>Preparation time (in minutes)</span>
-                    <input
-                        type="number"
-                        onChange={e => props.onValuesChange({preparation_time: parseInt(e.target.value)})}
-                        value={props.recipeValues.preparation_time} />
-                </li>
-                <li>
-                    <span>Cook time (in minutes)</span>
-                    <input
-                        type="number"
-                        onChange={e => props.onValuesChange({cook_time: parseInt(e.target.value)})}
-                        value={props.recipeValues.cook_time} />
-                </li>
-                <li>
-                    <span>Category</span>
-                    <select onChange={e => props.onCategorySelect(e.target.value)}>
-                        <option></option>
-                        {
-                            props.categories.map(c => (
-                                <option key={c.url} value={c.url}>{c.name}</option>
-                            ))
-                        }
-                    </select>
-                </li>
-                { props.subCategories.length > 1 ?
-                    <li>
-                        <span>Sub Category</span>
-                        <select onChange={e => props.onValuesChange({sub_category: e.target.value})}>
+            <div className="form" data-aos="fade-up">
+                <div className="form-group">
+                    <div className="form-item">
+                        <span>Name</span>
+                        <input
+                            onChange={e => props.onValuesChange({name: e.target.value})}
+                            value={props.recipeValues.name} />
+                    </div>
+                    <div className="form-item">
+                        <span>Image</span>
+                        <input
+                            type="file"
+                            onChange={e => props.onValuesChange({image_post: e.target.files[0]})}/>
+                    </div>
+                </div>
+                <div className="form-group">
+                    <div className="form-item">
+                        <span>Servings</span>
+                        <input
+                            type="number"
+                            onChange={e => props.onValuesChange({servings: parseInt(e.target.value)})}
+                            value={props.recipeValues.servings} />
+                    </div>
+                    <div className="form-item">
+                        <span>Preparation time (in minutes)</span>
+                        <input
+                            type="number"
+                            onChange={e => props.onValuesChange({preparation_time: parseInt(e.target.value)})}
+                            value={props.recipeValues.preparation_time} />
+                    </div>
+                    <div className="form-item">
+                        <span>Cook time (in minutes)</span>
+                        <input
+                            type="number"
+                            onChange={e => props.onValuesChange({cook_time: parseInt(e.target.value)})}
+                            value={props.recipeValues.cook_time} />
+                    </div>
+                </div>
+                <div className="form-group">
+                    <div className="form-item">
+                        <span>Category</span>
+                        <select onChange={e => props.onCategorySelect(e.target.value)}>
                             <option></option>
                             {
-                                props.subCategories.map(c => (
+                                props.categories.map(c => (
                                     <option key={c.url} value={c.url}>{c.name}</option>
                                 ))
                             }
                         </select>
-                    </li>
-                : null }
+                    </div>
+                    { props.subCategories.length > 1 ?
+                        <div className="form-item">
+                            <span>Sub Category</span>
+                            <select onChange={e => props.onValuesChange({sub_category: e.target.value})}>
+                                <option></option>
+                                {
+                                    props.subCategories.map(c => (
+                                        <option key={c.url} value={c.url}>{c.name}</option>
+                                    ))
+                                }
+                            </select>
+                        </div>
+                    : null }
+                </div>
                 { nextAvailable ?
-                    <li>
+                    <div className="form-item">
                         <button onClick={() => props.changeStep('next')}>Next</button>
-                    </li>
+                    </div>
                 : null }
-            </ul>
+            </div>
         </>
     );
 }

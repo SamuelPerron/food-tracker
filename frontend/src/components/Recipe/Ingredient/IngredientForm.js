@@ -11,7 +11,7 @@ const IngredientForm = props => {
     }
 
     return (
-        <div>
+        <div className="new-ingredient">
             { props.ingredient.name ?
                 <>
                     <strong>{props.ingredient.name}</strong>
@@ -37,6 +37,7 @@ const IngredientForm = props => {
                     :null }
                 </>
             }
+            <button onClick={props.removeRecipeIngredient}>Remove</button>
         </div>
     );
 }
