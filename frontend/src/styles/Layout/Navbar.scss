@@ -64,13 +64,13 @@ header {
         top: 0;
         padding: 1rem 0;
         z-index: 99;
-        right: -100vw;
+        right: -110vw;
         transition: right 450ms;
         box-shadow: 2px 1px 20px 1px $grey;
 
         @media (min-width: $desktop) {
             & {
-                right: -$desktop;
+                right: -$desktop -20px;
             }
         }
 

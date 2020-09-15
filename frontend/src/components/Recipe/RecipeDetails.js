@@ -15,19 +15,23 @@ const RecipeDetails = props => {
             <div className="header-title">
                 <div>
                     <h1>{props.recipe.name}</h1>
-                    { props.isUserLogged ?
-                        <span onClick={props.toggleBookmarkRecipe}>{
-                                props.bookmarked ? "Remove from bookmarks" : "Bookmark"}
-                            </span>
-                    : null }
-                    { props.isUserLogged && props.userId === props.recipe.author.pk ?
-                        <span onClick={props.deleteRecipe}>Delete</span>
-                    : null }
+                    <div className="header-actions">
+                        { props.isUserLogged ?
+                            <span onClick={props.toggleBookmarkRecipe}>{
+                                    props.bookmarked ? "Remove from bookmarks" : "Bookmark"}
+                                </span>
+                        : null }
+                        { props.isUserLogged && props.userId === props.recipe.author.pk ?
+                            <span onClick={props.deleteRecipe}>Delete</span>
+                        : null }
+                    </div>
                 </div>
             </div>
+            <div className="recipe-image-background" style={{backgroundImage: 'url(' + props.recipe.image + ')'}}/>
+            <div className="recipe-image-background-overlay"/>
             <div className="recipe-image" style={{backgroundImage: 'url(' + props.recipe.image + ')'}}/>
 
-            <div data-aos="fade-up">
+            <div className="recipe-informations" data-aos="fade-up">
                 <div className="recipe-category-author">
                     <p>
                         <img src={categoryIcon} /> <em>{props.recipe.category.name}</em>
@@ -44,23 +48,25 @@ const RecipeDetails = props => {
                 </ul>
             </div>
 
-            <div data-aos="fade-up">
-                <h2>Ingredients</h2>
-                <IngredientList ingredients={props.recipe.ingredients} />
+            <div className="ingredients-instructions">
+                <div className="ingredients" data-aos="fade-up">
+                    <h2>Ingredients</h2>
+                    <IngredientList ingredients={props.recipe.ingredients} />
+                </div>
+
+                <div className="instructions" data-aos="fade-up">
+                    <h2>Instructions</h2>
+                    <ol>
+                        { props.recipe.steps.map(s => (
+                            <li key={s.order}>
+                                <p>{s.content}</p>
+                            </li>
+                        )) }
+                    </ol>
+                </div>
             </div>
 
-            <div data-aos="fade-up">
-                <h2>Instructions</h2>
-                <ol>
-                    { props.recipe.steps.map(s => (
-                        <li key={s.order}>
-                            <p>{s.content}</p>
-                        </li>
-                    )) }
-                </ol>
-            </div>
-
-            <div data-aos="fade-up">
+            <div className="nutritional-values-container" data-aos="fade-up">
                 { Object.keys(props.recipe.nutritional_values).length ?
                     <>
                         <h2>Nutritional values per servings</h2>
