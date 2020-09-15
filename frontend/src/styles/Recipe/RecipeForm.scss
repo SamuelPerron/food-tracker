@@ -2,6 +2,8 @@
 @import '../variables.scss';
 
 .RecipeForm {
+    $desktop: 545px;
+
     .recipes-header {
         height: 7.5rem;
 
@@ -16,6 +18,12 @@
         display: flex;
         align-items: flex-end;
         margin-bottom: 4rem;
+
+        @media (min-width: $desktop) {
+            & {
+                margin-top: 2rem;
+            }
+        }
     }
 
     button {
@@ -29,13 +37,38 @@
         border: none;
         cursor: pointer;
         margin-top: 1rem;
+
+        @media (min-width: $desktop) {
+            & {
+                width: 10rem;
+            }
+        }
     }
 
-    .ul-form {
+    .form {
         list-style: none;
         padding-left: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        min-height: 90vh;
 
-        li {
+        .form-group {
+            display: flex;
+            flex-direction: column;
+
+            @media (min-width: $desktop) {
+                & {
+                    flex-direction: row;
+
+                    .form-item {
+                        margin-right: 2rem;
+                    }
+                }
+            }
+        }
+
+        .form-item {
             margin-bottom: 1rem;
 
             span {
@@ -72,28 +105,51 @@
                 padding-left: .5rem;
             }
 
-            &.new-ingredient,
-            &.new-step {
+            &.ingredients-fi {
+                width: 100%;
+                display: flex;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-direction: column;
+
+                @media (min-width: $desktop) {
+                    & {
+                        flex-direction: row;
+                    }
+                }
+            }
+
+            .new-ingredient,
+            &.new-step,
+            .create-ingredient {
                 margin: 2.5rem 0;
+                margin-bottom: 0;
                 box-shadow: 0px 8px 20px 1px $accent-pale;
                 padding: 1.5rem 5vw;
                 border-radius: $radius;
                 background-color: #fff;
                 transition: all .5s;
 
-                strong {
+                @media (min-width: $desktop) {
+                    & {
+                        width: 25rem;
+                        padding: 1.5rem 25px;
+                        margin-right: 5rem;
+                    }
+                }
+
+                button {
                     display: block;
-                    margin-bottom: 1.5rem;
                 }
+            }
 
-                .ingredient-quantity {
-                    width: 10vw;
-                    margin-left: 1vw;
-                }
+            .create-ingredient {
+                height: auto;
+                min-height: 0;
 
-                .ingredient-total {
-                    display: inline-block;
-                    margin-left: 2vw;
+                .form {
+                    height: auto;
+                    min-height: 0;
                 }
 
                 .serving-size {
@@ -104,15 +160,58 @@
                 select.serving-size {
                     margin-left: 2vw;
                     width: 30vw;
+
+                    @media (min-width: $desktop) {
+                        & {
+                            width: 10rem;
+                        }
+                    }
                 }
 
                 button {
                     width: 30vw;
                     height: 2rem;
+
+                    @media (min-width: $desktop) {
+                        & {
+                            width: 10rem;
+                        }
+                    }
                 }
 
                 .image-button {
                     background-color: $main;
+                }
+            }
+
+            .new-ingredient,
+            &.new-step {
+                strong {
+                    display: block;
+                    margin-bottom: 1.5rem;
+                }
+
+                .ingredient-quantity {
+                    width: 10vw;
+                    max-width: 50px;
+                    margin-left: 1vw;
+
+                    @media (min-width: $desktop) {
+                        & {
+                            margin-left: 5px;
+                        }
+                    }
+                }
+
+                .ingredient-total {
+                    display: inline-block;
+                    margin-left: 2vw;
+
+                    @media (min-width: $desktop) {
+                        & {
+                            margin-left: 10px;
+                        }
+                    }
                 }
 
                 .ingredient-search {
@@ -139,6 +238,21 @@
                     width: 90%;
                     height: 5rem;
                     padding-right: 1rem;
+                }
+            }
+        }
+
+        &.form-steps {
+            @media (min-width: $desktop) {
+                & {
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    padding-bottom: 5rem;
+                    align-items: flex-start;
+
+                    .new-step {
+                        height: auto;
+                    }
                 }
             }
         }

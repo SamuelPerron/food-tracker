@@ -70,32 +70,32 @@ const Signup = props => {
                 <h1>Mealtoasty</h1>
             </div>
             <div className="register-form">
-                <ul>
-                    <li data-aos="fade-up" data-aos-delay="100">
+                <div>
+                    <div data-aos="fade-up" data-aos-delay="100">
                         <span>Username</span>
                         <input value={username} onChange={e => setUsername(e.target.value)} />
                         <span className="error">{usernameErrorMessage}</span>
-                    </li>
-                    <li data-aos="fade-up" data-aos-delay="200">
+                    </div>
+                    <div data-aos="fade-up" data-aos-delay="200">
                         <span>Password</span>
                         <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
                         <span className="error">{passwordErrorMessage}</span>
-                    </li>
-                    <li data-aos="fade-up" data-aos-delay="300">
+                    </div>
+                    <div data-aos="fade-up" data-aos-delay="300">
                         <span>Repeat password</span>
                         <input type="password" value={repeatPassword} onChange={e => setRepeatPassword(e.target.value)} />
-                    </li>
-                    <li data-aos="fade-up" data-aos-delay="400">
+                    </div>
+                    <div data-aos="fade-up" data-aos-delay="400">
                         <span>Email</span>
                         <input value={email} onChange={e => setEmail(e.target.value)} />
                         <span className="error">{emailErrorMessage}</span>
-                    </li>
-                    <li data-aos="fade-up" data-aos-delay="500">
+                    </div>
+                    <div className="submit">
                         <button onClick={registerUser}>Sign up</button>
                         <span className="error">{generalErrorMessage}</span>
                         <span className="error">{successMessage}</span>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </div>
         </div>
     );

@@ -2,14 +2,27 @@
 
 header {
     padding-top: 3vh;
+    $desktop: 495px;
+
+    @media (min-width: $desktop) {
+        & {
+            padding-top: 0;
+        }
+    }
 
     .hamburger-icon {
-        width: 9vw;
+        width: 2rem;
         position: absolute;
         right: 5vw;
         top: 3vh;
         cursor: pointer;
         z-index: 999;
+
+        @media (min-width: $desktop) {
+            & {
+                right: 50px;
+            }
+        }
 
         &.open {
             position: fixed;
@@ -51,14 +64,21 @@ header {
     nav {
         background-color: #fff;
         width: 100vw;
+        max-width: $desktop;
         height: 100%;
         position: fixed;
         top: 0;
         padding: 1rem 0;
         z-index: 99;
-        right: 200vw;
+        right: -110vw;
         transition: right 450ms;
-        box-shadow: 2px 1px 20px 5px $pale-grey;
+        box-shadow: 2px 1px 20px 1px $grey;
+
+        @media (min-width: $desktop) {
+            & {
+                right: -$desktop -20px;
+            }
+        }
 
         &.open {
             right: 0;
@@ -76,10 +96,17 @@ header {
                 margin-bottom: 3rem;
                 border-bottom: 2px solid $pale-grey;
                 width: 80vw;
+                max-width: 380px;
                 height: 6rem;
                 vertical-align: top;
                 padding: 0;
                 margin-left: 10vw;
+
+                @media (min-width: $desktop) {
+                    & {
+                        margin-left: 60px;
+                    }
+                }
 
                 .avatar {
                     width: 50px;
@@ -92,6 +119,12 @@ header {
                     overflow: hidden;
                     vertical-align: middle;
 
+                    @media (min-width: $desktop) {
+                        & {
+                            margin-right: 25px;
+                        }
+                    }
+
                     img {
                         height: 50px;
                     }
@@ -102,16 +135,35 @@ header {
                 height: 2rem;
                 padding: 1rem 10vw;
 
+                @media (min-width: $desktop) {
+                    & {
+                        padding: 1rem 60px;
+                    }
+                }
+
                 &.active {
                     background-color: $accent-pale;
                     border-left: 1.5vw solid $accent;
                     padding-left: 8.5vw;
+
+                    @media (min-width: $desktop) {
+                        & {
+                            border-left: 10px solid $accent;
+                            padding-left: 50px;
+                        }
+                    }
                 }
 
                 img {
                     height: 2rem;
                     vertical-align: middle;
                     margin-right: 3vw;
+
+                    @media (min-width: $desktop) {
+                        & {
+                            margin-right: 25px;
+                        }
+                    }
                 }
 
                 a {

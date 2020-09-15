@@ -2,14 +2,31 @@
 @import '../variables.scss';
 
 .RecipeDetails {
+    $desktop: 545px;
+    padding-bottom: 2rem;
+
     h2 {
         margin-bottom: 0;
         margin-top: 3rem;
     }
 
     .recipes-header {
+        z-index: 4;
+
+        @media (min-width: $desktop) {
+            & {
+                height: 10rem;
+            }
+        }
+
         &:after {
             box-shadow: 0px 0.5rem 10px 0px rgba($accent-dark, 0.7);
+
+            @media (min-width: $desktop) {
+                & {
+                    top: 10rem;
+                }
+            }
         }
     }
 
@@ -18,86 +35,228 @@
         margin: 0;
         display: flex;
         align-items: flex-end;
+        z-index: 4;
+
+        @media (min-width: $desktop) {
+            & {
+                align-items: flex-start;
+                height: 7rem;
+            }
+        }
 
         h1 {
             font-size: 1.8rem;
         }
 
-        span {
-            color: $white;
-            cursor: pointer;
-            margin-top: 1rem;
-            display: block;
+        .header-actions {
+            display: flex;
+            justify-content: space-around;
+
+            span {
+                color: $white;
+                cursor: pointer;
+                margin-top: 1rem;
+                display: block;
+                margin-right: 1rem;
+            }
         }
+    }
+
+    .recipe-image-background,
+    .recipe-image-background-overlay {
+        background-position: center;
+        background-size: cover;
+        width: 100vw;
+        height: 26rem;
+        margin-left: -5vw;
+        position: absolute;
+    }
+
+    .recipe-image-background {
+        filter: blur(5px);
+        z-index: 1;
+    }
+
+    .recipe-image-background-overlay {
+        z-index: 2;
+        background-color: $accent-dark;
+        opacity: .5;
     }
 
     .recipe-image {
+        margin-left: -5vw;
         height: 26rem;
         width: 100vw;
-        margin-left: -5vw;
-        margin-bottom: 2.5rem;
+        margin-bottom: 1.5rem;
         background-position: center;
         background-size: cover;
-    }
+        z-index: 3;
+        position: relative;
 
-    .recipe-category-author {
-        p {
-            img {
-                vertical-align: bottom;
-                width: 8vw;
-                margin-right: 2vw;
-            }
-
-            a {
-                text-decoration: none;
-                color: $main;
+        @media (min-width: $desktop) {
+            & {
+                background-size: contain;
+                background-repeat: no-repeat;
             }
         }
-    }
 
-    .recipe-key-points {
-        list-style: none;
-        padding-left: 0;
-        margin: 2rem 0;
-
-        li {
-            margin-bottom: 0.5rem;
+        &:after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100vw;
+            height: 1rem;
+            background-color: $accent;
+            top: 25.5rem;
+            z-index: 1;
+            box-shadow: 0px -0.5rem 10px 0px rgba($accent-dark, 0.7);
         }
     }
 
-    .IngredientList {
-        padding-left: 8vw;
+    $desktop-infos: 1140px;
+    .recipe-informations {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
 
-        li {
-            margin-bottom: 1rem;
-
-            strong {
-                display: block;
-                margin-bottom: 0.25rem
+        @media (min-width: $desktop-infos) {
+            & {
+                flex-direction: row;
             }
         }
-    }
 
-    ol {
-        li {
-            text-align: justify;
-            padding-right: 5vw;
-        }
-    }
-
-    .nutritional-values {
-        list-style: none;
-        padding-left: 0;
-        width: 100%;
-
-        li {
-            border-bottom: 1px solid $text;
-            padding: 0.5rem 3vw;
+        .recipe-category-author {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: space-around;
 
-            &:first-child {
-                border-top: 1px solid $text;
+            @media (min-width: $desktop-infos) {
+                & {
+                    width: 40%;
+                    margin-left: -5vw;
+                    flex-direction: row;
+                }
+            }
+
+            p {
+                img {
+                    vertical-align: bottom;
+                    width: 8vw;
+                    margin-right: 2vw;
+
+                    @media (min-width: $desktop) {
+                        & {
+                            vertical-align: middle;
+                            width: 50px;
+                            margin-right: 20px;
+                        }
+                    }
+                }
+
+                a {
+                    text-decoration: none;
+                    color: $main;
+                }
+            }
+        }
+
+        .recipe-key-points {
+            list-style: none;
+            padding-left: 0;
+            margin: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+
+            @media (min-width: $desktop-infos) {
+                & {
+                    width: 50%;
+                    flex-direction: row;
+                }
+            }
+
+            li {
+                margin-bottom: 0.5rem;
+            }
+        }
+    }
+
+    .ingredients-instructions {
+        display: flex;
+        flex-direction: column;
+
+        @media (min-width: $desktop-infos) {
+            & {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+
+        .ingredients {
+            @media (min-width: $desktop-infos) {
+                & {
+                    width: 20%;
+                }
+            }
+
+            .IngredientList {
+                padding-left: 5vw;
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+
+                @media (min-width: $desktop) {
+                    & {
+                        padding-left: 0;
+                    }
+                }
+
+                li {
+                    margin-bottom: 1rem;
+
+                    strong {
+                        display: block;
+                        margin-bottom: 0.25rem
+                    }
+                }
+            }
+        }
+
+        .instructions {
+            @media (min-width: $desktop-infos) {
+                & {
+                    margin-left: 50px;
+                    width: 80%;
+                }
+            }
+
+            ol {
+                li {
+                    text-align: justify;
+                    padding-right: 5vw;
+                }
+            }
+        }
+    }
+
+    .nutritional-values-container {
+        padding-top: 1rem;
+
+        .nutritional-values {
+            list-style: none;
+            padding-left: 0;
+            width: 100%;
+
+            li {
+                border-bottom: 1px solid $text;
+                padding: 0.5rem 3vw;
+                display: flex;
+                justify-content: space-between;
+
+                &:first-child {
+                    border-top: 1px solid $text;
+                }
             }
         }
     }

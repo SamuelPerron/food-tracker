@@ -55,22 +55,22 @@ const Login = props => {
                 <h1>Mealtoasty</h1>
             </div>
             <div className="login-form">
-                <ul>
-                    <li data-aos="fade-up" data-aos-delay="100">
+                <div>
+                    <div data-aos="fade-up" data-aos-delay="100">
                         <span>Username</span>
                         <input value={username} onChange={e => setUsername(e.target.value)} />
                         <span className="error">{usernameErrorMessage}</span>
-                    </li>
-                    <li data-aos="fade-up" data-aos-delay="200">
+                    </div>
+                    <div data-aos="fade-up" data-aos-delay="200">
                         <span>Password</span>
                         <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
                         <span className="error">{passwordErrorMessage}</span>
-                    </li>
-                    <li data-aos="fade-up" data-aos-delay="300">
+                    </div>
+                    <div data-aos="fade-up" data-aos-delay="300" className="submit">
                         <button onClick={authUser}>Sign in</button>
                         <span className="error">{generalErrorMessage}</span>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </div>
         </div>
     );

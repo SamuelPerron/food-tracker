@@ -194,6 +194,7 @@ const RecipeForm = props => {
             }
         }
         setRecipe({...recipe, ingredients: newRecipeIngredients});
+        setIngredientSearch('');
     }
 
     const changeIngredientQuantity = (ingredientId, qty) => {
