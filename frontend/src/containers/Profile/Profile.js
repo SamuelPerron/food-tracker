@@ -67,24 +67,20 @@ const Profile = props => {
                             </ul>
                         </div>
                     </div>
-                    { recipes.length > 0 ?
-                        <>
-                            <h2>Recipes</h2>
-                            <div className="recipes" data-aos="fade-up">
-                                <ul>
-                                    { loggedUser && user.pk === loggedUser.pk ? <li className="new-recipe">
-                                        <div className="card-background"/>
-                                        <NavLink to={'/recipes/new'} exact>+</NavLink>
-                                    </li> : null }
-                                    { recipes.map(recipe => (
-                                        <RecipeItem
-                                            key={recipe.id}
-                                            {...recipe} />
-                                    )) }
-                                </ul>
-                            </div>
-                        </>
-                    : null }
+                    <h2>Recipes</h2>
+                    <div className="recipes" data-aos="fade-up">
+                        <ul>
+                            { loggedUser && user.pk === loggedUser.pk ? <li className="new-recipe">
+                                <div className="card-background"/>
+                                <NavLink to={'/recipes/new'} exact>+</NavLink>
+                            </li> : null }
+                            { recipes.map(recipe => (
+                                <RecipeItem
+                                    key={recipe.id}
+                                    {...recipe} />
+                            )) }
+                        </ul>
+                    </div>
                 </>
             : null }
         </div>
