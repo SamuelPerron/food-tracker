@@ -6,6 +6,7 @@ cd ./www/food-tracker/
 git fetch
 git checkout $1
 git reset --hard HEAD
+echo 'ALLOWED_HOSTS = ["samperron.alwaysdata.net",]' >> ./api/settings.py
 EOF
 
 # Restart server
