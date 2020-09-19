@@ -11,17 +11,20 @@ const Signup = props => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
+    const [avatar, setAvatar] = useState(null);
     const [generalErrorMessage, setGeneralErrorMessage] = useState('');
-    const [usernameErrorMessage, setUsernameGeneralErrorMessage] = useState('');
-    const [passwordErrorMessage, setPasswordGeneralErrorMessage] = useState('');
-    const [emailErrorMessage, setEmailGeneralErrorMessage] = useState('');
+    const [usernameErrorMessage, setUsernameErrorMessage] = useState('');
+    const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+    const [emailErrorMessage, setEmailErrorMessage] = useState('');
+    const [avatarErrorMessage, setAvatarErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
     const resetMessages = () => {
         setGeneralErrorMessage('');
-        setUsernameGeneralErrorMessage('');
-        setPasswordGeneralErrorMessage('');
-        setEmailGeneralErrorMessage('');
+        setUsernameErrorMessage('');
+        setPasswordErrorMessage('');
+        setEmailErrorMessage('');
+        setAvatarErrorMessage('');
     }
 
     const resetFields = () => {
@@ -29,13 +32,25 @@ const Signup = props => {
         setEmail('');
         setPassword('');
         setRepeatPassword('');
+        setAvatar(null);
     }
 
     const registerUser = () => {
         resetMessages();
 
         if (password === repeatPassword) {
-            axios.post(props.api + 'users/', { username, password, email }, )
+            const data = new FormData();
+            data.append('username', username);
+            data.append('password', password);
+            data.append('email', email);
+            data.append('avatar', avatar);
+
+            axios({
+                url: props.api + 'users/',
+                method: 'POST',
+                headers: {...props.headers, 'Content-Type': 'multipart/form-data'},
+                data
+            })
             .then(r => {
                 resetFields();
                 setSuccessMessage('User created, you can now login.');
@@ -45,13 +60,16 @@ const Signup = props => {
                 for (var key in error) {
                     switch (key) {
                         case 'username':
-                                setUsernameGeneralErrorMessage(error[key]);
+                                setUsernameErrorMessage(error[key]);
                             break;
                         case 'password':
-                                setPasswordGeneralErrorMessage(error[key]);
+                                setPasswordErrorMessage(error[key]);
                             break;
                         case 'email':
-                                setEmailGeneralErrorMessage(error[key]);
+                                setEmailErrorMessage(error[key]);
+                            break;
+                        case 'Avatar':
+                                setAvatarErrorMessage(error[key]);
                             break;
                         default:
                             setGeneralErrorMessage(error[key]);
@@ -59,7 +77,7 @@ const Signup = props => {
                 }
             });
         } else {
-            setPasswordGeneralErrorMessage('Passwords don\'t match');
+            setPasswordErrorMessage('Passwords don\'t match');
         }
     }
 
@@ -89,6 +107,12 @@ const Signup = props => {
                         <span>Email</span>
                         <input value={email} onChange={e => setEmail(e.target.value)} />
                         <span className="error">{emailErrorMessage}</span>
+                    </div>
+                    <div>
+                        <span>Avatar</span>
+                        <input
+                            type="file"
+                            onChange={e => setAvatar(e.target.files[0])}/>
                     </div>
                     <div className="submit">
                         <button onClick={registerUser}>Sign up</button>

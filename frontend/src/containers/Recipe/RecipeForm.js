@@ -75,7 +75,6 @@ const RecipeForm = props => {
             username: user.username
         }
         newRecipe.image = URL.createObjectURL(newRecipe.image_post);
-        console.log(newRecipe.image);
         newRecipe.nutritional_values = [];
         for (let cat in subCategories) {
             if (subCategories[cat].url === recipe.sub_category) {

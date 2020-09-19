@@ -13,15 +13,19 @@ class ProfileSerializer(WritableNestedModelSerializer):
 
 class UserSerializer(WritableNestedModelSerializer):
     profile = ProfileSerializer(required=False)
+    avatar = serializers.ImageField(write_only=True)
 
     class Meta:
         model = get_user_model()
-        fields = ['pk', 'profile', 'username', 'email', 'is_staff', 'password']
+        fields = ['pk', 'profile', 'username', 'email', 'is_staff', 'password', 'avatar']
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
         password = validated_data.pop('password')
+        avatar = validated_data.pop('avatar')
         user = get_user_model()(**validated_data)
         user.set_password(password)
         user.save()
+        user.profile.avatar = avatar
+        user.profile.save()
         return user

@@ -67,7 +67,7 @@ const Navbar = props => {
                     </>
                 }
 
-                <li className="version">v0.10.4</li>
+                <li className="version">v0.10.5</li>
             </ul>
         </nav>
     );
