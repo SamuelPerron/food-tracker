@@ -5,7 +5,7 @@ ssh samperron@ssh-samperron.alwaysdata.net << EOF
 cd ./www/food-tracker/
 git fetch
 git checkout $1
-git reset --hard HEAD
+git pull
 echo 'ALLOWED_HOSTS = ["samperron.alwaysdata.net",]' >> ./api/settings.py
 EOF
 

@@ -31,7 +31,7 @@ const IngredientForm = props => {
                     { props.ingredientSearch !== '' ?
                         <ul className="ingredient-search">
                             { props.ingredients.map(i => (
-                                <li data-aos="zoom-out" onClick={() => props.chooseIngredientHandler([props.ingredient.id, i])}>{i.name}</li>
+                                <li onClick={() => props.chooseIngredientHandler([props.ingredient.id, i])}>{i.name}</li>
                             ))}
                         </ul>
                     :null }
