@@ -7,6 +7,7 @@ import StepGeneralInformations from '../../components/Recipe/RecipeForm/StepGene
 import StepIngredients from '../../components/Recipe/RecipeForm/StepIngredients';
 import StepInstructions from '../../components/Recipe/RecipeForm/StepInstructions';
 import StepValidation from '../../components/Recipe/RecipeForm/StepValidation';
+import StepIndicator from '../../components/Recipe/RecipeForm/StepIndicator';
 
 import '../../styles/Recipe/RecipeForm.scss';
 
@@ -259,6 +260,8 @@ const RecipeForm = props => {
                     <h1>New recipe</h1>
                 </div>
             </div>
+
+            <StepIndicator step={formStep} totalSteps={4} />
 
             { formStep !== 1 ?
                 <div className="go-back">
