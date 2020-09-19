@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ImageUploader from 'react-images-upload';
 
 const StepGeneralInformations = props => {
     const nextAvailable = props.recipeValues.name && props.recipeValues.servings > 0 &&
         props.recipeValues.category && props.recipeValues.sub_category && props.recipeValues.image_post;
+
+    useEffect(() => {
+        props.onValuesChange({image_post: null});
+    }, []);
 
     return (
         <>
@@ -49,7 +53,9 @@ const StepGeneralInformations = props => {
                 <div className="form-group">
                     <div className="form-item">
                         <span>Category</span>
-                        <select onChange={e => props.onCategorySelect(e.target.value)}>
+                        <select
+                            onChange={e => props.onCategorySelect(e.target.value)}
+                            value={props.recipeValues.category}>
                             <option></option>
                             {
                                 props.categories.map(c => (
@@ -61,7 +67,9 @@ const StepGeneralInformations = props => {
                     { props.subCategories.length > 1 ?
                         <div className="form-item">
                             <span>Sub Category</span>
-                            <select onChange={e => props.onValuesChange({sub_category: e.target.value})}>
+                            <select
+                                onChange={e => props.onValuesChange({sub_category: e.target.value})}
+                                value={props.recipeValues.sub_category}>
                                 <option></option>
                                 {
                                     props.subCategories.map(c => (

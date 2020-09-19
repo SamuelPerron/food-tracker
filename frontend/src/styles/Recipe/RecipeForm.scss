@@ -26,6 +26,18 @@
         }
     }
 
+    .go-back {
+        cursor: pointer;
+
+        &:before {
+            content: '< ';
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
     button {
         border-radius: $radius;
         color: #fff;
