@@ -69,23 +69,23 @@ const Signup = props => {
                 <img src={logo} data-aos="zoom-out" data-aos-delay="700"/>
                 <h1>Mealtoasty</h1>
             </div>
-            <div className="register-form">
+            <div className="register-form" data-aos="fade-up">
                 <div>
-                    <div data-aos="fade-up" data-aos-delay="100">
+                    <div>
                         <span>Username</span>
                         <input value={username} onChange={e => setUsername(e.target.value)} />
                         <span className="error">{usernameErrorMessage}</span>
                     </div>
-                    <div data-aos="fade-up" data-aos-delay="200">
+                    <div>
                         <span>Password</span>
                         <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
                         <span className="error">{passwordErrorMessage}</span>
                     </div>
-                    <div data-aos="fade-up" data-aos-delay="300">
+                    <div>
                         <span>Repeat password</span>
                         <input type="password" value={repeatPassword} onChange={e => setRepeatPassword(e.target.value)} />
                     </div>
-                    <div data-aos="fade-up" data-aos-delay="400">
+                    <div>
                         <span>Email</span>
                         <input value={email} onChange={e => setEmail(e.target.value)} />
                         <span className="error">{emailErrorMessage}</span>

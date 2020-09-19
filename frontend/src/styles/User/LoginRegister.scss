@@ -1,18 +1,11 @@
 @import '../colors.scss';
 @import '../variables.scss';
 
-.Signup {
-    h1 {
-        margin-bottom: 0!important;
-    }
-}
-
 .Login,
 .Signup {
     $desktop: 545px;
 
     width: 100vw;
-    height: 90%;
     position: absolute;
     top: 0;
     left: 0;
@@ -103,5 +96,13 @@
                 }
             }
         }
+    }
+}
+
+.Signup {
+    height: auto;
+
+    h1 {
+        margin-bottom: 0 !important;
     }
 }
