@@ -38,6 +38,13 @@ const RecipeForm = props => {
                 setRecipeValue({...data});
                 setTitle('Edit ' + data.name);
 
+                let newSteps = {};
+                for (let i in data.steps) {
+                    const newStep = Object.keys(newSteps).length + 1;
+                    newSteps = {...newSteps, [newStep]: data.steps[i].content};
+                }
+                data.steps = newSteps;
+
                 for (let i in data.ingredients) {
                     const newIngredient = {};
                     newIngredient.url = data.ingredients[i].ingredient;
@@ -52,8 +59,8 @@ const RecipeForm = props => {
                     axios.get(newIngredient.url)
                     .then(r => {
                         newIngredient.servings = r.data.servings;
-
                         data.ingredients[i] = newIngredient;
+
                         setRecipeValue({...data});
                     });
                 }
