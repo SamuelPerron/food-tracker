@@ -56,6 +56,7 @@ const App = props => {
                 <Switch>
                     <Route path="/recipes" exact component={RecipeListPage} />
                     <Route path="/recipes/new" exact component={RecipeForm} />
+                    <Route path="/recipes/edit/:id" exact component={RecipeForm} />
                     <Route path="/recipes/:slug" exact component={RecipeDetailsPage} />
                     <Route path="/bookmarks" exact component={BookmarkedRecipeList} />
 

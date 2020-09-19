@@ -19,11 +19,47 @@ const RecipeForm = props => {
     const [ingredientCategories, setIngredientCategories] = useState([]);
     const [ingredients, setIngredients] = useState([]);
     const [ingredientSearch, setIngredientSearch] = useState('');
+    const [title, setTitle] = useState('New recipe');
     const [recipe, setRecipe] = useState({
         name: '', servings: 0, preparation_time: 0, cook_time: 0, category: null, sub_category: null,
         steps: {1: ''}, ingredients: [],
     });
     const [errorMessage, setErrorMessage] = useState('');
+
+    const parseFromApi = data => {
+        axios.get(data.category)
+        .then(r => {
+            data.sub_category = data.category;
+            data.category = r.data.parent_category;
+
+            axios.get(props.api + 'recipes/sub-categories/?parent_category=' + data.category.slice(-2)[0])
+            .then(r => {
+                setSubCategories(r.data);
+                setRecipeValue({...data});
+                setTitle('Edit ' + data.name);
+
+                for (let i in data.ingredients) {
+                    const newIngredient = {};
+                    newIngredient.url = data.ingredients[i].ingredient;
+                    newIngredient.quantity = data.ingredients[i].quantity;
+                    newIngredient.name = data.ingredients[i].ingredient_name.name;
+                    newIngredient.serving = {};
+                    newIngredient.serving.name = data.ingredients[i].serving.for_list_name !== '' ? data.ingredients[i].serving.for_list_name : data.ingredients[i].serving.custom_name;
+                    newIngredient.serving.grams = data.ingredients[i].serving.grams;
+                    newIngredient.serving.milliliters = data.ingredients[i].serving.milliliters;
+                    newIngredient.serving.id = data.ingredients[i].serving.id;
+                    newIngredient.id = crypto.randomBytes(20).toString('hex');
+                    axios.get(newIngredient.url)
+                    .then(r => {
+                        newIngredient.servings = r.data.servings;
+
+                        data.ingredients[i] = newIngredient;
+                        setRecipeValue({...data});
+                    });
+                }
+            });
+        });
+    }
 
     useEffect(() => {
         if (props.token) {
@@ -44,6 +80,14 @@ const RecipeForm = props => {
         .then(r => {
             setIngredientCategories(r.data);
         });
+
+        if (props.match.url.includes('edit')) {
+            const id = parseInt(props.match.params.id);
+            axios.get(props.api + 'recipes/' + id + '/')
+            .then(r => {
+                parseFromApi(r.data);
+            });
+        }
     }, []);
 
     useEffect(() => {
@@ -66,7 +110,7 @@ const RecipeForm = props => {
     }
 
     const setRecipeValue = updatedValues => {
-        setRecipe({...recipe, ...updatedValues})
+        setRecipe({...recipe, ...updatedValues});
     }
 
     const transformRecipe = () => {
@@ -257,7 +301,7 @@ const RecipeForm = props => {
             <div className="recipes-header"/>
             <div className="header-title">
                 <div>
-                    <h1>New recipe</h1>
+                    <h1>{title}</h1>
                 </div>
             </div>
 
