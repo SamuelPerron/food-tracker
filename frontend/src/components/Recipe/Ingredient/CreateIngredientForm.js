@@ -9,6 +9,11 @@ const CreateIngredientForm = props => {
             carbs: 0,
             fats: 0,
         }],
+        servings: [{
+            serving_name: '',
+            serving_size: 0,
+            serving_type: '',
+        }],
         category: '',
         author: props.authorId,
     });
@@ -40,25 +45,31 @@ const CreateIngredientForm = props => {
                         <div className="form-item">
                             <span>Serving name</span>
                             <input
-                                value={newIngredient.nutritional_values.serving_name}
+                                value={newIngredient.servings.serving_name}
                                 onChange={e => setNewIngredient({
-                                    ...newIngredient,
-                                    serving_name: e.target.value
+                                    ...newIngredient, servings: [{
+                                        ...newIngredient.servings[0],
+                                        serving_name: e.target.value
+                                    }]
                                 })} />
                             <span>Serving size</span>
                             <input
                                 className="serving-size"
-                                value={newIngredient.serving_size}
+                                value={newIngredient.servings.serving_size}
                                 onChange={e => setNewIngredient({
-                                    ...newIngredient,
-                                    serving_size: parseFloat(e.target.value)
+                                    ...newIngredient, servings: [{
+                                        ...newIngredient.servings[0],
+                                        serving_size: parseFloat(e.target.value)
+                                    }]
                                 })} />
                             <select
                                 className="serving-size"
-                                value={newIngredient.nutritional_values.serving_type} onChange={e => setNewIngredient({
-                                    ...newIngredient,
-                                    serving_type: e.target.value }
-                                )}>
+                                value={newIngredient.servings.serving_type} onChange={e => setNewIngredient({
+                                    ...newIngredient, servings: [{
+                                        ...newIngredient.servings[0],
+                                        serving_type: e.target.value
+                                    }]
+                                })}>
                                 <option></option>
                                 <option value="grams">grams</option>
                                 <option value="milliliters">milliliters</option>

@@ -66,6 +66,8 @@ const Navbar = props => {
                             )} />
                     </>
                 }
+
+                <li className="version">v0.10.4</li>
             </ul>
         </nav>
     );

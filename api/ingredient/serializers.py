@@ -25,6 +25,10 @@ class IngredientBrandSerializer(serializers.ModelSerializer):
 
 
 class IngredientServingSerializer(serializers.ModelSerializer):
+    serving_name = serializers.CharField(write_only=True)
+    serving_size = serializers.FloatField(write_only=True)
+    serving_type = serializers.CharField(write_only=True)
+
     class Meta:
         model = IngredientServing
         exclude = ['ingredient']
@@ -33,9 +37,6 @@ class IngredientServingSerializer(serializers.ModelSerializer):
 class IngredientSerializer(serializers.HyperlinkedModelSerializer):
     nutritional_values = NutritionalValuesSerializer(many=True)
     servings = IngredientServingSerializer(many=True, required=False)
-    serving_type = serializers.CharField(write_only=True)
-    serving_name = serializers.CharField(write_only=True)
-    serving_size = serializers.FloatField(write_only=True)
     author = serializers.PrimaryKeyRelatedField(write_only=True, queryset=get_user_model().objects.all())
 
     def create(self, validated_data):
@@ -49,15 +50,17 @@ class IngredientSerializer(serializers.HyperlinkedModelSerializer):
             new_nv = NutritionalValues(**nv)
             new_nv.save()
             ingredient.nutritional_values.add(new_nv)
-        grams = 0
-        milliliters = 0
-        if validated_data['serving_type'] == 'grams':
-            grams = validated_data['serving_size']
-        else:
-            milliliters = validated_data['serving_size']
-        new_serving = IngredientServing(for_list_name=validated_data['serving_name'], grams=grams, milliliters=milliliters)
-        new_serving.save()
-        ingredient.servings.add(new_serving)
+        if validated_data['servings']:
+            for serving in validated_data['servings']:
+                grams = 0
+                milliliters = 0
+                if serving['serving_type'] == 'grams':
+                    grams = serving['serving_size']
+                else:
+                    milliliters = serving['serving_size']
+                new_serving = IngredientServing(for_list_name=serving['serving_name'], grams=grams, milliliters=milliliters)
+                new_serving.save()
+                ingredient.servings.add(new_serving)
         return ingredient
 
     class Meta:

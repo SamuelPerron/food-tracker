@@ -177,6 +177,12 @@ header {
                         color: $main;
                     }
                 }
+
+                &.version {
+                    position: absolute;
+                    bottom: 2rem;
+                    color: $grey;
+                }
             }
         }
     }
