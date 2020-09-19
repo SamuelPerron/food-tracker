@@ -26,6 +26,37 @@
         }
     }
 
+    .go-back {
+        cursor: pointer;
+
+        &:before {
+            content: '< ';
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .step-indicator {
+        margin-bottom: 1rem;
+        width: 100%;
+        text-align: center;
+
+        span {
+            width: 10px;
+            height: 10px;
+            background-color: $text;
+            margin-right: 5px;
+            border-radius: 10px;
+            display: inline-block;
+
+            &.done {
+                background-color: $main;
+            }
+        }
+    }
+
     button {
         border-radius: $radius;
         color: #fff;

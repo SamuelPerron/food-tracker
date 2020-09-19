@@ -15,7 +15,9 @@ const IngredientForm = props => {
             { props.ingredient.name ?
                 <>
                     <strong>{props.ingredient.name}</strong>
-                    <select value={props.ingredient.serving.id} onChange={e => props.changeIngredientServing([e.target.value, props.ingredient.id])}>
+                    <select
+                        value={props.ingredient.serving.id}
+                        onChange={e => props.changeIngredientServing([e.target.value, props.ingredient.id])}>
                         <option></option>
                         { props.ingredient.servings.map(s => (
                             <option value={s.id} key={s.id}>{ s.for_list_name !== '' ? s.for_list_name : s.custom_name }</option>
